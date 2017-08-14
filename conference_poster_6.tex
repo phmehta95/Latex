@@ -1,0 +1,182 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% a0poster Portrait Poster
+% LaTeX Template
+% Version 1.0 (22/06/13)
+%
+% The a0poster class was created by:
+% Gerlinde Kettl and Matthias Weiser (tex@kettl.de)
+% 
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a0,portrait]{a0poster}
+
+\usepackage{multicol} % This is so we can have multiple columns of text side-by-side
+\columnsep=100pt % This is the amount of white space between the columns in the poster
+\columnseprule=3pt % This is the thickness of the black line between the columns in the poster
+
+\usepackage[x11names]{xcolor} % Specify colors by their 'svgnames', for a full list of all colors available see here: http://www.latextemplates.com/svgnames-colors
+
+%\usepackage{times} % Use the times font
+\usepackage{palatino} % Uncomment to use the Palatino font
+
+\usepackage{graphicx} % Required for including images
+\graphicspath{{figures/}} % Location of the graphics files
+\usepackage{booktabs} % Top and bottom rules for table
+\usepackage[font=small,labelfont=bf]{caption} % Required for specifying captions to tables and figures
+\usepackage{amsfonts, amsmath, amsthm, amssymb} % For math fonts, symbols and environments
+\usepackage{wrapfig} % Allows wrapping text around tables and figures
+\usepackage{pstricks,pst-grad} 
+\pagecolor{Thistle2}
+
+
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	POSTER HEADER 
+%----------------------------------------------------------------------------------------
+
+% The header is divided into two boxes:
+% The first is 75% wide and houses the title, subtitle, names, university/organization and contact information
+% The second is 25% wide and houses a logo for your university/organization or a photo of you
+% The widths of these boxes can be easily edited to accommodate your content as you see fit
+
+
+\begin{minipage}[b]{0.75\linewidth}
+
+\VeryHuge \color{MediumPurple4} \textbf{Comparing Hadronic Interaction \newline Models in Geant 4 Using WCSim} \color{Maroon0}\\ % Title
+\newline\huge \textbf{Pruthvi Mehta}\\[0.5cm] % Author(s)
+\huge Queen Mary University of London\\[0.4cm] % University/organization
+\large Email: p\_h\_mehta@outlook.com
+
+\end{minipage}
+%
+\begin{minipage}[b]{0.25\linewidth}
+\includegraphics[width=15cm]{logo1.png}\\
+\end{minipage}
+
+\vspace{1cm} % A bit of extra whitespace between the header and poster content
+
+%----------------------------------------------------------------------------------------
+
+\begin{multicols}{2} % This is how many columns your poster will be broken into, a portrait poster is generally split into 2 columns
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+\color{SlateBlue4} % Navy color for the abstract
+
+\begin{abstract}
+Three models often used in conjunction with Geant 4 (BINARY, BERTINI and GHEISHA) are discussed and compared using WCSim. Different particles with different energies are used, and the data gathered from the PMTs concerning hits, charge e.t.c was analysed using the macros `read\_PMT.C' and `cerInfo.C'. The data created using the different models was compared: the results for pions and electrons at 500 MeV using the `read\_PMT.C' macro showed no difference between the three models, but using neutrons at 500 MeV showed a significant difference. The macro `cerInfo.C' showed no difference between the models when electrons at 500 MeV were used, slight differences for $\pi^-$ at 100 MeV and greater differences for $\pi^-$ at 500 MeV.
+
+\end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+\color{Turquoise4} % SaddleBrown color for the introduction
+
+\section*{Introduction}
+
+ Hyper-Kamiokande is an ultra-pure water Cherenkov detector around 20 times the size of its predecessor Super-Kamiokande, allowing for a very fine analysis of how neutrinos interact with hadrons. \par
+The detectors contain PMTs (photo-multiplier tubes). When neutrinos interact with electrons or hadrons in the water molecules, this produces a charged particle, creating a cone of light (Cherenkov radiation), which is projected as a ring of light onto the detector walls and is picked up by the PMTs. The PMT records information about the charge and time of the light ring detection, and from this determines information about the interaction, including the flavour of the incoming neutrino. We can use two software packages, Geant4 and WCSim, to simulate the interactions that take place. Geant4 simulates the interactions of the atmospheric and beam neutrinos with the hadrons in the water molecules, while WCSim simulates the Cherenkov radiation detected by the PMTs. There are three theoretical models used to compare the simulated data: BINARY, BERTINI and GHEISHA. \cite{models} This project made comparisons in-between the three models, by running simulations of the interactions occurring in the water Cherenkov detector with the different models and comparing the results.
+%----------------------------------------------------------------------------------------
+%	MATERIALS AND METHODS
+%----------------------------------------------------------------------------------------
+\color{VioletRed3}
+\section*{Method}
+\subsection*{Comparing Models in Geant 4}
+\begin{itemize}
+\item A “particle gun” fired a particle into the simulated Hyper Kamiokande Cherenkov detector (constructed in WCSim): this particle interacted with the hadrons and electrons in the water molecules, producing Cherenkov radiation, which interacts with the PMTs.
+\item The information collected from the PMT gives us information about the incoming particle.
+\item These interactions were run with different physics models (GHEISHA,BERTINI,BINARY), to see if there were differences in the PMT data produced.
+\item WCSim was run with two macros `read\_PMT.C', and `cerInfo.C, which display different information about the PMTs.
+\end{itemize}
+
+%----------------------------------------------------------------------------------------
+%	RESULTS 
+%----------------------------------------------------------------------------------------
+\color{DarkOrchid4}
+\section*{Results}
+\subsection*{Results for `read\_PMT.C'}
+The macro `read\_PMT.C' was run with the following settings in the WCSim.mac file: /run/beamOn/10, /gun/particle neutron, /gun/energy 500MeV.
+
+\begin{center}\vspace{0cm}
+	\includegraphics[width=\linewidth]{readpmt}
+	\captionof{figure}{\color{SlateBlue4} Results for read\_PMT.C with a neutron at 500 MeV }
+\end{center}\vspace{0cm}
+
+As can be seen from Figure 1, there are clear differences between the results when WCSim is run with each different hadronic interaction model when the incoming particle is set to a neutron. No differences between the three models were found for electrons or pions when the `read\_PMT.C' macro was run. Key: \textcolor{Red1}{GHEISHA} \textcolor{Green1}{BERTINI} \textcolor{Blue1}{BINARY}. 
+
+\color{Maroon0}
+\subsection*{Results for `cerInfo.C'}
+The macro `cerInfo.C' was run with the following settings in the WCSim.mac file: /run/beamOn/1000, /gun/particle pi-, /gun/energy 100MeV.
+\begin{center}\vspace{0cm}
+	\includegraphics[width=\linewidth]{cerinfo1}
+	\captionof{figure}{\color{SlateBlue4} Results for cerInfo.C with a negative pion at 100 MeV }
+\end{center}\vspace{0cm}
+
+In Figure 2 the \textcolor{Red1}{BERTINI} and \textcolor{Blue1}{BINARY} models are compared over a 1000 events for an incoming negative pion with an energy of 100 MeV. The overall shapes of the distributions are the same, however differences are shown in the difference plot below each main plot. The True Times of all Hits plot shows the smallest difference between the two models.\\
+
+`cerInfo.C' was run again with the energy of the particle gun increased to 500 MeV:  /run/beamOn/1000, /gun/particle pi-, /gun/energy 500MeV.
+\begin{center}\vspace{0cm}
+	\includegraphics[width=\linewidth]{cerinfo2}
+	\captionof{figure}{\color{SlateBlue4} Results for cerInfo.C with a negative pion at 100 MeV }
+\end{center}\vspace{0cm}
+
+Figure 3 shows a greater difference in the results for the \textcolor{Red1}{BERTINI} and \textcolor{Blue1}{BINARY} models, the increase in the difference can be seen in the difference plots. Again, True Times of All Hits shows the smallest difference between the two models, $<$1.
+
+
+%----------------------------------------------------------------------------------------
+%	CONCLUSIONS
+%----------------------------------------------------------------------------------------
+
+\color{Turquoise4} % SaddleBrown color for the conclusions to make them stand out
+
+\section*{Conclusions}
+
+\begin{itemize}
+\item For ‘read\_PMT.C’:
+\subitem No difference using pions or electrons
+\subitem Difference using neutrons 
+\item For ‘cerInfo.C’:
+\subitem No difference using electrons
+\subitem Difference between Binary and Bertini models found using negative pions
+\subitem Pions at 500 MeV gave a greater difference between the two models than pions at 100 MeV
+\end{itemize}
+
+\color{SlateBlue4} % Set the color back to DarkSlateGray for the rest of the content
+
+
+ %----------------------------------------------------------------------------------------
+%	REFERENCES
+%----------------------------------------------------------------------------------------
+\begin{thebibliography}{}
+\bibitem{models}
+Wright, D.H., Koi, T., Folger, G., Ivanchenko, V., Kossov, M., Starkov, N., Heikkinen, A. and Wellisch, H.P., 2007, March. Low and high energy modeling in Geant4. In M. Albrow and R. Raja eds.,, AIP Conference Proceedings (Vol. 896, No. 1, pp. 11-20). AIP.
+\end{thebibliography}
+
+
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+\section*{Acknowledgements}
+
+I would like to thank my supervisor, Prof. Lodovico, for her ongoing help throughout this project and also Dr Stephane Zsoldos for his help in understanding the macros used.
+
+%----------------------------------------------------------------------------------------
+
+\end{multicols}
+\end{document}

@@ -1,0 +1,895 @@
+\documentclass[11pt,oneside,a4paper]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+
+
+
+
+\begin{document}
+
+\title {Comparing Models in Geant 4 and Investigating CP Violation through Neutrino Oscillations}
+\author{Pruthvi Mehta}
+
+\maketitle
+
+
+\begin{abstract}
+Three models often used in conjunction with Geant 4 (BINARY, BERTINI and GHEISHA) are discussed and compared using WCSim. Different particles with different energies are used, and the data gathered from the PMTs concerning hits, charge e.t.c was analysed using the macros `read\_PMT.C' and `cerInfo.C'. The data created using the different models was compared: the results for pions and electrons at 500 MeV using the `read\_PMT.C' macro showed no difference between the three models, but using neutrons at 500 MeV showed a significant difference. The macro `cerInfo.C' showed no difference between the models when electrons at 500 MeV were used, slight differences for $\pi^-$ at 100 MeV and greater differences for $\pi^-$ at 500 MeV. The theory behind CP violation was explained, and Prob 3++ was used to investigate $P(\nu_{\mu} \rightarrow \nu_{e})$ oscillation by plotting the individual terms against the energy of the $\nu_{\mu}$ . The CP-violating ($\delta$) probability term was 0 at all $\nu_{\mu}$ energies.
+
+\end{abstract}
+\newpage
+\tableofcontents
+
+\newpage
+\section{Introduction}
+
+This project is split into two parts: the first part of the  project is to investigate particle interactions at the yet to be built Hyper-Kamiokande detector in Japan. Hyper-Kamiokande is an ultra-pure water Cherenkov detector around 20 times the size of its predecessor Super-Kamiokande, allowing for a very fine analysis of how neutrinos interact with hadrons. Super-Kamiokande is a neutrino observatory located underground in the Mozumi Mine, near the city of Hida in Japan. The observatory was designed to investigate a multitude of physics problems, including studying solar and atmospheric neutrinos. It consists of a cylindrical tank containing 20000 tons of ultra-pure water. Figure \ref{fig:superkchamber} shows the inside of the Super-K chamber. The tank is separated into the inner and outer detector.\par
+
+The detectors contain PMTs (photo-multiplier tubes). When neutrinos interact with electrons or hadrons in the water molecules, this produces a charged particle, creating a cone of light (Cherenkov radiation), which is projected as a ring of light onto the detector walls and is picked up by the PMTs. Figure \ref{fig:cherenkovring} shows a single-ring event from Super-K. The PMT size shows charge (amount of light hitting the PMT), PMTs that were not hit by the Cherenkov radiation are grey.\par
+
+The PMT records information about the charge and time of the light ring detection, and from this determines information about the interaction, including the flavour of the incoming neutrino. Hyper Kamiokande will carry out the same process as Super-K, just on a much larger scale using PMTs which have a 50 percent higher photodetection efficiency. Hyper-K is due to start being built in 2018 and therefore we can use two software packages, Geant4 and WCSim, to simulate these interactions. Geant4 simulates the interactions of the atmospheric and beam neutrinos with the hadrons in the water molecules, while WCSim simulates the Cherenkov radiation detected by the PMTs. There are three theoretical models used to compare the simulated data: BINARY, BERTINI and GHEISHA. This project will make comparisons in-between the three models, by running simulations of the interactions occurring in the water Cherenkov detector with the different models and comparing the results. The simulations will be done with various particles of different energies and the different facets of the information collected by the PMTs will be presented, including information regarding the number of hits, charge collected e.t.c. The impact of this research is that it will add to our knowledge of the differences between these three physics lists and what particles and energy range they give different results for. 
+\paragraph{}
+The second part of this project involves looking at CP violation and discussing in depth how CP violation arises and the theory behind it, by looking at quark flavour changing and neutrino oscillation. Regarding the experimental part of this investigation into CP violation, I will be computing three flavour neutrino oscillation probabilities using software called Prob3++ and showing how my results compare with those found in the paper `Discovery potential of CP violation for Hyper-K and DUNE with non-standard neutrino interactions.' \cite{yijiapaper}
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.0in]{superkwc.png}
+	\captionsetup{justification=centering}
+	\caption{Inside the Super Kamiokande tank}
+	\label{fig:superkchamber}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.0in]{cherenkovringexample.png}
+	\captionsetup{justification=centering}
+	\caption{An example of a Cherekov ring constructed in the Super-Kamiokande detector}
+	\label{fig:cherenkovring}
+\end{figure}
+
+\section{Cherenkov detectors}
+
+\subsection{Discovery of Cherenkov radiation}
+
+The discovery of Cherenkov radiation is due to the experimental work of Sergey Ivanovich Vasilov and Pavel Alekseyevich in 1934 \cite{cherenkovgammapaper}. Cherenkov's original experiment was to investigate fluorescence emitted from the uranyl salts, by observing the salts by eye along with a technique called `quenching' to find the intensity of the radiation. Cherenkov found that light could be observed even when gamma rays were shone at the vessel when it just contained the solvent for the uranyl salts, sulfuric acid. Cherenkov then went on to show that when gamma rays produced from a 104mg radium source were shone at various other solvents, luminous emission was induced, creating a ``blue glow". This was the Cherenkov radiation. The ``blue glow" occurred because of the Compton electrons produced by the gamma rays. Compton electrons are the name given to the electrons scattered during Compton scattering, which is when incident gamma rays hit an electron and it scatters.
+
+
+
+\subsection{Theoretical explanation for Cherenkov radiation}
+In 1937 Ilya Frank and Igor Tamm developed a theoretical explanation for the production of Cherenkov radiation, and for this, they were awarded with a Nobel Prize in 1958. Their explanation was as follows: if a charged particle moves with a speed \textit{v'} through a medium of refractive index \textit{n}, and \textit{v'} is greater than the phase velocity of light through that medium (the phase velocity of light for a medium with refractive index n is $v=c/n$) then Cherenkov radiation is produced. This radiation is emitted because when a charged particle moves through a medium, for example, water, it gives energy to the water molecules. This excites them, and when they de-excite and return to their ground state, visible photons of blue light are released. Due to the charged particle moving faster than the phase velocity of light, it causes a shower of photons to be released that are in phase with each other, which means they constructively interfere with each other, making the blue light visible. This cascade of photons which is triggered can be likened to the water wave produced by a duck moving on the surface of a lake, the wave front of the water waves can be thought of as a triangle, with the duck at the corner of the triangle, moving along with it. Similarly, the wave front of the radiation can be thought of as a triangle, with the charged particle speeding along at the vertex, shown in Figure \ref{fig:cherenkovwavegeom}.
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.0in]{cherenkovwavegeom3.png}
+	\captionsetup{justification=centering}
+	\caption{The Cherenkov wave geometry}
+	\label{fig:cherenkovwavegeom}
+\end{figure}
+
+Figure \ref{fig:cherenkovwavegeom} shows the geometry of the Cherekov radiation wave front. The radius of the spherical wave emitted by the moving charged particle \textit{AC} is equal to \textit{$vt$}, where, as mentioned above, \textit{v} is the phase velocity of light in the medium. The distance \textit{AB} is equal to \textit{$v't$}, therefore the Cherenkov Angle \textit{$\Theta$} can be given by Equation \ref{eq:cherenkovgeomequ}.
+
+\begin{equation}
+\label{eq:cherenkovgeomequ}
+cos{\Theta}=\frac{AC}{AB}=\frac{v}{v'}=\frac{c/n}{v'}=\frac{1}{\beta n}
+\end{equation}
+where $\beta$ is equal to $\frac{v'}{c}$.
+
+The Frank-Tamm formula (shown in Equation \ref{eq:franktamm}) gives the amount of Cherenkov radiation emitted at a particular frequency as the charged particle moves through the medium:
+
+\begin{equation}
+\label{eq:franktamm}
+{\frac  {dE}{dx\,d\omega }}={\frac  {q^{2}}{4\pi }}\mu (\omega )\omega {\left(1-{\frac  {c^{2}}{v^{2}n^{2}(\omega )}}\right)}
+\end{equation}
+
+where \textit{$\mu$} is the permeability of the medium, \textit{n} is its refractive index, \textit{q} is the charge of the particle, \textit{v} is its speed, \textit{c} is the speed of light in a vacuum, \textit{$\omega$} is the emitted angular frequency of the photons, and \textit{x} is the length travelled by the particle. The frequencies that are more intense in Cherenkov radiation are the higher frequencies, and in fact, most of the Cherenkov radiation produced tends to be in the ultra-violet portion of the EM spectrum. However, what is visible to the human eye is the Cherekov radiation produced with the frequency of blue light, which is why Cherenkov radiation has that brilliant blue colour, as shown in Figure \ref{fig:bluecherenkov}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.0in]{cherenkovblue.jpg}
+	\captionsetup{justification=centering}
+	\caption{Cherenkov radiation produced from the Reed research nuclear reactor}
+	\label{fig:bluecherenkov}
+\end{figure}
+
+\section{CP Violation}
+As mentioned previously, Super-Kamiokande and the yet to be built Hyper-Kamiokande also investigate CP violation. CP violation is an important concept in physics: it attempts to answer the question of why there is more matter than antimatter in the universe. If CP symmetry was preserved, then the Big Bang should have produced equal amounts of matter and antimatter, resulting in nothing but the matter and antimatter particles annihilating each other and producing a universe full of radiation and no matter whatsoever. However this is clearly not the case! Hyper-Kamiokande will aim to investigate CP violation by looking at neutrino oscillation probabilities, which is also something this project will cover. I will do this using a program called Prob 3++ (see section on Computing Tools used.)
+
+
+\subsection{The theory behind CP Violation}
+CP violation essentially means the lack of CP symmetry. CP symmetry is a composition of \textit{C} symmetry and \textit{P} symmetry.
+
+\subsubsection{Parity Symmetry}
+
+The \textit{P} operator stands for the parity operator: it equates to the inversion of the three spatial coordinate axes, much like an object being reflected in the mirror. The \textit{P} operator inverts the coordinates (e.g \textit{r} $\Rightarrow$ \textit{-r}) and therefore also inverts momentum (\textit{p} $\Rightarrow$ \textit{-p}), however it does not change angular momentum \textit{L}, which is given by \textit{r$\times$p} as the parity operator has been applied to both \textit{r} and \textit{p}, and applying this operation twice brings the system back to its original state, as \textit{$P^2$}=1. Spin \textit{s} also remains unchanged.
+ 
+In general, scalar quantities are symmetric, vector quantities are not, pseudovector quantities (a quantity which after undergoing an improper rotation in three dimensions (e.g reflection) change sign) are symmetric;  pseudoscalar quantities (scalar product a of vector and pseudovector) are not. In addition, three fundamental interactions; strong, electromagnetic and gravitational are parity symmetric, however, the weak interaction does not have parity symmetry.
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.0in]{parityclocks.png}
+	\includegraphics[width=3.0in]{paritybottomclocks.png}
+	\caption{Parity symmetry and parity asymmetry}
+	\label{fig:parityclocks1}
+\end{figure}
+
+As shown in Figure \ref{fig:parityclocks1} , the two clocks in the top row show parity symmetry, as the clock on left will act like the mirror image of the same clock (shown on the right). The hands will move in the opposite direction, but both clocks will show the same time. However, the two clocks on the bottom row are parity asymmetric, as the clock in the mirror image does not act in the same way as the clock on the left: the hands will not show the same time.
+
+\subsubsection{Charge-conjugation symmetry}
+
+When the charge-conjugation operator \textit{C} acts on a particle, it changes the particle into its antiparticle, keeping the time, space and spin quantities associated with the particle unchanged. Just as with parity, the strong, electromagnetic and gravitational interactions obey charge-conjugation symmetry, but weak interactions do not. It is easily understandable as to how charge-conjugation would not vary the laws governing electromagnetic interactions, for example, if an electron were replaced by a positron, the electric and magnetic fields would change direction, therefore EM interactions obey charge-conjugation symmetry.
+
+\subsubsection{Parity violation: The Wu experiment}
+In 1956 the theoretical physicists Tsung-Dao Lee and Chen-Ning Yang discovered that although parity symmetry had been investigated in experiments concerning the strong and electromagnetic interactions, it had yet to be tested for weak interactions. In the same year, Chien-Shiung Wu (nicknamed ``The First Lady of Physics" for her expertise in experimental physics) lead a group of experimental physicists who tested whether parity symmetry occurred in the beta-decay of cobalt-60 nuclei \cite{wupaper}. This was done by cooling cobalt-60 atoms to a temperature close to absolute zero and aligning the magnetic moments of the cobalt-60 atoms using a uniform magnetic field. As cobalt-60 is unstable isotope, it decays to the stable isotope nickel-60 by beta-minus decay (See Equation \ref{eq:cobalt60decay}).
+
+\begin{equation}
+\label{eq:cobalt60decay}
+{}_{{27}}^{{60}}{\text{Co}}\rightarrow {}_{{28}}^{{60}}{\text{Ni}}+e^{-}+{\bar {\nu }}_{e}+2{\gamma }
+\end{equation}
+
+The gamma rays emitted by cobalt-60 are photons, therefore their emission from the cobalt-60 nucleus is due to the electromagnetic interaction. As mentioned previously, it was known that the electromagnetic interaction was obeyed by parity symmetry, therefore these could be used as a control variable in the experiment. The setup of the experiment can be seen in Figure \ref{fig:wuexpsetup}.
+
+\begin{figure}
+		\centering
+		\captionsetup{justification=centering}
+		\includegraphics[width=\linewidth]{Wu2.jpg}
+		\caption{The setup used by Wu et al.}
+		\label{fig:wuexpsetup}
+\end{figure}
+
+\begin{figure}
+		\centering
+		\captionsetup{justification=centering}
+		\includegraphics[width=\linewidth]{wuexpsetup.png}
+		\caption{The full setup of the Wu experiment}
+		\label{fig:wuexpsetup2}
+\end{figure}
+
+
+The polarising magnetic field is positioned vertically along the \textit{z} direction in Figure \ref{fig:wuexpsetup2}. The gamma photons released during the decay of cobolt-60 are detected by the two scintillators, one positioned $90\degree$ to the field, the other scintillator at around $0\degree$. To detect the electrons, an anthracene crystal is used to guide the light emitted by the scintillators to a photomultiplier. In this way, the direction of the electrons and gamma photons emitted could be observed, with the nuclear spins in opposite orientations. Magnetic fields are pseudovectors, and therefore (as mentioned previously) should be parity symmetric, however the direction the electrons are emitted is affected by a parity transformation. However as can be seen in Figure \ref{fig:wuresults}, due to the electrons being produced via the weak interaction, this was not the case.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\linewidth]{wuresults.png}
+	\captionsetup{justification=centering}
+	\caption{Diagram explaining the results Wu found}
+	\label{fig:wuresults}
+\end{figure}
+
+If the weak interaction obeyed parity symmetry then the direction of the electron trajectories emitted by cobalt-60 would be reversed (as the direction in which the electron travels is a vector quantity.) As mentioned previously, the magnetic field (being a pseudovector) and spin are not affected by a parity transformation. However, what Wu found was that under a parity transformation, no matter the alignment of the magnetic field, the electrons were always released in one direction, thus proving the weak interaction violated parity symmetry.
+
+ 
+\subsubsection{CP violation}
+\textit{CP} symmetry is the combination of the two symmetries mentioned previously: it is a combination of charge-conjugation symmetry and parity symmetry. Just like when the symmetries are considered separately, the electromagnetic, strong and gravitational fundamental interactions obey \textit{CP} symmetry, but the weak interaction does not. The concept of \textit{CP} symmetry was put forward by the physicist Lev Landau in 1957 as the ``true symmetry" between matter and it's antimatter counterpart. This means that if a particle is replaced with it's antiparticle by some process (charge-conjugation) the mirror image of this process (parity) would be the same as the original (charge-parity symmetry). However for matter to exist in the universe as we know it, this \textit{CP} symmetry must be violated somehow.
+
+In order to understand \textit{CP} violation, it is important to understand the following matrices: the CKM (Cabbibo-Kobayashi-Masakawa) matrix and the PMNS (Pontecorvo-Maki-Nakagawa-Sakata) matrix. The CKM  matrix describes quark mixing, that is, it describes quarks changing from one flavour to the other. The PMNS matrix describes neutrino mixing: it describes neutrinos changing from one flavour to another. The part of this project focusing on \textit{CP} violation is focusing on \textit{CP} violation from neutrino oscillations, therefore the PMNS matrix is of far more relevance, but for the sake of completeness when describing \textit{CP} violation in general, the development of the CKM matrix will be explained.
+
+There are two types of CP violation: ``Direct" CP violation and ``Indirect" CP violation. Indirect CP violation was discovered in 1964 by James Cronin and Val Fitch. Prior to their experimental work (for which they won the Nobel Prize in 1980), charge-parity was still thought to be conserved, but by looking at the decay of neutral kaons, Cronin and Fitch proved that CP symmetry could be disobeyed. 
+
+It was found that there were two types of neutral kaon, the K-Short ($K^0_S$) which is a neutral kaon with a short lifetime, and the K-Long ($K^0_L$), a neutral kaon with a long lifetime. The quark composition of the K-Short and K-Long is given by Equations \ref{eq:kshort} and \ref{eq:klong}.
+
+\begin{equation}
+\label{eq:kshort}
+K^0_S = \mathrm {\tfrac {d{\bar {s}}+s{\bar {d}}}{\sqrt {2}}} \
+\end{equation}
+
+\begin{equation}
+\label{eq:klong}
+K^0_L = \mathrm {\tfrac {d{\bar {s}}-s{\bar {d}}}{\sqrt {2}}} \
+\end{equation}
+
+The $K^0_S$ and the $K^0_L$ both have different decay modes, the $K^0_S$ decays to two $\pi_0$ mesons and the $K^0_L$ decays to three $\pi_0$ mesons. The two particles also have different lifetimes before they decay: the $K^0_S$ meson has a lifetime of just $0.89 \times 10^{-10}$ seconds before decaying, whereas the $K^0_L$ has the much longer lifetime of $5.2 \times 10^{-8}$ seconds. In the experiments, the K-Short and K-Long mesons were sent down a 57-foot long collimator (a instrument that makes a beam of particles narrower) and into a chamber of Helium. As the lifetime of the K-Long meson is much greater the the lifetime of the K-Short meson, it was expected that only the decays from K-Long would be found in the detector: you'd only see the decay into three pions, not two pions. However, Cronin and Fitch found 45 2-pion decays out of 22,700 decays. \cite{valfitch}. That's about 1 in 500 decays being 2-pion events. The decay mode of the K-Short meson has a charge-parity (CP) eigenvalue of +1 and the decay mode of the K-Long meson has a charge-parity (CP) eigenvalue of -1. Because decays from the K-Short meson were found, it means that some of the decay modes from the K-Long meson flipped to the decay modes of the K-Short meson, meaning that the CP eigenvalues flipped from -1 to +1, which showed that charge-parity symmetry was violated. The CP violation discovered here was related to the knowledge that neutral kaons can oscillate from their particles into their antiparticles, as shown in Figure \ref{fig:kaonosc}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.0in]{kaonosc.png}
+	\caption{Feynmann diagram showing the $K_0$ to $\overline{K_0}$ oscillation}
+	\label{fig:kaonosc}
+\end{figure}
+
+However this oscillation does not occur with equal probability in both directions, hence this is called \textit{indirect} CP violation. However, \textit{direct} CP violation can be found in the Standard Model if a complex phase is present in the CKM or PMNS matrix. Say there are two sets of particles, a and b, with antiparticles $\overline{a}$ and $\overline{b}$. The transformation of particle a to particle b can be denoted by ${a}\rightarrow{b}$ and the corresponding antiparticle transformation can be given by ${\overline{a}}\rightarrow{\overline{b}}$. The amplitudes of these respective processes can be given by A and $\overline{A}$. Prior to CP violation occurring, these amplitudes (given by complex numbers) have to be the same. The magnitude and phase of these amplitudes can be separated, for example, $A = |A|e^{i\theta}$. If there is a complex phase from either the CKM or PMNS matrix, this will be given by $e^{i\phi}$. The complex phase taken up by the antiparticle $\overline{A}$ will be given by $e^{-i\phi}$, as the matrix $\overline{A}$ contains the complex-conjugate of A. Now the amplitudes of the interactions can be given by Equation \ref{eq:amp}.
+
+	
+\begin{equation}
+\label{eq:amp}
+A=|A|e^{i\theta }e^{i\phi }
+{\overline{A}}=|A|e^{i\theta }e^{-i\phi }
+\end{equation}
+
+Equation \ref{eq:amp2} shows the contribution to the amplitudes if there are two different ways the particle transformation can occur.
+\begin{equation}
+\label{eq:amp2}
+A=|A_{1}|e^{i\theta _{1}}e^{i\phi _{1}}+|A_{2}|e^{i\theta _{2}}e^{i\phi _{2}}
+{\overline {A}}=|A_{1}|e^{i\theta _{1}}e^{-i\phi _{1}}+|A_{2}|e^{i\theta _{2}}e^{-i\phi _{2}}
+\end{equation}
+
+Squaring the amplitudes of the transformation for the particles and antiparticles and finding the difference gives Equation \ref{eq:amp3}.
+
+\begin{equation}
+\label{eq:amp3}
+{\displaystyle |A|^{2}-|{\overline {A}}|^{2}=-4|A_{1}||A_{2}|\sin(\theta _{1}-\theta _{2})\sin(\phi _{1}-\phi _{2})}
+\end{equation}
+
+As a result, we see that there is a difference between the rate at which the transformation between \textit{a} and \textit{b} occur for particles and antiparticles, therefore showing that CP symmetry is violated.
+
+
+\subsubsection{The CKM matrix}
+
+The CKM matrix is a unitary matrix (matrix $\times$ conjugate transpose = identity matrix) ($U\mbox{*}U = UU\mbox{*}=I$) which provides information on the strength (probability) of flavour-changing weak decay in quarks.
+
+The CKM matrix is an extension of the GIM mechanism, which only provided information on flavour changing when 3 quarks were thought to exist (up, down and strange). It uses the Cabbibo angle, which is associated with the probability that strange and down quarks decay via the charged-current weak interactions (i.e interactions involving the $W^+$ and $W^-$ bosons) into up quarks. The probability that strange quarks will decay into up quarks is given by $|V_{us}|^2$ and the probability that down quarks decay into up quarks is given by $|V_{ud}|^2$. In the terms of particle physics, the object \textit{d'} which ``couples" the up-quark via the $W^+$ and $W^-$ interactions is a superposition of the down and strange quarks, which can be shown in terms of maths in Equation \ref{eq:cabbibods}.
+
+\begin{equation}
+\label{eq:cabbibods}
+d^{\prime }=V_{ud}d+V_{us}s
+\end{equation}
+
+If we relate this to the Cabibbo angle and we know that $V_{ud}=\cos \theta _{\mathrm {c}}$ and that $V_{us}=\sin \theta _{\mathrm {c}}$ then we can form Equation \ref{eq:cabbibo2}
+
+\begin{equation}
+\label{eq:cabbibo2}
+d^{\prime }=\cos \theta _{\mathrm {c} }d+\sin \theta _{\mathrm {c} }s
+\end{equation}
+
+After using the known value for $V_{ud}$ and $V_{us}$, the value of the Cabbibo angle can be found, as shown in Equation \ref{eq:cabbibo}.
+
+\begin{equation}
+\label{eq:cabbibo}
+\tan \theta _{\mathrm {c} }={\frac {|V_{us}|}{|V_{ud}|}}={\frac {0.22534}{0.97427}}\rightarrow \theta _{\mathrm {c} }=~13.02^{\circ }
+\end{equation}
+
+After the charm quark was found in 1974, a similar equation to Equation \ref{eq:cabbibo2} can be written for the down and strange quarks decaying into the charm quark, given by Equation \ref{eq:cabbibocharm}.
+
+\begin{equation}
+\label{eq:cabbibocharm}
+s^{\prime }=-\sin {\theta _{\mathrm {c} }}d+\cos {\theta _{\mathrm {c} }}s
+\end{equation}
+
+Combining the previous equations to give a matrix, Equation \ref{eq:cabbibomatsimp} can be written.
+
+\begin{equation}
+\label{eq:cabbibomatsimp}
+{\begin{bmatrix}d^{\prime }\\s^{\prime }\end{bmatrix}}={\begin{bmatrix}\cos {\theta _{\mathrm {c} }}&\sin {\theta _{\mathrm {c} }}\\-\sin {\theta _{\mathrm {c} }}&\cos {\theta _{\mathrm {c} }}\\\end{bmatrix}}{\begin{bmatrix}d\\s\end{bmatrix}}
+\end{equation}
+
+Kobayashi and Masakawa extended Cabbibo's matrix to include all three generations of quarks, which is the CKM matrix:
+
+\begin{equation}
+{\begin{bmatrix}d^{\prime }\\s^{\prime }\\b^{\prime }\end{bmatrix}}={\begin{bmatrix}V_{ud}&V_{us}&V_{ub}\\V_{cd}&V_{cs}&V_{cb}\\V_{td}&V_{ts}&V_{tb}\end{bmatrix}}{\begin{bmatrix}d\\s\\b\end{bmatrix}}
+\end{equation}
+
+The CKM matrix gives the probability that a quark of one type \textit{i} will decay into a quark of another type \textit{j}. These are given by the squares of the magnitudes of the elements of the CKM matrix, $|V_{ij}|^2$.
+
+In order to properly characterise the CKM matrix, parameters are needed. There are many proposed parameters, but the most common one is the ``standard" parametrisation, using $\theta_{12},\theta_{23},\theta_{13}$ and $\delta_{13}$: $\theta_{12},\theta_{23},\theta_{13}$ are the Euler angles, with $\theta_{12}$ being the Cabbibo angle and $\delta_{13}$ being the CP violating phase. The parametrisation of the CKM matrix can be seen in Equation \ref{eq:ckmpara}.
+
+\begin{equation}
+\label{eq:ckmpara}
+{\begin{aligned}&{\begin{bmatrix}1&0&0\\0&c_{23}&s_{23}\\0&-s_{23}&c_{23}\end{bmatrix}}{\begin{bmatrix}c_{13}&0&s_{13}e^{-i\delta _{13}}\\0&1&0\\-s_{13}e^{i\delta _{13}}&0&c_{13}\end{bmatrix}}{\begin{bmatrix}c_{12}&s_{12}&0\\-s_{12}&c_{12}&0\\0&0&1\end{bmatrix}}\\&={\begin{bmatrix}c_{12}c_{13}&s_{12}c_{13}&s_{13}e^{-i\delta _{13}}\\-s_{12}c_{23}-c_{12}s_{23}s_{13}e^{i\delta _{13}}&c_{12}c_{23}-s_{12}s_{23}s_{13}e^{i\delta _{13}}&s_{23}c_{13}\\s_{12}s_{23}-c_{12}c_{23}s_{13}e^{i\delta _{13}}&-c_{12}s_{23}-s_{12}c_{23}s_{13}e^{i\delta _{13}}&c_{23}c_{13}\end{bmatrix}}.\end{aligned}}
+\end{equation}
+
+\subsubsection{The PMNS matrix}
+
+The Pontecorvo-Maki-Nakagawa-Sakata matrix is similar to the CKM matrix as it gives oscillation probabilities, but for neutrino flavours instead of quark flavours. The entire concept of neutrino mixing came about due to Bruno Pontecorvo in 1957, who said that similarly to neutral kaon oscillation, where $K_0$ could oscillate into $\overline{K_0}$, so could neutrinos oscillate into their anti-neutrinos. This then brought about the idea of neutrinos changing flavour, for example, muon neutrinos oscillating into electron neutrinos. e.t.c. The PMNS matrix can be seen in Equation \ref{eq:pmns}.
+
+\begin{equation}
+\label{eq:pmns}
+{\begin{bmatrix}{\nu _{e}}\\{\nu _{\mu }}\\{\nu _{\tau }}\end{bmatrix}}={\begin{bmatrix}U_{e1}&U_{e2}&U_{e3}\\U_{\mu 1}&U_{\mu 2}&U_{\mu 3}\\U_{\tau 1}&U_{\tau 2}&U_{\tau 3}\end{bmatrix}}{\begin{bmatrix}\nu _{1}\\\nu _{2}\\\nu _{3}\end{bmatrix}}
+\end{equation}
+
+The $\nu_e$, $\nu_{\mu}$, and  $\nu_{\tau}$ are definite flavour states of the neutrino, obtained from a quantum superposition of stationary states: $\nu_1$, $\nu_2$, $\nu_3$. The states $\nu_1$, $\nu_2$, $\nu_3$ undergo a unitary transformation to become the definite flavour states $\nu_e$, $\nu_{\mu}$, and  $\nu_{\tau}$. The transformation is given by the 3 x 3 matrix in Equation \ref{eq:pmns}. As for the parametrisation of the PMNS matrix, the transformation can be thought of in terms of three rotations: the mixing angles $\theta_{12}$, $\theta_{23}$ and $\theta_{13}$ and a charge-parity violating phase $\delta_{CP}$.
+
+\begin{equation}
+\label{eq:para}
+{\begin{aligned}&{\begin{bmatrix}1&0&0\\0&c_{23}&s_{23}\\0&-s_{23}&c_{23}\end{bmatrix}}{\begin{bmatrix}c_{13}&0&s_{13}e^{-i\delta _{CP}}\\0&1&0\\-s_{13}e^{i\delta _{CP}}&0&c_{13}\end{bmatrix}}{\begin{bmatrix}c_{12}&s_{12}&0\\-s_{12}&c_{12}&0\\0&0&1\end{bmatrix}}\\&={\begin{bmatrix}c_{12}c_{13}&s_{12}c_{13}&s_{13}e^{-i\delta _{CP}}\\-s_{12}c_{23}-c_{12}s_{23}s_{13}e^{i\delta _{CP}}&c_{12}c_{23}-s_{12}s_{23}s_{13}e^{i\delta _{CP}}&s_{23}c_{13}\\s_{12}s_{23}-c_{12}c_{23}s_{13}e^{i\delta _{CP}}&-c_{12}s_{23}-s_{12}c_{23}s_{13}e^{i\delta _{CP}}&c_{23}c_{13}\end{bmatrix}}.\end{aligned}}
+\end{equation}
+
+The current values for the mixing angles obtained from experiments are:
+\paragraph{}
+$
+\begin{matrix}
+{\begin{aligned}\sin ^{2}2\theta _{12}&=0.857\pm 0.024\\\sin ^{2}2\theta _{23}&>0.95\\\sin ^{2}2\theta _{13}&=0.095\pm 0.010\\\end{aligned}}
+\end{matrix}
+$
+
+\paragraph{}
+If neutrino oscillations violate CP symmetry, the CP violating phase factor $\delta_{CP}$ will be non-zero, something which has not yet been observed in experiments. Hyper-Kamiokande will hopefully be able to pick up on these CP-violating phases, as the CP violation observed in the quark sector from the $\delta_{CP}$ in the CKM matrix only explains a small portion of the CP violation required to explain matter-antimatter imbalance.
+
+For three flavour neutrino oscillation probabilities, the current measurements for the oscillation parameters are: $sin^2(2\theta)_{13} = 0.10$, $sin^2(2\theta)_{23} = 0.97$ and $sin^2(2\theta)_{13} = 0.861$. The parameters $\delta{m^2}_{12} = 7.59 \times 10^{−5} eV^2$ and $\delta{m^2}_{32} \approx \delta{m^2}_{13} = 2.32 \times 10^{−3} eV^2$ where $\delta{m^2}$ is the difference between the masses of the neutrinos squared.
+
+Equation (3) from \cite{probcomponents} gives the probability of a $\nu_{\mu}$ oscillating into a $\nu_e$, and contains terms normally left out when calculating neutrino oscillation probabilities. This equation will be used when plotting said probabilities (see Results section.)
+
+
+
+\section{Computing tools used}
+
+\subsection{Geant4}
+Geant4 (GEometry ANd Tracking) is software used to simulate how particles travel through matter. \cite{geant4paper} It is a toolkit used in many fields of physics: not only high energy physics, but also astronomy and medical physics. Geant4 allows for complete functionality when analysing how particles move through matter: it allows for tracking, geometry, hits, and physics models (three of which will be discussed further on in this section.) Geometry entails the physical setup of the experiment, for example, the detector, and how the setup will effect the passage of the particles. Tracking involves the actual simulation of how the particles interact with matter and electromagnetic fields, including interactions with other particles and possible decay processes. Detector response is also something simulated by Geant4: it approximates how a real detector would measure the properties of a particle passing through it. Run management is used to store information about the events for analysis, and there are options for visualisation of the detector and particle trajectories. Geant4 uses Monte-Carlo methods to simulate the detector and the physics processes and was the first of the GEANT series of software toolkits designed by CERN to use object-oriented programming in C++.\cite{geant4paper}
+
+\subsection{WCSim}
+WCSim is a Geant4 package used for the simulation of large water-Cherenkov detectors, such as Super-Kamiokande and Hyper-Kamiokande. The simulated detector contains top and side photomultiplier tubes. Given parameters detailing the geometry of the chamber and information about the PMTs, it sets up the detector as requested so events can be simulated. WCSim gives the results of the simulation in an output ROOT file. WCSim loops through the events, and gives a list of hits containing information about the PMTs hit, including charge, time and ID of the PMT that was hit. One such file used in my project to analyse the PMT information was `read{\_}PMT.C'.
+
+\subsection{Prob 3++}
+Prob 3++ is software used for calculating probabilities of neutrino oscillations occurring between three flavours of neutrino. It was written in C/C++ by members of the Super-Kamiokande collaboration and is based on the work of Barger et al.Phys. \cite{prob3++}.
+
+
+\subsection{Physics models used: GHEISHA, BERTINI, and BINARY}
+
+\subsubsection{GHEISHA}
+
+Gheisha is the hadronic package which was used with Geant3 and the original Geant4 model. It covers all long-lived particles at all energies and describes hadronic showers well. It also conserves momentum and energy on average.
+
+\subsubsection{BERTINI CASCADE}
+This model handles incoming protons, neutrons, pions, kaons and hyperons \cite{modelspaper}. It models the particle interactions according to classical scattering, that is, scattering theory based on classical mechanics rather than quantum mechanics. Scattering theory based on classical mechanics states that for a particle in a central potential V(r), the angle of scattering is determined by the impact parameter b$\theta$. 
+
+The number of particles scattered per unit time between $\theta$ and $\theta$+d$\theta$ is equal to the number of of incident particles between \textit{b} and \textit{b+db}, shown in Figure \ref{fig:classicalscattering}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.0in]{classicalscattering.png}
+	\caption{A particle being classically scattered in central potential V(r)}
+	\label{fig:classicalscattering}
+\end{figure}
+
+The number of particles scattered into the solid angle for incident flux \textit{j} is given by Equation \ref{eq:numberofparticles}
+\begin{equation}
+\label{eq:numberofparticles}
+N d \Omega = N 2\pi \sin (\theta) d\theta = 2 \pi b db j 
+\end{equation}
+
+where d$\Omega$ is the solid angle.
+ 
+
+
+It models particle interactions as follows: an incident hadron collides with a nucleus of another atom and then moves along straight lines through the simulated nucleus. It collides with other particles according to the mean free path (estimated from kinetic theory) which is worked out by considering the total cross-section of the incident hadron and the nucleus. The nucleus itself is simulated using up to three concentric shells of constant density. The momentum of the nucleus before the collision is simulated according to the momentum of particles inside a Fermi gas, and Pauli blocking is simulated for the protons and neutrons. Pauli blocking states that for nucleons to collide there must be quantum states available for scattered nucleons to go into, as many collisions cannot actually occur as the possible states scattered nuclei could go into are already filled. This is a direct consequence of the Pauli exclusion principle, which states that two or more fermions (which include the nucleons used here, as protons and neutrons have spin 1/2) can exist in the same quantum state. One large drawback of the Bertini model is that no Coulomb barrier is used, so the fact that there is an energy barrier due to electrostatic repulsion that needs to be overcome in order for two nuclei to get close enough to react is currently not being modelled. 
+
+
+\subsubsection{BINARY CASCADE}
+
+The Binary Cascade model is a combination of a classical cascade model and a quantum dynamical model. It is valid for incident nucleons with 0 $<$ KE $<$ 1.5 GeV and pions with 0 $<$ KE $<$ 1.5GeV. The model was developed as such: a simulation of a 3D model of a nucleus is used, and the nucleons are placed in the nucleus according to the Woods-Saxon potential, which is given by Equation \ref{eq:woodssaxonpotential}.
+
+\begin{equation}
+\label{eq:woodssaxonpotential}
+V(r) = \frac{-V_0}{1+exp(\frac{r-R}{a})}
+\end{equation}
+
+where $R = r_0A^\frac{1}{3}$. \textit{V(r)} is the potential as a function of distance \textit{r} from the centre of the nucleus, \textit{${V_0}$} is the depth of the potential well, \textit{a} represents the ``surface thickness" of the nucleus, $\textit{${r_0}$}=1.25fm$, and \textit{A} is the mass number of the nucleus. Figure \ref{fig:wspot} is an example of a Woods-Saxon potential for a nucleus with mass number $\textit{A}=50$.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.0in]{woodssaxonpot50.png}
+	\caption{Woods-Saxon potential for $\textit{A}=50$, with $\textit{a}=50fm$}
+	\label{fig:wspot}
+\end{figure}
+
+When investigating the cross section (probability of collision) of two particles which interact as a function of energy, peaks can occur at certain energies. These peaks indicate the creation of a new particle; the mass-energy of the particle being being the energy of the peak. These peaks are known as resonances. Two types of resonances are as follows: t-channel and s-channel resonances, the Feynmann diagrams for which are shown in Figures \ref{fig:schannel} and \ref{fig:tchannel}. The interacting nucleons in the Binary model are given their momentum in accordance with the Fermi gas model, much like in the Bertini model. Nucleon-nucleon scattering is handled by t-channel resonance formation and decay, while meson-nucleon scattering is modelled by s-channel resonance excitation. S-channel (space-channel) and t-channel (time-channel) are channels which represent different possible scattering events where there is an interaction involving an intermediate particle (represented by the dashed line in Figures \ref{fig:schannel} and \ref{fig:tchannel}) , the four-momentum (four-momentum being the momentum vector in space and time) of which equals \textit{s} and \textit{t} respectively. \textit{s} and \textit{t} are known as Mandelstam variables, which are simply numbers that contain information about the momentum, angles and energy of particles that take part in a scattering process in a way which is Lorentz-invariant. 
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=.6\linewidth]{schannel.png}
+		\caption{A s-channel process}
+		\label{fig:schannel}
+	\end{minipage}%
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=.6\linewidth]{tchannel.png}
+		\caption{A t-channel process}
+		\label{fig:tchannel}
+	\end{minipage}
+\end{figure}
+
+
+If we use the Minkowski metric shown in Equation \ref{eq:minkowskimetric}:
+
+
+\begin{equation}
+\label{eq:minkowskimetric}
+g_{\mu\nu} = \begin{bmatrix}
+-1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
+\end{equation}
+
+then the Mandelstam variables for \textit{s} and \textit{t} are given by Equations \ref{eq:mandelschannel} and \ref{eq:mandeltchannel} respectively.
+
+\begin{equation}
+\label{eq:mandelschannel}
+s=(p_1 + p_2)^2 = (p_3 + p_4)^2
+\end{equation}
+\begin{equation}
+\label{eq:mandeltchannel}
+t=(p_1 - p_3)^2 = (p_2 - p_4)^2
+\end{equation}
+
+
+where \textit{$p_1$} and \textit{$p_2$} are the four-momenta of the particles going into the interaction, and \textit{$p_3$} and \textit{$p_4$} are the four-momenta of particles leaving the interaction. As you can see from Figures \ref{fig:schannel} and \ref{fig:tchannel} the differences between and s-channel process and a t-channel process is as follows: in the s-channel process, the two particles with four-momenta \textit{$p_1$} and \textit{$p_2$} join into an intermediate particle which then splits into two particles with four-momenta \textit{$p_3$} and \textit{$p_4$}. With a t-channel process, the particle with four-momentum \textit{$p_1$} emits an intermediate particle and turns into a particle with four-momentum \textit{$p_3$}. A particle with four-momentum \textit{$p_2$} absorbs the intermediate particle and transforms into a particle with four-momentum \textit{$p_4$}.
+
+In the Binary model, the resonances (peaks produced by unstable particles) in the cross sections for the scattering experiments are modelled using the Breit-Wigner distribution, given by Equation \ref{eq:bwdist}, and shown in Figure \ref{fig:wig}.
+
+\begin{equation}
+\label{eq:bwdist}
+f(E)=\frac{k}{(E^2 - M^2)^2 + M^2\Gamma^2}
+\end{equation}
+
+\begin{figure}
+	\centering
+\includegraphics[width=3.0in]{breitwignershape.png}
+\caption{The Breit-Wigner distribution}
+\label{fig:wig}
+\end{figure}
+
+where \textit{k} is a constant of proportionality. \textit{E} is the centre of mass energy that produces the resonance, \textit{M} is the mass of the unstable particle, and \textit{$\Gamma$} is the width of the resonance. The mean lifetime of the unstable particle produced is given by $\tau = 1/\Gamma$. Another key feature of this model is that unlike the Bertini model, a Coulomb barrier is put in place for charged hadrons.
+
+
+
+\section{Results and Discussion}
+\subsection{Results for comparing Physics Lists}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.0in]{hyperkinteractions.png}
+	\captionsetup{justification=centering}
+	\caption{Schematic of the Water Cherenkov detector being modelled}
+	\label{fig:detectordrawings}
+\end{figure}
+
+
+Figure \ref{fig:detectordrawings} shows the interactions WCSim is modelling. The blue cylinder represents the water Cherenkov detector being modelled. The red arrow coming into the detector from the left shows the incoming particle being fired from a `particle gun': this can be set to any particle. The incoming particle interacts with the hadrons and electrons in the atoms in the water molecules inside the water Cherenkov detector; these interactions produce charged particles which move faster than the speed of light in water. These interactions are shown in Figure \ref{fig:detectordrawings} by green arrows and the hadrons and electrons that take part in these interactions are showed by the orange circles. Because the charged particles move faster than the speed of light in water Cherenkov radiation is produced (see section on Cherenkov detectors). These photons are shown in Figure \ref{fig:detectordrawings} by the purple arrows. These photons are detected by photomultiplier tubes, shown in Figure \ref{fig:detectordrawings} as the yellow hemispheres which line the detector. The information recorded by the photomultiplier tubes can give us information about the incoming particle. The purpose of this experiment is to see how data recorded by the PMTs changes based on which physics model (see section on Physics models used) GHEISHA, BERTINI or BINARY is used. The data for the PMTs was produced by running the macros `read\_PMT.C' and `cerInfo.C' after the simulation was run and the results for each physics model was saved in a ROOT file.
+\paragraph{}
+The `read\_PMT.C' macro was run using the following energy and particle configuration in the WCSim.mac file: 
+\paragraph{}
+/gun/energy 500 MeV
+\newline \indent
+/run/beamOn 10
+\paragraph{}
+This means that energy of the incoming particle was set to 500 MeV, and the number of events run in the simulation was set to 10. When the simulation was run with the incoming particles set to pions or electrons (/gun/particle pi+, pi-, pi0 and /gun/particle/e-) there was no difference in the results between the physics lists. An example of this is shown in Figures \ref{fig:pi+gheisha}, \ref{fig:pi+bertini} and \ref{fig:pi+binary}, where the incoming particle is set to a positively charged pion, (/gun/particle pi+) and there is clearly no difference in the results for the three models.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=\linewidth]{gheishapiplusreadpmt-1.png}
+	\captionsetup{justification=centering}
+	\caption{All `read\_PMT.C' plots using the GHEISHA model}
+	\label{fig:pi+gheisha}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{bertinipiplusreadpmt-1.png}
+	\captionsetup{justification=centering}
+	\caption{All `read\_PMT.C' plots using the BERTINI model}
+	\label{fig:pi+bertini}
+\end{figure}	
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{binarypiplusreadpmt-1.png}
+	\captionsetup{justification=centering}
+	\caption{All `read\_PMT.C' plots using the BINARY model}
+	\label{fig:pi+binary}	
+\end{figure}
+
+However if we set the incoming particle to neutron (/gun/particle/neutron) and keep all other parameters the same, there is a difference in the data recorded for the PMTs. Using ROOT, the results for each model was plotted and overlayed. The histogram plot for `average charge vs time' collected by the PMTs, shown in Figure \ref{fig:averagechargevstoverlay}, shows clear differences between the results for the three models. The data for GHEISHA is plotted in red, the data for BERTINI is plotted in green and the data for BINARY is plotted in blue. The average charge in Coulombs collected by the PMT is plotted on the y-axis while the time in seconds since the beginning of the simulation is plotted on the x-axis. The reason charge is picked up by the PMTs is because even though photons have no charge, once they hit the PMT, the photons are converted to photoelectrons by a photocathode via the photoelectric effect, as shown in Figure \ref{fig:pmt}.
+
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{avqvst.png}
+	\caption{Plot of average charge against time recorded by the PMTs}
+	\label{fig:averagechargevstoverlay}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{pmt.jpg}
+	\caption{Schematic of a photomultiplier tube and scintillator}
+	\label{fig:pmt}
+\end{figure}
+
+In Figure \ref{fig:hitsvstime} we can see the number of actual photons hitting the PMT (hits) plotted against time. All three models show the largest number of photon hits recorded at 950-960 seconds, with GHEISHA recording the highest number of photon hits (32 hits).
+
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{hitsvstimeoverlay-1.png}
+	\caption{Plots of photon hits against time recorded by the PMTs}
+	\label{fig:hitsvstime}
+\end{figure}
+
+
+The number of events recorded against charge was also plotted: this can be seen in Figure \ref{fig:chargevtime}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{chargeoverlay-1.png}
+	\caption{Number of events against charge recorded by the PMTs}
+	\label{fig:chargevtime}
+\end{figure}
+
+The largest number of events were recorded for the GHEISHA model, with 1C with 57 events. For the BERTINI model, the largest number of events were recorded at 1.25 C with 40 events recorded. The BINARY model recorded the most events at 1C with 31 events being recorded. Simply by looking at Figure \ref{fig:chargevtime} we can see that the GHEISHA model recorded the largest number of events in total, followed by the data for BERTINI and then BINARY recording the lowest number of events. The reason the GHEISHA model gives the largest total number of events may be because of the fact the cross-section and luminosity of the interactions were modelled in such a way that the calculated number of events would be larger than the other two models. Luminosity is dependent on factors such as the beam width and the particle flow rate, as well as the information involving the target nuclei (which here are the electrons and hadrons.) The physics lists will have simulated these parameters in different ways, leading to a different number for the total events.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{pemultoverlay-1.png}
+	\caption{Number of events against photoelectron multiplicity recorded by the PMTs}
+	\label{fig:pemultvtime}
+\end{figure}
+
+Figure \ref{fig:pemultvtime} shows the number of events occurring per photoelectron produced. The largest number of events recorded for each model occur when 1 photoelectron is produced. BERTINI gives the highest number of recorded events at 1200 events occurring with 1 photoelectron produced. GHEISHA gives the next largest results at 1125 events recorded with 1 photoelectron. BINARY gives the least number of recorded events: 300 events recorded at 1 photoelectron produced. Again these results are due to the ways the different physics models simulate the hadronic interactions taking place.
+
+Another macro called `cerInfo.C' was used with WCSim to further analyse the difference between the models BINARY and BERTINI. `cerInfo.C' is a macro that outputs the number of events plotted against the following: `Number of Tubes with true hit', `Number of Tubes with true digi hit', `Total Charge by Event' and `True Times of all Hits'. 
+This macro was run with an altered configuration in the WCSim.mac file to the one used with `read{\_}PMT.C'.
+
+The macro was first run with:
+
+\noindent/gun/particle e
+\newline 
+/gun/energy 500 MeV
+\newline 
+/run/beamOn 1000
+\paragraph{}
+
+Here electrons were used as the incoming particle, and they were set to have an energy of 500 MeV. The number of events recorded was increased from before to 1000 events. This was in order to increase the reliability of the results. The results can be seen in Figures \ref{fig:hitbin}-\ref{fig:timebin} for BINARY and Figures \ref{fig:hitbert}-\ref{fig:timebert} for BERTINI.
+
+\begin{figure}
+	\centering
+		\captionsetup{justification=centering}
+		\includegraphics[width=\linewidth]{numtubestruehitbinary.png}
+		\caption{No.of tubes with true hit for the BINARY model}
+		\label{fig:hitbin}
+\end{figure}
+\begin{figure}
+		\centering
+		\captionsetup{justification=centering}
+		\includegraphics[width=\linewidth]{numtubestruedigihitbinary.png}
+		\caption{No. tubes with true digi hit for the BINARY model}
+		\label{fig:digihitbin}
+	\end{figure}
+	
+\begin{figure}
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=\linewidth]{totalchargebyeventbinary.png}
+	\caption{Total charge by event for the BINARY model}
+	\label{fig:qbin}
+\end{figure}
+\begin{figure}
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=\linewidth]{truetimesofallhitsbinary.png}
+	\caption{True times of all hits for the BINARY model}
+	\label{fig:timebin}
+\end{figure}
+
+\begin{figure}
+		\centering
+		\captionsetup{justification=centering}
+		\includegraphics[width=\linewidth]{numtubestruehitbertini.png}
+		\caption{No. of tubes with true hit for the BERTINI model}
+		\label{fig:hitbert}
+\end{figure}
+	\begin{figure}
+		\centering
+		\captionsetup{justification=centering}
+		\includegraphics[width=\linewidth]{numtubestruedigihitbinary.png}
+		\caption{No. of tubes with true digi hit for the BERTINI model}
+		\label{fig:digihitbert}
+	\end{figure}
+	
+	\begin{figure}
+		\centering
+		\captionsetup{justification=centering}
+		\includegraphics[width=\linewidth]{totalchargebyeventbinary.png}
+		\caption{Total charge by event for the BERTINI model}
+		\label{fig:qbert}
+	\end{figure}
+
+\begin{figure}
+		\centering
+		\captionsetup{justification=centering}
+		\includegraphics[width=\linewidth]{truetimesofallhitsbinary.png}
+		\caption{True times of all hits for the BERTINI model}
+		\label{fig:timebert}
+\end{figure}
+
+
+It can be seen that for electrons at 500 MeV, there is no difference in the results for the BINARY and BERTINI models. The y-axis shows number of events plotted. In Figures \ref{fig:hitbin} and \ref{fig:hitbert} the number of tubes with a true hit is recorded along the x-axis. A `true hit' is simply when a photon is recorded hitting a PMT. In Figures \ref{fig:digihitbin} and \ref{fig:digihitbert} the number of tubes with true digi hits is recorded along the x-axis. A `true digi hit' is the hit detected after the electronics of the PMT, in other words, the detector output recorded by the PMT. Figures \ref{fig:qbin} and \ref{fig:qbert} show the total charge recorded by the PMT on the x axis, and Figures \ref{fig:timebin} and \ref{fig:timebert} show the times at which the hits occurred on the x-axis. We can see from Figures \ref{fig:hitbin} and \ref{fig:hitbert} there's a peak of 68 events occurring with 2400 PMTs recording a true hit, and from Figures \ref{fig:digihitbin} and  \ref{fig:digihitbert} that a peak occurred at 82 events with 2000 PMTs recording a true digi hit. `Total Charge by Event' represents the sums of all the signals digitized by the PMTs. Because the calibration is almost linear, it can be converted immediately by saying it is equal to the number of photoelectrons collected by the event. Figures \ref{fig:qbin} and \ref{fig:qbert} show that at 59 events there is a recorded charge of 2575 photoelectrons and 2625 photoelectrons.  Figures \ref{fig:timebin} and \ref{fig:timebert} show that at 180s into the simulation there are 56000 hits recorded.
+
+The `cerInfo.C' macro was also run with the energy of the particle gun set to 100 MeV and the particle was set to a negative pion, $\pi^-$. The plots were overlayed using ROOT. These plots showed a slight difference between the BINARY and BERTINI physics lists, as can be seen from Figures \ref{fig:truehitpi-100} to \ref{fig:timepi-100}. The blue histogram represents the BINARY model, while the red histogram represents the BERTINI model.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{truehitpi-100.png}
+	\caption{Number of tubes giving a true hit overlayed for BINARY and BERTINI}
+	\label{fig:truehitpi-100}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{truedigihitpi-100.png}
+	\caption{Number of tubes giving a true digi hit overlayed for BINARY and BERTINI}
+	\label{fig:truedigihitpi-100}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{totalchargebyeventpi-100.png}
+	\caption{The total charge by event overlayed for BINARY and BERTINI}
+	\label{fig:qpi-100}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{truetimesofallhitspi-100.png}
+	\caption{The true times of all hits overlayed for BINARY and BERTINI}
+	\label{fig:timepi-100}
+\end{figure}
+
+For example, Figure \ref{fig:truehitpi-100} shows the BERTINI model has peak at around 1100 tubes giving a true hit, with 15 events, while the BINARY model has a peak at around 770 tubes giving a true hit for 14 events. Figure \ref{fig:truedigihitpi-100} shows that both the BERTINI and BINARY models have very similar distributions, as both have a peak at 150 tubes with 35 events. Figure \ref{fig:qpi-100} shows again that the histograms for the two models are very similar, with a peak at 175 photoelectrons produced, but with BINARY having a slightly higher number of events, with 30. Figure \ref{fig:timepi-100} shows that the histograms are very similar again for the two models, with a peak in events occurring at 175 seconds for both. The important fact to note here is that for the negative pions at 100 MeV, the distributions of the two models have very similar shapes, with peaks occurring at almost the same or exactly the same places. The differences are in the height of the peaks, or in other words, the number of events occurring with the values along the x-axis. In order to look more closely at the small differences between the BINARY and BERTINI models, a macro called `compareProcessed.C' was used to calculate a plot of the difference between the two histograms; the results of which can be seen in Figures \ref{fig:truehitdiffpi-100} to \ref{fig:timediffpi-100}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{truehitdiffpi-100.png}
+	\caption{Figure \ref{fig:truehitpi-100} with a difference plot}
+	\label{fig:truehitdiffpi-100}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{truedigihitdiffpi-100.png}
+	\caption{Figure \ref{fig:truedigihitpi-100} with a difference plot}
+	\label{fig:truedigihitdiffpi-100}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{sumqdiffpi-100.png}
+	\caption{Figure \ref{fig:qpi-100} with a difference plot}
+	\label{fig:sumqdiffpi-100}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{timediffpi-100.png}
+	\caption{Figure \ref{fig:timepi-100} with a difference plot}
+	\label{fig:timediffpi-100}
+\end{figure}
+
+Figure \ref{fig:truehitdiffpi-100} shows the greatest difference in the number of events between the plots is at around 1450 tubes with the BERTINI model giving 8 more events than BINARY. Figure \ref{fig:truedigihitdiffpi-100} shows that at 760 tubes and 790 tubes BERTINI records seven more events than BINARY. Figure \ref{fig:sumqdiffpi-100} shows BERTINI recording 7 more events than BINARY producing 120 photoelectrons. Figure \ref{fig:timediffpi-100} shows that compared to Figures \ref{fig:truehitdiffpi-100} - \ref{fig:sumqdiffpi-100} the difference between the two models is much smaller, with a maximum difference of 0.8 events between BINARY and BERTINI.
+
+
+WCSim was then run yet again, with the particle gun still set to negative pions, but the energy of the pions increased from 100 MeV to 500 MeV. `cerInfo.C' was run with the data for the two different models. In order to look more closely at the different shape of the distributions, the plots were overlayed using ROOT, this can be seen in Figures \ref{fig:hitoverlay} to \ref{fig:timeoverlay}. The blue plots represent the data from using the BINARY model, while the red plot represents data from using the BERTINI model.
+
+\begin{figure}
+		\centering
+		\captionsetup{justification=centering}
+		\includegraphics[width=\linewidth]{numtubestruehitoverlay.png}
+		\caption{No. tubes with true hit overlayed}
+		\label{fig:hitoverlay}
+	\end{figure}
+
+\begin{figure}
+		\centering
+		\captionsetup{justification=centering}
+		\includegraphics[width=\linewidth]{numtubestruedigihitoverlay.png}
+		\caption{No. tubes with true digi hit overlayed}
+		\label{fig:digihitoverlay}
+	\end{figure}
+	
+	\begin{figure}
+		\centering
+		\captionsetup{justification=centering}
+		\includegraphics[width=\linewidth]{totalchargebyeventoverlay.png}
+		\caption{Total charge by event overlayed}
+		\label{fig:qoverlay}
+	\end{figure}
+
+	\begin{figure}
+		\centering
+		\captionsetup{justification=centering}
+		\includegraphics[width=\linewidth]{truetimesofallhitsoverlay.png}
+		\caption{True times of all hits overlayed}
+		\label{fig:timeoverlay}
+	\end{figure}
+
+It is quite clear from Figures \ref{fig:hitoverlay} to \ref{fig:timeoverlay} that the results between the two models are more varied than before. Figure \ref{fig:hitoverlay} shows that while the two models give roughly the same shape of the distribution for the `Number of tubes with a true hit', the BERTINI model produces a higher peak value for the number of events, 17 events where 2300 tubes gave a true hit. BINARY had its modal value for the number of events at 2650 tubes giving a true hit, with 14 events giving this result. Figure \ref{fig:digihitoverlay} shows that again, both plots have roughly the same shape, and the shape of the distributions are more similar than for Figure \ref{fig:hitoverlay}: both have their highest number of events recorded at 1250 tubes but with BINARY giving a higher peak at 23 events, instead of 21 events. The results for `Total charge by event' shown in Figure \ref{fig:qoverlay} show that even though the overall trends of the plots are similar, the BINARY model shows a much higher peak with 20 events producing 1850 photoelectrons, however the BERTINI model has 4 peaks at around 16 events, two of which produce around 1400 photoelectrons and the other two producing 1900 photoelectrons. The plot for `True times of all hits' is extremely similar for the two models as can be seen in Figure \ref{fig:timeoverlay}. Both the BINARY and BERTINI model have a peak at 34000 events. There is then a sharp decrease for both models until 210s where there is a small peak with 17000 events. There is then another sharp decrease until 225s, after which both the BERTINI and BINARY models gradually trail off.
+
+\begin{figure}
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=\linewidth]{comparetruehit.png}
+	\caption{Figure \ref{fig:hitoverlay} with difference plot}
+	\label{fig:hitdiff}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=\linewidth]{comparetruedigihit.png}
+	\caption{Figure \ref{fig:digihitoverlay} with difference plot}
+	\label{fig:digihitdiff}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=\linewidth]{comparetotalchargebyevent.png}
+	\caption{Figure \ref{fig:qoverlay} with difference plot}
+	\label{fig:qdiff}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=\linewidth]{comparetimeofhits.png}
+	\caption{Figure \ref{fig:timeoverlay} with difference plot}
+	\label{fig:timediff}
+\end{figure}
+
+
+ Figures \ref{fig:hitdiff} to \ref{fig:timediff} show the overlayed plots of the BINARY and BERTINI models as well as the difference in the data between both models. In Figure \ref{fig:hitdiff} we can see the greatest difference in the data for the number of tubes giving a true hit is at 2850 tubes, with the BERTINI model giving 16 more events than the BINARY model. Figure \ref{fig:digihitdiff} shows 950, 1550, 1575 and 1600 tubes with a true digi hit giving the greatest difference in the number of events between the models, with BERTINI having 13 more events than the BINARY model for these number of PMTs giving a true digi hit. Figure \ref{fig:qdiff} shows the greatest difference in the data for the total charge by event for 500 photoelectrons produced and 2100 photoelectrons produced, with the BERTINI model having 13 more events than the BINARY model where these numbers of photoelectrons were produced. Figure \ref{fig:timediff} shows that (as mentioned previously) there is much more similarity between the two models for the true times of all hits than the other data sets, with the largest difference in the number of events being 0.6 and the smallest being around 0.05. The difference between the two models is the smallest around the peak of the curves, at 180s. Away from the peak, the difference in the data between BINARY and BERTINI increases.
+
+
+
+
+\subsection{Results for Three-flavour neutrino oscillation using Prob 3++}
+A macro called probAnalytic.cc was run to investigate the probability of muon neutrinos transforming into electron neutrinos. probAnalytic.cc makes use of terms that are quite often dropped when investigating neutrino oscillation, the equation used to calculate muon neutrino to electron neutrino oscillation is Equation (3) from \cite{probcomponents}, which is shown in Figure \ref{fig:probosc}.
+
+	\begin{figure}
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=\linewidth]{numutonueoscillationprobequ.png}
+	\caption{Oscillation probability of muon neutrinos to electron neutrinos}
+	\label{fig:probosc}
+\end{figure}
+
+
+In order to calculate the oscillation probability, the parameters for the three neutrino oscillation probabilities (see Subsection on the PMNS matrix) were used. The values used by probAnalytic.cc can be found in Table \ref{table:probpara}. 
+
+
+	\begin{table}[h!]
+	\centering
+	\begin{tabular}{||c c||} 
+		\hline
+		Parameter & Value \\ [0.5ex] 
+		\hline\hline
+		$\theta_{13}$ & 0.025  \\ 
+		\hline
+		$\theta_{12}$ & 0.312  \\
+		\hline
+		$\theta_{23}$ & 0.5 \\
+		\hline
+		$\Delta{m^2}_{12}$ & $7.6 \times 10^{{-}5} eV^2$ \\
+		\hline
+		 $\Delta{m^2}_{32} \approx \Delta{m^2}_{13}$ & $2.4 \times 10^{{-}3} eV^2$  \\ [1ex] 
+		\hline
+	\end{tabular}
+	\captionsetup{justification=centering}
+	\caption{Table showing three neutrino oscillation parameters used by probAnalytic.cc}
+\label{table:probpara}
+\end{table}
+
+The first line of the equation in Figure \ref{fig:probosc} gives the dominant term for the probability of oscillation. \textit{L} in this equation is the distance of the neutrino source from the detector (here 295km), and E is the energy of the original neutrino (here it is a muon neutrino.) $S_{13}$ and $C_{13}$ mean $sin(\theta)_{13}$ and $cos(\theta)_{13}$ e.t.c: these have their values calculated from the parameters in Table \ref{table:probpara}. The values for $\Delta{m^2}_{12}$ and $\Delta{m^2}_{32} \approx \Delta{m^2}_{13}$ are also taken from Table \ref{table:probpara}. The value \textit{a} in the equation in Figure \ref{fig:probosc} is the matter effect, which is given by Equation \ref{eq:mattereffect}.
+
+\begin{equation}
+\label{eq:mattereffect}
+a = 2\sqrt{2}G_fn_eE (gm/cm^3) (GeV) (eV)^2
+\end{equation}
+
+where $G_f$ is the Fermi coupling constant (which gives the strength of the interaction) and $n_e$ is the electron density in the matter the neutrino is oscillating in. The second line of the equation in Figure \ref{fig:probosc} is the charge-parity conserving term. The third line gives the matter term, that is, it takes into account how the three neutrino oscillation parameters are changed when the neutrino oscillation takes place in matter. The fourth line is the charge-parity violating term. Both the second and fourth line contain the charge-parity violating phase $\delta$. The last line is the solar term, as it can be seen that it depends on the solar mass mixing term $\Delta{m^2}_{21} = \Delta{m^2}_{sol}$ which has been measured by looking at the oscillations of solar neutrinos. 
+
+In \cite{yijiapaper} there is a plot of each of the separate components of the equation in Figure \ref{fig:probosc}. This can be seen in Figure \ref{fig:jiaplot}.
+
+	\begin{figure}
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=\linewidth]{yijiaplot.png}
+	\caption{Plot from Yi Jia's paper on neutrino interactions}
+	\label{fig:jiaplot}
+    \end{figure}
+
+
+Figure \ref{fig:jiaplot} shows the components of the probability oscillation equation overlayed. This was also created using Prob 3++, however, this plot was intended to include the effects of matter on neutrino oscillation, while each oscillation probability term in Figures \ref{fig:domterm} to \ref{fig:matterm} represent three-neutrino oscillation probabilities calculated for a vacuum.
+
+	\begin{figure}
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=\linewidth]{domterm.png}
+	\caption{$P(\nu_{\mu} \rightarrow \nu_{e}$) for the dominant term}
+	\label{fig:domterm}
+	\end{figure}
+
+	\begin{figure}
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=\linewidth]{cpcterm.png}
+	\caption{$P(\nu_{\mu} \rightarrow \nu_{e}$) for the CP-conserving term}
+	\label{fig:cpcterm}
+	\end{figure}
+
+	\begin{figure}
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=\linewidth]{solterm.png}
+	\caption{$P(\nu_{\mu} \rightarrow \nu_{e}$) for the solar term}
+	\label{fig:solterm}
+	\end{figure}
+
+\begin{figure}
+		\centering
+		\captionsetup{justification=centering}
+		\includegraphics[width=\linewidth]{cpvterm.png}
+		\caption{$P(\nu_{\mu} \rightarrow \nu_{e}$) for the CP-violating term}
+		\label{fig:cpvterm}
+	\end{figure}
+
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{matterm.png}
+		\captionsetup{justification=centering}
+		\caption{$P(\nu_{\mu} \rightarrow \nu_{e}$) for the matter term}
+		\label{fig:matterm}
+\end{figure}
+
+Figures \ref{fig:jiaplot} to \ref{fig:matterm} show the probability of a muon neutrino oscillating to an electron neutrino against the energy of the muon neutrino in GeV.
+The black curve visible in the blue shading in Figure \ref{fig:domterm} shows the dominant component of the $P(\nu_{\mu} \rightarrow \nu_{e}$) oscillation. From Figure \ref{fig:jiaplot} it can be seen that it matches the dominant term (given by the pink line). The curve for both plots peaks at P=0.05 at an energy value of 0.2 GeV, decreases to 0 at 0.3 GeV and peaks again at P= 0.05 at 0.6 GeV, and then decreases again gradually.
+
+Figure \ref{fig:cpcterm} also matches Figure \ref{fig:jiaplot} when looking at the charge-parity conserving term (shown by the green curve). The black curve in the blue shading in Figure \ref{fig:cpcterm} shows a dip with a probability value of P=-0.02 at 0.15GeV and a peak of P=0.15 at 0.25 GeV followed by another dip at P=-0.01 and then increasing to P=0.005 and then gradually decreasing to zero.
+
+Figure \ref{fig:solterm} is a little different from the plot of the solar component in Figure \ref{fig:jiaplot} (shown by the light blue line). The curve in Figure \ref{fig:jiaplot} shows the probability of oscillation gradually decreasing to zero with no peak values, however Figure \ref{fig:solterm} shows a peak in oscillation probability at P=0.018 at  0.225 GeV.
+
+Figure \ref{fig:cpvterm} matches the CP-violation term in Figure \ref{fig:jiaplot} (shown by the red line) as both terms have a value of P=0 for all muon neutrino energies. Figure \ref{fig:matterm} shows the matter term has a oscillation probability value of 0 for all muon energies, unlike Yi Jia's plot in Figure \ref{fig:jiaplot} as the oscillation probability was calculated for muon neutrinos in a vacuum for Figures \ref{fig:domterm} to \ref{fig:matterm} but for Yi Jia's plot the probability of neutrino oscillations were calculated in matter with a density of $2.6g/cm^3$. Therefore, for the plots created by Yi Jia, the matter effect given by Equation \ref{eq:mattereffect} was taken into account. 
+
+
+
+
+\section{Conclusion}
+
+The three models, BINARY, BERTINI and GHEISHA were compared in WCSim by running the macro `read\_PMT.C', which gives the results of average charge collected by the PMTs against time, the hits recorded by the PMTs against time, the number of events plotted against hits recorded by the PMTs and the number of events plotted against photoelectrons produced by the PMTs. When the energy of the particle gun was set to 500 MeV, there was no difference in the results for positive pions, negative pions, neutral pions and electrons. However, when the incoming particle was set to a neutron, also with an energy of 500 MeV, there were visible differences between the three models. Another macro called `cerInfo.C' was used in conjunction with another macro called `compareProcessed.C' in order to compare the differences between the BINARY and BERTINI physics lists. `cerInfo.C' produced plots of number of events plotted against number of tubes with a true hit, number of events plotted against number of tubes with a true digi hit, number of events plotted against total charge recorded per event and the number of events plotted against the true times of all hits. When `cerInfo.C' was run for electrons with an energy at 500 MeV, there was no difference between the results of the plots for each model. `cerInfo.C' was also run for negative pions with an energy of 100 MeV: this time there was a slight, but clear difference between the results for BINARY and BERTINI. When the energy of the pions was set to 500 MeV there was a much larger difference in the results for the models, however, the results for `True Times of all hits' showed the least difference between the BINARY and BERTINI models, shown by the results of `compareProcessed.C' with a maximum difference for the number of events between the two physics lists of 0.6. In order to investigate neutrino oscillation and CP violation, the oscillation probability of muon neutrinos to electron neutrinos in a vacuum was calculated in Prob3++ using a macro called probAnalytic.cc, which calculates the $P(\nu_{\mu} \rightarrow \nu_{e})$ using terms that are normally not included. When the individual components of $P(\nu_{\mu} \rightarrow \nu_{e})$ were plotted against the energy of the $\nu_{\mu}$ and compared to a plot produced by Yi Jia in \cite{yijiapaper}, the dominant, CP-conserving and CP-violating ($\delta$) terms matched the plot exactly, while the solar term and matter term did not. The matter term calculated gave a $P(\nu_{\mu} \rightarrow \nu_{e})$ value of 0 for all energies, while for Yi Jia it gave a non-zero value because the neutrino oscillations occurred in matter unlike the oscillations mentioned here that were carried out in a vacuum.
+
+\section{Acknowledgements}
+I would like to thank my supervisor, Prof. Lodovico, for her ongoing help throughout this project and also Dr Stephane Zsoldos for his help in understanding the macros used.
+
+
+
+\begin{thebibliography}{99}
+\bibitem{geant4paper}
+Agostinelli, S., Allison, J., Amako, K.A., Apostolakis, J., Araujo, H., Arce, P., Asai, M., Axen, D., Banerjee, S., Barrand, G. and Behner, F., 2003. GEANT4—a simulation toolkit. Nuclear instruments and methods in physics research section A: Accelerators, Spectrometers, Detectors and Associated Equipment, 506(3), pp.250-303.
+
+\bibitem{cherenkovgammapaper}
+Cherenkov, P.A., 1934. Visible emission of clean liquids by action of γ radiation. Doklady Akademii Nauk SSSR, 2, p.451.
+
+\bibitem{cherenkovexp}
+Watson, A.A., 2011. The discovery of Cherenkov radiation and its use in the detection of extensive air showers. Proceedings of CRIS2010: Cosmic Ray International Seminar on ‘100 years of Cosmic Rays: from Pioneering Experiments to Physics in Space’.
+
+\bibitem{valfitch}
+Christenson, J.H., Cronin, J.W., Fitch, V.L. and Turlay, R., 1964. Evidence for the $2{\pi}$ Decay of the $K_2^0$  Meson. Physical Review Letters, 13(4), p.138.
+
+\bibitem{probcomponents}
+Burton Richter, arXiv:hep-ph/0008222
+
+\bibitem{prob3++}
+Barger et al.,1980. Matter effects on three neutrino oscillations. Phys. Rev. D22, 2718
+
+\bibitem{yijiapaper}
+Jia, Yi, 2015. Discovery potential of CP violation for Hyper-K and DUNE with non-standard neutrino interactions. Summer Research at Queen Mary, University of London
+
+\bibitem{modelspaper}
+Wright, D.H., Koi, T., Folger, G., Ivanchenko, V., Kossov, M., Starkov, N., Heikkinen, A. and Wellisch, H.P., 2007, March. Low and high energy modeling in Geant4. In M. Albrow and R. Raja eds.,, AIP Conference Proceedings (Vol. 896, No. 1, pp. 11-20). AIP.
+
+\bibitem{wupaper}
+Wu, Chien-Shiung, et al. "Experimental test of parity conservation in beta decay." Physical review 105.4 (1957): 1413.
+
+  
+\end{thebibliography}
+
+\end{document}
