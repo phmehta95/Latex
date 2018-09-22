@@ -1,0 +1,932 @@
+\documentclass[11pt,oneside,a4paper]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{float}
+
+
+\begin{document}
+\begin{center}
+\textbf{Declaration}
+
+I hereby certify that this Dissertation, which is approximately 10500  words in length, has been written by me at the School of Physics and Astronomy, Queen Mary University of London, that all material in this dissertation which is not my own work has been properly acknowledged, and  that it has not been submitted in any previous application for a higher degree.\\
+\vspace{5mm} Pruthvi Hiren Mehta (Student Number: 140034275)
+\newline
+Supervisor: Dr Eram Rizvi
+\end{center}
+	
+\title {“A discussion of effective and universal field theories and their impact on the parametrisation of new physics effects” }
+\author{Pruthvi Hiren Mehta}
+
+
+\maketitle
+
+
+\begin{abstract}
+Effective field theories are discussed, the parameters that constitute new physics Lagrangians and the coefficients of the dimension-six operators in the EFT approach are defined in various new physics scenarios. In EW interactions, new physics parameters consisting of 7 oblique parameters and quark parameters and defined and tested. In universal field theories, 16 new physics parameters are defined, including 5 oblique parameters and parameters associated with TGCs and the Higgs Boson. These are then defined in the Higgs basis. Finally, expected and observed 95\% CLs are calculated for interactions involving TGC vertices in order to find aTGC parameters, however no proof of deviations from SM physics is found in the papers reviewed. 
+	
+\end{abstract}
+\newpage
+\tableofcontents
+
+\newpage
+\section{Introduction}
+This paper will focus on exploring how effective field theories and universal field theories parametrise new physics effects by looking at various phenomenological papers that discuss these topics and also by examining experimental data found in other papers to see how effective they are at encapsulating them and whether any BSM (Beyond the Standard Model) physics effects can be found. There are two ways in which new physics beyond the Standard Model can be found, one method involves trying to find brand new particles which do not exist in the Standard Model at present, and the other method involves trying to find different ways in which particles which are known to exist in the Standard Model interact. Effective and universal field theories fall into the second method. In order to parameterise these new physics interactions, one can do this via an extension of the Standard Model, however, this extension should be faithful to certain truths that are in line with the Standard Model. For example, the extension to the Standard Model should obey the $SU(3) \times SU(2)_{L} ×\times U(1)_{Y}$ symmetry of the Standard Model, and be a quantum field theory (QFT). These conditions are satisfied by effective field theories and universal field theories. As can be seen in later sections of this paper, effective field theories and universal field theories come with an energy scale $\Lambda$ which is the energy scale of the new physics effects and can be assumed to be greater than the mass of the Higgs Boson. The effective field theory of the Standard Model can be written as:
+
+\begin{equation}
+\mathcal{L} = \mathcal{L}_{SM} + \sum_{i}^{}\frac{\mathcal{C}_{i}}{\Lambda^{2}}\mathcal{O}_{i}+...
+\end{equation}
+
+where $\mathcal{C}_{i}$ are dimensionless coefficients and $\mathcal{O}_{i}$ are operators of dimension-six made from fields from the Standard Model. This paper will look at what these coefficients are, how to parametrise them and write these parameters in different bases, and finally look at the use of experimental data to calculate the confidence levels on them in various scenarios and for different couplings.
+
+\section{Theory}
+
+\subsection{The Standard Model}
+
+The Standard Model of particle physics is the theory that explains how the fundamental particles of nature act and how they interact using three quantum field theories describing three of the four fundamental forces: the EM, weak and strong forces.
+
+The electromagnetic force relates to the electric and magnetic fields and the interactions that occur between electrically charged particles, with its mediator being the photon. The weak force is the mechanism by which radioactive decay occurs and this force is mediated via the $W^+$, $W^-$ and $Z$ bosons. The strong force is responsible for the binding of quarks inside nucleons (protons and neutrons) and the binding of nucleons inside atomic nuclei. The strong force is mediated by gluons. The Standard Model contains two different classes of particles: fermions and bosons. Fermions have half-integer spin and comprise the matter the universe is made of, bosons have whole integer spin and are responsible for the mediation of the four fundamental forces.
+
+Fermions are a class of particles that consist of two sub-classes; quarks and leptons. These leptons are separated into three generations of negatively charged particles, each of which has an associated electrically neutral neutrino; see Table \ref{table:leptons}.
+\begin{table}[h!]
+\begin{center}
+	\begin{tabular}{||c c c c c||} 
+		\hline
+		Particle & Symbol & Spin($\hbar$) & Charge (e) &  Mass (MeV) \\ [0.5ex] 
+		\hline\hline
+		Electron & $e$ & $\frac{1}{2}$ & -1 & 0.511  \\ 
+		Electron neutrino & $\nu_{e}$ & $\frac{1}{2}$  & 0 & $<$0.002 \\
+		\hline
+		Muon & $\mu$ & $\frac{1}{2}$  & -1 & 105.66 \\
+		Muon neutrino & $\nu_{\mu}$ & $\frac{1}{2}$ & 0 & $<$0.19 \\
+		\hline
+		Tau & $\tau$ & $\frac{1}{2}$ & -1 & 1776.82 \\ 
+		Tau neutrino & $\nu_{\tau}$ & $\frac{1}{2}$ & 0 & $<$18.2 \\ [1 ex] 
+		\hline
+	\end{tabular}
+\caption{Table listing the fermions and their properties}
+\label{table:leptons}
+\end{center}
+\end{table}
+According to the original Standard Model, neutrinos should be massless. However since neutrinos have been observed oscillating between the different flavour eigenstates ($\nu_{e}$,$\nu_{\mu}$,$\nu_{\tau}$), and that these flavour eigenstates are related to the neutrino mass eigenstates via the PMNS matrix, we know this is not the case, and through neutrino experiments we are able to put an upper bound on their masses.
+
+The other subclass of fermions, quarks, can also be divided into three generations, and have a charge of either -1/3 or +2/3. As will be mentioned when discussing parton distribution functions, they also have an additional charge which relates to a quantity called ``colour" which can be ``red", ``green" or ``blue" (and for antiquarks, ``anti-red", ``anti-green" or ``anti-blue"). It is this reason why inside hadrons (states which are made up of quarks or antiquarks) you either have three quarks bound together (a baryon) or a quark-antiquark pair (a meson). This means that the baryon and mesons states are ``colourless" overall, and therefore colour charge is conserved. Quark properties are stated in Table \ref{table:quarks}.
+
+\begin{table}[h!]
+\begin{center}
+	\begin{tabular}{|| c | c| c |c |c||} 
+		\hline
+		Quark & Symbol & Spin($\hbar$) & Charge (e) &  Mass (GeV) \\ [0.5ex] 
+		\hline\hline
+		 Up & u & 1/2 & +2/3 & 0.002  \\ 
+		Down & d & 1/2  & -1/3 & 0.005 \\
+		\hline
+		Charm & c & 1/2 & +2/3 & 105.66 \\
+		Strange & s & 1/2 & -1/3 & 1.275\\
+		\hline
+		Top & t & 1/2 & +2/3 & 4.18 \\ 
+		Bottom & b & 1/2 & -1/3 & 173.21 \\ [1 ex] 
+		\hline
+	\end{tabular}
+\caption{Table listing the quarks and their properties}
+\label{table:quarks}
+\end{center}
+\end{table}
+
+Bosons are particles that mediate the four fundamental forces; three of which were mentioned earlier in this section, and which have been incorporated into the Standard Model. The fourth fundamental force is gravity, which has a theorised boson associated with it called the graviton, however there is no complete quantum field theory that will allow it to be incorporated into the Standard Model, and experimental observation of such a particle is impossible due to the extremely low cross section that the graviton would have when interacting with matter.
+However the graviton does have theorised parameters such as charge and mass e.t.c which can be seen in the summary of bosons in Table \ref{table:bosons}.
+
+\begin{table}[h!]
+	\begin{center}
+		\begin{tabular}{|| c | c| c |c |c||} 
+			\hline
+			Boson & Symbol & Spin($\hbar$) & Charge (e) &  Mass (GeV) \\ [0.5ex] 
+			\hline\hline
+			Photon & $\gamma$ & 1 & 0 & 0  \\ 
+			Gluon & g & 1  & 0 & 0 \\
+			 W-boson & $W^{\pm}$ & 1 & $\pm$1 & 80.385 \\
+			Z-boson & Z & 1 & 0 & 91.188\\
+			Higgs & H & 0 & 0 & 125.7 \\ 
+			Graviton (theorised) & G & 2 & 0 & 0 \\ [1 ex] 
+			\hline
+		\end{tabular}
+		\caption{Table listing the bosons and their properties}
+		\label{table:bosons}
+	\end{center}
+\end{table}
+
+The photon and the gluon are massless particles, however the W and Z are not. In order to have local gauge invariance when transforming the QED Lagrangian (the theory that describes the dynamics of the EM force), the W and Z bosons would have to be massless. The addition of the Higgs field (the mediator of which is the Higgs boson) to the QED Lagrangian restores this invariance, thereby giving the W and Z bosons their mass.
+
+\subsection{QED}
+The theory that describes the dynamics of the electromagnetic interaction is Quantum Electrodynamics (QED). The QED Lagrangian can be formulated starting from the Lagrangian of a free fermion field (known as the Dirac Lagrangian) and this is given by Equation \ref{eq:QED}.
+
+\begin{equation}
+\label{eq:QED}
+\mathcal{L} = i\bar{\psi} \gamma^{\mu} \partial_{\mu} \psi - m \psi \bar{\psi}
+\end{equation}
+
+where $\gamma^{\mu}$ and $m$ denote the Dirac matrices and the mass of the gauge boson respectively.
+
+Symmetries that occur in the universe (such as the conservation of charge) are due to the invariance of a system under a local gauge transformations. Such a transformation is a transformation of a phase which looks like the following: $\psi(x) \rightarrow \psi(x)e^{i\alpha(x)}$ where $\alpha(x)$ is a real number dependent on space-time. The difference between local and global gauge invariance is as follows: the phase of the field can be thought of as a number of arrows, with an arrow at each point in spacetime. Under global gauge transformations, the arrows are rotated by the constant phase $\alpha$ at each point in spacetime. However under local gauge transformations, the phase shift $\alpha(x)$ now allows each arrow to be rotated by a \textit{different} amount at each point in spacetime. The difference between global and local gauge transformations can be shown in Figure \ref{fig:localglobal}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=4.0in]{localglobal.png}
+	\caption{Diagrams depicting the difference between global (left) and local (right) gauge transformations}
+	\label{fig:localglobal}
+\end{figure}
+
+When a local gauge transformation is applied to Equation \ref{eq:QED}, the Lagrangian is not gauge invariant. However replacing the derivative $\partial_{\mu}$ with the covariant derivative $D_{\mu}$ restores gauge invariance as $D_{\mu}$ satisfies $D_{\mu}\psi(x)\rightarrow D_{\mu}\psi(x)e^{i\alpha(x)}$ under transformation where $D_{\mu}$ is constructed with a vector field $A_{\mu}$ shown in Equation \ref{eq:covariant}.
+
+\begin{equation}
+\label{eq:covariant}
+D_{\mu} = \partial_{\mu} - ieA_{\mu}
+\end{equation}
+ 
+where the vector field $A_{\mu}$ transforms as in Equation \ref{eq:vectorfield}.
+
+\begin{equation}
+\label{eq:vectorfield}
+A_{\mu} \rightarrow A_{\mu} + \frac{1}{e}\partial_{\mu}\alpha
+\end{equation}
+
+The strength of the EM field in QED is given by $F_{\mu\nu}$ which is defined by Equation \ref{eq:QEDstrength}.
+\begin{equation}
+\label{eq:QEDstrength}
+F_{\mu\nu} = \partial_{\mu}A_{\nu} - \partial_{\nu}A_{\mu}
+\end{equation}
+
+This makes up the kinetic energy term in the QED Lagrangian $-\frac{1}{4}F_{\mu\nu}F^{\mu\nu}$ which is also invariant under local gauge transformations, therefore the full QED Lagrangian can be written as shown in Equation \ref{eq:fullQED}.
+
+\begin{equation}
+\label{eq:fullQED}
+\mathcal{L}_{QED} = \bar{\psi}(i\gamma^{\mu} D_{\mu}- m)\bar{\psi}-\frac{1}{4}F_{\mu\nu}F^{\mu\nu}
+\end{equation}
+
+
+
+\subsection{Running Coupling and Renormalisation}
+
+The coupling strength of the EM interaction is defined by \ref{eq:finestructure}.
+
+\begin{equation}
+\label{eq:finestructure}
+\alpha = \frac{e}{4\pi}
+\end{equation}
+
+where $\alpha$ is called the ``fine structure constant." Results from experiments show that $\alpha$ depends on energy scale. At large distances from the charge and at low energies, the strength of the electromagnetic interaction is reduced; this is what is called the ``running" of the EM coupling. This decrease in interaction strength is caused by the spontaneous production of fermions and their antiparticles by the photon propagator, which polarise the vacuum between the particles involved in the interaction, creating a ``shield" of charge. Therefore the coupling constant of the interaction is $\propto$ Q (the momentum transfer between the particles.) Perturbation theory is needed to incorporate all the extra loop processes that are involved; these extra loop processes are added on as a geometric series. In order to stop this series becoming infinite, a limit must be imposed: this is called ``renormalisation". 
+
+Due to the concept of renormalisation, the fine structure constant can be given as a function of $Q^2$ and the renormalisation momentum $\mu_{R}$, shown in Equation \ref{eq:renormalisationQED}.
+
+\begin{equation}
+\label{eq:renormalisationQED}
+\alpha(Q^{2}) = \frac{\alpha(\mu_{R}^{2})}{1-\frac{\alpha(\mu^{2}_{R})}{3\pi}log(\frac{Q^{2}}{\mu_{R}^{2}})}
+\end{equation}
+
+This dependence of the fine structure constant on the momentum transfer squared means that corrections of the higher orders contribute the least to the interactions.
+
+\subsection{QCD}
+
+QCD (Quantum Chromodyamics) describes the strong force; the interaction that takes place between quarks and gluons, and is related to the quantum number ``colour".  The Lagrangian for quantum chromodynamics is given by Equation \ref{eq:QCD}. 
+
+\begin{equation}
+\label{eq:QCD}
+\mathcal{L}_{QCD} = -\frac{1}{4}F^{a}_{\alpha\beta}F^{\alpha\beta}_{a} + \sum_{f=1}^{n_{f}}\bar{q_{f}}(i\gamma^{\mu} D_{\mu}- m_{f})q_{f}
+\end{equation}
+
+where $F^{a}_{\alpha\beta}$ denotes the field strength tensor and is defined by Equation \ref{eq:QCDstrength}.
+\begin{equation}
+\label{eq:QCDstrength}
+F^{a}_{\alpha\beta} = [\partial_{\alpha}A^{a}_{\beta}-\partial_{\beta}A^{a}_{\alpha}-g_{s}f^{abc}A^{b}_{\alpha}A^{c}_{\beta}]
+\end{equation}
+
+In Equation \ref{eq:QCD}: $q_{f}$ and $\bar{q_{f}}$ represent the quarks and antiquarks, $m_{f}$ are the mass of the quarks and $D_{\mu}$ is the covariant derivative. The summation takes place over different quark flavours, $f$ and in Equation \ref{eq:QCDstrength}, the indices $a$, $b$, and $c$ relate to the eight colour combinations of the gluons and $g_{s}$, which is the strong coupling constant. 
+
+The term $g_{s}f^{abc}A^{b}_{\alpha}A^{c}_{\beta}$ says that gluons can self interact which results in ``asymptotic freedom" of quarks. This means as the quarks get closer together, the forces acting on the quarks get weaker, so that inside the limits of the baryon the quarks are basically free to move around, as if an elastic bag were surrounding them. This is depicted in Figure \ref{fig:asymptotic}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=2.0in]{asymptotic.png}
+	\caption{Diagram depicting asymptotic freedom in a proton, as the quarks move apart the forces acting on the quarks increase (right)}
+	\label{fig:asymptotic}
+\end{figure}
+
+This is because the quark anti-quark pairs can be instantly produced and then annihilated by the propagating boson (just like with fermion anti-fermion pairs in QED), however with QCD, due to the self interactions, the gluons can produce extra gluons. These gluons have an opposite effect to the ``charge shielding" from QED and with decreasing momentum transfer, increase the the strength of the strong interaction. When momentum transfer is large this lets experimental cross section calculations to be made via DIS (Deep Inelastic Scattering.)
+
+The dependence of the strong coupling constant on $Q^{2}$ is given by Equation \ref{eq:renormalisationQCD}.
+
+\begin{equation}
+\label{eq:renormalisationQCD}
+\alpha_{s}(Q^{2}) = \frac{\alpha_{s}(\mu_{R}^{2})}{1+\frac{\alpha_{s}(\mu^{2}_{R})}{12\pi} (33-2n_{f}) log(\frac{Q^{2}}{\mu_{R}^{2}})}
+\end{equation}
+
+where $n_{f}$ is the number of quark flavours. Because of the production of the extra gluons from the self interactions, it can be seen that unlike in Equation \ref{eq:renormalisationQED}, the sign of the second term in the denominator is positive.
+
+\subsection{The Drell-Yan Process}
+
+
+
+The Drell-Yan process was theorized in 1970 by Sidney Drell and Tung-Mow Yan in 1970 in order to describe how lepton and anti-lepton pairs are produced when high energy hadrons collide; this process was later detected by J.H Christenson at the Alternating Gradient Synchrotron by colliding protons with uranium atoms. 
+\paragraph{}
+The process is as follows: the quark from one colliding hadron and the anti-quark of another colliding hadron annihilate each other, producing a virtual photon ($\gamma$) or a Z boson which will then decay into a lepton and anti-lepton pair, as shown by the Feynman diagram in Figure \ref{fig:drell_yan}. 
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.0in]{drell_yan.png}
+	\caption{Feynman diagram depicting the Drell Yan process}
+	\label{fig:drell_yan}
+\end{figure}
+
+The Drell-Yan process gives important knowledge about the parton distribution functions (PDFs). These functions involve the physics of strong interactions which means that they provide information about how partons are enclosed within hadrons. ``Partons" was a term coined by Feynman in the 1970s and simply means the constituents of the proton. These constituents were later found to be quarks, anti-quarks and gluons, however the term ``parton" refers to a combination of a quark and a gluon.
+
+\subsection{Parton Distribution Functions}
+
+When quarks are bound inside nuclei, this bound state has to be colourless due to the need to conserve colour charge. One such bound state, the proton, consists of two up valence quarks and one down valence quark. However, matters are more complex than this because when a gluon from the proton's colour field splits, this produces virtual quark and anti-quark pairs which continuously come into existence and then annihilate each other which results in a gluon being produced. These virtual quark pairs that pop in and out of existence are called sea quarks, and are far less stable than valence quarks. PDFs give the probability densities of quarks and gluons existing inside the proton, and these probability densities are based on momentum transfer Q and a longitudinal momentum fraction $x$ (also known as Bjorken x.) Due to the complex structure of the proton, the cross-section of a proton-proton interaction can be hard to calculate. The factorisation theorem can be used to help calculate the cross section of the proton by separating the calculation into a calculation of the enclosed quark-quark interactions and the parton distribution functions that have been determined by experiment. 
+\paragraph{}
+For an interacting pair of protons, the total cross section $\sigma_{AB}$ can be calculated using Equation \ref{eq:protonsigma}, $f_{a/A} (x_{a})$ and $f_{b/B} (x_{b})$
+
+\begin{equation}
+\label{eq:protonsigma}
+\sigma_{AB} = \int dx_{a} dx_{b} f_{a/A} (x_{a}) f_{b/B} (x_{b})\sigma_{ab}
+\end{equation}
+
+where $a$ and $b$ are the interacting quarks, $X$ is the interaction products and $f_{a/A}(x_{a})$ and $f_{b/B}(x_{b})$ are the parton distribution functions for the quarks. This cross section, however, doesn't account for interactions that cover the emission of gluons. When emitted gluons are collinear (when the angle between the emitted gluon and incoming quark is zero), there are divergences in the calculation of the cross section. In order to get rid of these divergences a factorisation scale $\mu_{f}$ is used; this is generally the same as the momentum transfer ($Q^2$) of the process.
+
+
+\subsection{Effective Field Theories}
+The key underlying principle of effective field theories (EFTs) and why they are useful is how they treat the concept of scale in physics. For example, in order to describe the physics at some mass scale $m^2$, we do not need to know the detailed dynamics at some mass scale which is much larger than $m^2$ e.g $\Lambda^2>>m^2$: i.e; in terms of particles, if we want to describe the physics of the light bottom quark, we don't need to know in detail the physics of the much heavier Z boson.
+
+Effective field theories let you compute a quantity that can be measured experimentally with some error that is finite. An EFT contains $\delta$ which is an expansion parameter, which is the ``power counting" parameter. The calculations are carried out to the nth order in an expansion so the order of the error on the calculation is $\delta^{n+1}$.
+
+The main feature of EFTs is there is an expansion which is systematic and a well defined method in order to calculate higher order corrections in $\delta$. 
+
+Therefore, we can calculate to some arbitrary high order in $\delta$ and force the theoretical error to be small by picking a suitably high n to expand up to.
+
+A simple example with which to illustrate an EFT is the calculation of energy levels within the hydrogen atom. The Hamiltonian of an electron (with mass $m_{e}$) interacting electrostatically with a proton (treated as a point-like particle) using the Coulomb force is.
+
+\begin{equation}
+\label{eq:hydrogen}
+\mathcal{H} = \frac{\bf{p^2}}{2m_{e}} - \frac{\alpha}{r}
+\end{equation}
+
+The binding energies etc can be calculated using Equation \ref{eq:hydrogen}. The proton is made up of quarks and gluons, but this fact is immaterial and therefore we don't need to include any QCD. We can make corrections to Equation \ref{eq:hydrogen} as follows: the effect of the proton recoil can be included by changing the electron mass $m_{e}$ to the reduced mass: $m_{e}m_{p}/(m_{e} + m_{p})$. The fine structure of hydrogen can be computed by adding higher order corrections to Equation \ref{eq:hydrogen} which will give corrections of $\mathcal{O}\alpha^2$ and even more accurate computations need QED corrections to be added e.t.c.
+
+The EFT that will be discussed in this paper will be the Standard Model Effective Field Theory (SM-EFT) and it is the effective field theory that is composed of SM fields and is used to examine deviations from the Standard Model and therefore search for physics that is Beyond the Standard Model (BSM). The higher dimension operators in Standard Model Effective Field Theory are produced at a new physics scale $\Lambda$ (this is unknown.)
+
+\section{Discussion of related literature}
+
+\subsection{Electroweak new physics parameters}
+One such paper that uses a Standard Model effective field theory description to describe new physics effects is \cite{EWprecision}. This paper provides a way to describe the impression that data from EM and weak interactions has on new physics effects involving the Z-boson, and gives the parameters and couplings that can approximate this new physics. The impact that new physics has on EW observables can be defined by adding to the dimension-6 operators in the Lagrangian of the Standard Model given by Equation \ref{eq:SMLagrangian} \cite{SMlagrangian}. These operators depend on the fields in the Standard Model: the photon field (denoted by $A_{\mu}$ in Equation \ref{eq:vectorfield}), the vacuum expectation value of the Higgs, and the currents of the fermions involved in the interactions.
+
+\begin{equation}
+\label{eq:SMLagrangian}
+\mathrm{\mathcal{L} = \mathcal{L_{SM}}^{(4)} + \frac{1}{\Lambda}\sum_{k}^{}\mathcal{C_\textsubscript{k}}^{(5)}\mathcal{O_\textsubscript{k}}^{(5)}+\frac{1}{\Lambda^{2}}\sum_\textsubscript{k}^{}\mathcal{C_\textsubscript{k}}^{(6)}\mathcal{O_\textsubscript{k}}^{(6)}+\mathcal{O}(\frac{1}{\Lambda^{3}})}
+\end{equation}
+The equations of motion of the $W{\pm}$, $Z$ and $\gamma$ are used to discard the currents of the fermions involved in the interaction upon which the dimension-6 operators depend, as the operators which depend upon charged leptons have been strongly constrained by precision measurements of data from electron-positron colliders such as LEP. The Lagrangian that can be used to describe new physics is given by Equation \ref{eq:newphysics}. \cite{EWprecision}
+
+\begin{equation}
+\label{eq:newphysics}
+\mathrm{\mathcal{L} = \mathcal{L_\textsubscript{oblique}} +\mathcal{L_\textsubscript{couplings}}}
+\end{equation}
+
+
+where the oblique term in the Lagrangian contains the corrections to the precision measurements of charged lepton observables and the couplings term in the Lagrangian which has an impact on observables for neutrinos and quarks: it is comprised of the corrections to neutrino and quark couplings. The oblique term in the Lagrangian in Equation \ref{eq:newphysics} encapsulates how generic heavy new physics acts on the kinetic terms of vector bosons $\Pi_{33}$, $\Pi_{30}$, $\Pi_{00}$ and $\Pi_{WW}$ and these vector bosons can be used to define 7 parameters $\hat{S}, \hat{T}, W, Y, \hat{U}, V$ and $X$ which correct the propagators of the $W$ and $Z$ bosons and the photon $\gamma$. Corrections to the vertices in electroweak interactions, namely new physics that affects the couplings of the $Z$ boson and the photon can be represented by the Lagrangian for the couplings from Equation \ref{eq:newphysics}. The corrections to $Z$ boson couplings ($\delta g$) can be defined in terms of the parameters $V$, $\hat{U}$ and $X$ as shown in Equation \ref{eq:newz}.
+
+
+
+
+\begin{equation}
+\label{eq:newz}
+\delta g_{L\nu} = V - \frac{1}{2}\hat{U} - tan\theta_{W}X
+\end{equation}
+
+where $\theta_{W}$ is the Weinberg angle ($cos\theta_{W} = m_W/m_Z$).
+
+\cite{EWprecision} makes it clear that new physics corrections to observables relating to leptons are given in terms of $\hat{S}, \hat{T}, W, Y, \hat{U}, V,$ and $X$ and observables which have a final state that involve quarks contain $\delta g$. The parameter $C^{\gamma,Z}_{q}$ is used for the cross section of an electron-antielectron pair transforming to a quark-antiquark pair in electron positron colliders. Due to final states involving leptons being mostly better evaluated than final states involving hadrons \cite{EWprecision} states that using just the oblique parameters $\hat{S}, \hat{T}, W, Y, \hat{U}, V,$ and $X$ would be a good approximation; this is what is known as an oblique approximation. 
+Section 3 in \cite{EWprecision} involves showing that the previous approximations are reliable by looking at the fit of EW precision measurements. One approximation that could be made (as mentioned earlier) is that only the oblique parameters,  $\hat{S}, \hat{T}, W, Y, \hat{U}, V,$ and $X$ matter and that all the other parameters ($\delta g$ (relating to corrections of Z-couplings) and $C^{\gamma}$ and $C^{Z}$ (fermion parameters) are 0. Another approximation mentioned in \cite{EWprecision} is that for quarks, two parameters in particular have the most impact on the new physics bound: these are given by Equation \ref{eq:quarkobs}, and are associated with the corrections to the Z coupling and the fermion operators.
+
+
+\begin{equation}
+\label{eq:quarkobs}
+\delta\epsilon_{q} = \delta g_{uL} - \delta g_{dL}
+\delta C_{q} = C^{Z}_{uL} - C^{Z}_{dL}
+\end{equation}
+
+\cite{EWprecision} then checks the accuracy of these two approximations for guessing the bound on the new physics scale $\Lambda$ (mentioned in the section on Effective Field Theories), which is done by creating random models where each parameter can be written as $r/\Lambda^{2}$ where -1$\leq r \leq$ 1 and $r$ is a random number. The bound on the new physics scale $\Lambda$ can be found from exact and approximate fits, and the results can be seen in Figure \ref{fig:fits}.\cite{EWprecision}
+
+
+\begin{figure}[htbp]
+    \includegraphics[scale=0.65]{fits.png}
+    \centering
+	\caption{Diagram showing the distribution of the approximate bound on the new physics scale/true bound}
+	\label{fig:fits}
+\end{figure}
+
+The first panel in Figure \ref{fig:fits} shows just the oblique parameters $\hat{S}, \hat{T}, W, Y, \hat{U}, V,$ and $X$ being considered in the fit, the second panel shows the oblique parameters plus the two quark parameters, and in the third panel the fit includes all parameters except the two quark parameters. Table \ref{table:fits} is a quantitative summary of the results.
+
+\begin{table}[h!]
+	\begin{center}
+		\begin{tabular}{|| c | c||} 
+			\hline
+		Approximation &  $\Lambda_{approx}$/$\Lambda_{true}$\\ [0.5ex] 
+			\hline\hline
+				Oblique & $0.95\pm 0.16$\\
+			Oblique + $\delta\epsilon_{q}, C_{q}$ & 0.98$\pm$ 0.06\\ 
+			All parameters except $\delta\epsilon_{q}, C_{q}$ & 0.95$\pm$ 0.15  \\ [1 ex] 
+			\hline
+		\end{tabular}
+		\caption{Summary of fits results for different approximations}
+		\label{table:fits}
+	\end{center}
+\end{table}
+
+As can be seen from Table \ref{table:fits} the best approximation is given by the second panel in Figure \ref{fig:fits}; that is, when the oblique parameters and the two quark parameters are considered. It is also shown in Table \ref{table:fits} that a fit where all parameters aside from the two quark parameters are considered is not much of an improvement on if just the oblique parameters were considered. This tells us that all parameters aside from $\delta\epsilon_{q}$ and $C_{q}$ are not as constrained, meaning they are irrelevant when trying to establish an accurate bound on $\Lambda$. 
+
+The 10 by 10 matrix in Equation 3.1 in \cite{EWprecision} gives the combinations of the oblique parameters which are constrained by data from 2006; this represents the eigenvector; the 10 linear combinations of the parameters which are orthogonal to each other. The right-hand side of Equation 3.1 in \cite{EWprecision} gives the constraint on each eigenvector. Each value in this column vector on the RHS gives the constraint on the 10 parameters in terms of $l = ln(m_{h}/M_{z})$, where $m_{h}$ is the mass of the Higgs and $M_{z}$ is the mass of the Z boson.
+
+\cite{EWprecision} also touches on theoretical proof of the oblique parameters $W$ and $Y$ being greater than or equal to zero, which has been found to be true for many physics including models with extra dimensions \cite{dimmensions} and supersymmetric models. 
+
+The reason for this is due to the K\"allen-Lehmann representation which tells us that we can write propagators as shown in Equation \ref{eq:kallen}.
+
+\begin{equation}
+\label{eq:kallen}
+\frac{1}{\Pi^{2}} = \int_{0}^{\infty} dm^{2} \frac{\rho(m^2)}{p^{2} - m^{2} - i\epsilon}
+\end{equation}
+
+where $\rho(m^2)$ is the spectral density function which has to be greater than or equal to zero.
+
+The vector boson $\Pi"(0)$ is therefore also greater than or equal to zero, and as the oblique parameters are defined in terms of these vector bosons as shown in \cite{EWprecision} and shown in Equation \ref{eq:parameterbosons}:
+
+\begin{equation}
+\label{eq:parameterbosons}
+W = \frac{M^{2}_{W}}{2}\Pi''_{33} , Y=\frac{M^{2}_{W}}{2}\Pi''_{00}
+\end{equation}
+
+and therefore W,Y$\geq$ 0. 
+
+\cite{highptdilepton} is a paper which also looks at searches for new physics, however here it involves looking at flavour-changing neutral current (FCNC) interactions. The FCNC's here are four fermion interactions; these describe an interaction between four fermion fields which are local, which means that the interaction happens at the same spacetime point. Four fermion theories are an effective field theory that can be used when the energies of the particles involved are much smaller than the mass of the propagator, as shown in Figure \ref{fig:4fermion}.
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=4in]{4fermion.png}
+	\caption{Feynman diagrams depicting normal fermion-antifermion scattering (left) and four-fermion scattering (right)}
+	\label{fig:4fermion}
+\end{figure}
+
+In Equation \ref{eq:SMLagrangian} we saw that new physics scale $\Lambda$ can be associated with higher dimensional operators in the Standard Model. The dimension-six operators in Equation \ref{eq:SMLagrangian} can contribute to interactions in which a quark-antiquark pair transform into a lepton-antilepton pair ($q \bar{q} \rightarrow l^{+} l^{-}$) by either changing the Standard Model contributions to the $Z$ propagator or by the four-fermion interactions shown in Figure \ref{fig:4fermion}. In the case of the latter, the dimension-six operators are given by $\mathcal{L}^{SMEFT}$ in \cite{highptdilepton}. In order to define new physics corrections to the Standard Model Lagrangian it is useful to look at the concept of lepton flavour universality (LFU), which states that all characteristics aside from mass are the same for the leptons ($e$, $\mu$ and $\tau$; i.e spin, charge etc. are the same for each lepton flavour and therefore in the massless limit the decay rates and cross-sections have to be equal (or universal) as well.  The lepton flavour universality ratio $R$ can be defined as in Equation \ref{eq:lfu}.
+
+\begin{equation}
+\label{eq:lfu}
+R_{\mu^{+}\mu^{-}/e^{+}e^{-}}(m_{ll}) \equiv \frac{d\sigma_{\mu\mu}}{dm_{ll}}/\frac{d\sigma_{ee}}{dm_{ll}}
+\end{equation}
+
+The LFU ratio shown as function of the invariant mass of the two leptons produced in ($q \bar{q} \rightarrow l^{+} l^{-}$) can be seen in Figure \ref{fig:ratiovmass} which gives us three new physics benchmark points.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=4in]{ratiovmass.png}
+	\caption{LFU ratio as a function of $m_{l^{+}l^{-}}$ for three new physics points at the centre of mass energy of proton-proton colliding beams}
+	\label{fig:ratiovmass}
+\end{figure}
+$R = 1.0$ shows no new physics due to lepton flavour universality being a feature of the Standard Model, while its violation implies new physics. Figure 6 shows that as the invariant mass of the dilepton pairs increases so does the deviation from Standard Model physics as the increase in invariant mass corresponds to a larger change from $R = 1.0$ for all three physics benchmark points. The main aim of \cite{highptdilepton} is to link the experimental results of LFU in the decay of semileptonic B mesons with the high-$p_{t}$ dilepton tails measurements. These results hint towards new physics in quark currents involving muons. The new physics terms that are relevant to proton-proton to muon-antimuon interactions can be written as $\mathcal{L}^{eff}$ seen in \cite{highptdilepton} which contain the matrices $\mathcal{C^{U\mu}}$ and $\mathcal{C}^{D\mu}$ (shown in Equation \ref{eq:matrix}) which are related to the new physics scale $\Lambda$ found in $\mathcal{L}^{SMEFT}$. 
+
+
+
+\begin{equation}
+\label{eq:matrix}
+C^{U\mu}_{ij} =
+ \left( \begin{array}{ccc} 
+C_{u\mu} & 0 & 0 \\
+0 & C_{c\mu}& 0\\
+0 & 0 & C_{t\mu}
+\end{array} \right)
+,
+%
+C^{D\mu}_{ij} =
+\left( \begin{array}{ccc}
+C_{d\mu} & 0 & 0 \\
+0 &  C_{s\mu} & C^{*}_{bs\mu}\\
+0 &  C_{bs\mu}& C_{b\mu}\\
+\end{array} \right)
+\end{equation}
+
+In order to set limits on the coefficients inside the matrices in Equation \ref{eq:matrix}, 36.5 fb$^{-1}$ of ATLAS data, searched for at  $\sqrt{13}$ TeV was used.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=4in]{atlasfig.png}
+	\caption{Plot showing the limits to $2\sigma$ on the $C_{q\mu}$ operators (shown in Equation \ref{eq:matrix}. The present limits are in blue and the projected limits are in red.)}
+	\label{fig:atlasfig}
+\end{figure}
+
+The dashed lines in Figure \ref{fig:atlasfig} show the limits on the operators if the other coefficients are marginalised.\cite{highptdilepton}.
+
+Interactions in which a bottom quark transforms to a strange quark and that have leptonic products are interactions that allow for the possibility of containing new physics, such as $b + s \rightarrow \mu^{+} + \mu^{-}$ and $b + s \rightarrow e^{+} + e^{-}$ \cite{b2s}. These interactions are known as flavour changing neutral currents (FCNC) and are not allowed by the Standard Model at tree level interactions and only come about when considering loops, therefore they are sensitive to new physics. Evidence of new physics in the form of lepton flavour violation (LFU) can be seen when looking at the value of $R_{K}$ and $R_{K^{*}}$. \cite{b2s}. $R_{K}$ gives the ratio between the branching fraction for a B meson decaying to $K + \mu^{+} +\mu^{-}$  and the branching fraction for a  meson decaying to $K + e^{+} +e^{-}$ and $R_{K*}$ is the ratio obtained from looking at the ratio between the  branching fraction for a B meson decaying to $K^{*} + \mu^{+} +\mu^{-}$  and the branching fraction for a  meson decaying to $K^{*} + e^{+} +e^{-}$. The values of these ratios are $R_{K} = 0.81 \pm 0.24$ and $R_{K^{*}} = 0.98 \pm 0.38$ which are at not compatible with the Standard Model predictions of $R_{K}^{SM} = 1 \pm 0.0001$ and $R_{K^{*}}^{SM} = 0.991 \pm 0.002$, indicating that there is lepton flavour violation, and hence that there is new physics involved.
+
+This new physics would be contained in a contribution to the coefficient $C_{bs\mu}$ which is found in Equation \ref{eq:matrix}. In relation to the Standard Model Effective Field Theory Lagrangian (SMEFT), this would be consistent with an addition to one or more of the two SMEFT operators in the first row of the SMEFT Lagrangian seen in Figure \ref{fig:SMEFT}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=4in]{smeft.png}
+	\caption{Standard Model Effective Field Theory Lagrangian}
+	\label{fig:SMEFT}
+\end{figure}
+
+Matching the SMEFT operator(s) to the Hamiltonian in Effective Field Theory which describes the transition of the bottom quark to the strange quark (shown in Equation \ref{eq:SMEFTham}):
+
+\begin{equation}
+\label{eq:SMEFTham}
+\mathcal{H}_{eff} = \frac{-4G_{F}}{\sqrt{2}}V_{tb}V_{ts}^{*}\Sigma[\mathcal{C}_{i}(\mu)\mathcal{O}_{i}(\mu)+\mathcal{C'}_{i}(\mu)\mathcal{O'}_{i}(\mu)]
+\end{equation}	
+where $V_{tb}$ and $V_{ts}$ are Cabbibo-Kobayashi-Masakawa matrix elements, $\mathcal{O}$ are operators and $G_{F}$ is the Fermi coupling constant. We find that
+
+\begin{equation}
+\label{eq:deltaC}
+\Delta\mathcal{C}^{\mu}_{9} = -\Delta\mathcal{C}^{\mu}_{10} = \frac{\pi}{\alpha V_{tb} V^{*}_{ts}C_{bs\mu}}
+\end{equation}	
+
+
+where $\alpha$ is the fine structure constant for the EM interaction = 1/137, and the CKM matrix elements $|V_{ts}| = (40.0 \pm 2.7)$ and $|V_{tb}| = 1.009 \pm 0.031$. Therefore using this to calculate the value for $\Delta\mathcal{C}^{\mu}_{9}$ and using Equation \label{eq:deltaC}, we can approximate the scale of the new physics $\Lambda$ by using Equation \ref{eq:newscale}.
+
+\begin{equation}
+\label{eq:newscale}
+C_{bs\mu} = \frac{g^2_{*}v^2}{\Lambda^{2}}
+\end{equation}
+
+\subsection{BSM parameters in universal theories}
+As in \cite{EWprecision} and \cite{highptdilepton}, \cite{universal} also talks about using parameters to characterise Beyond the Standard Model effects when considering extensions of the Standard Model. The paper mentions that the constraints on oblique parameters (mentioned earlier when discussing \cite{EWprecision}), $\hat{S}, \hat{T}, W, Y, \hat{U}, V$ and $X$ can normally only be applied to a certain class of BSM physics scenarios which are called \textit{univeral theories}. \cite{universal} finds that these theories can be encapsulated by 16 parameters. Section 2 in \cite{universal} further elaborates upon what universal theories are defined as. It states that universal theories are defined as theories where Beyond the Standard Model effects can be encapsulated by ``dimension-6 operators suppressed by $\frac{1}{\Lambda^{2}}$ (where $\Lambda$ is the energy scale of the BSM physics) which involve SM bosons only". An example of a universal theory is the SMEFT Lagrangian in \cite{highptdilepton}.
+
+Section 3 of \cite{universal} contains a Lagrangian (given by Equation \ref{eq:Luniversal})which gives the dynamics of the universal theory, which can then be transformed using ``field and parameter redefinitions" into a configuration where the coefficients of the various terms in this Lagrangian are associated with the 16 new physics parameters mentioned above. 
+
+\begin{equation}
+\label{eq:Luniversal}
+\mathcal{L} = \mathcal{L}_{V^{2}} + \mathcal{L}_{V^{3}} + \mathcal{L}_{h} + \mathcal{L}_{hV} + \mathcal{L}_{hf} + \mathcal{L}_{4f} + \mathcal{L}_{fDf} + \mathcal{O}(V^{4})
+\end{equation}
+
+$L_{V^{2}}$ is the gauge boson quadratic term, defined in Equation 3.1 in \cite{universal}, $\mathcal{L}_{V^{2}}$ is the triple-gauge interaction term, $\mathcal{L}_{h}$ gives the Lagrangian defining the kinetic energy and potential terms of the Higgs Boson, $L_{hV}$ gives the Lagrangian describing the dynamics of the interactions between the Higgs boson and vector bosons, and $\mathcal{L}_{4f}$ gives the four-fermion interaction term, and $\mathcal{L}_{fDf}$ gives the kinetic energy terms for the gauged fermions. An interesting thing to note is that unlike in the Standard Model, where the minimum value of the Higgs field is given by $\frac{v}{\sqrt{2}}$, it has been shifted to (1+$\frac{3}{8}E_{6}\frac{v}{2}$). All the parameters in the Equations for these terms in Equation \ref{eq:Luniversal} are all the same as the Standard Model, aside from the vaccuum expectation value of the Higgs boson $v$. 
+
+\subsubsection{Defining the oblique parameters in universal theories}
+Section 3 of \cite{universal} tells us how to define the oblique parameters: they come about from the coefficients of the Taylor expansions of the BSM physics contributions to the self energies of the vector bosons where the vector boson fields and the Standard Model parameters have to obey 3 conditions involved in defining the oblique parameters, namely that only bosonic operators can be used, the kinetic terms of the W and B bosons have to be normalised, and that the vector boson $\Pi_{WW}(0) = 0$. 
+
+Equations 3.13a-3.13e in \cite{universal} give the definitions of 5 oblique parameters, $\hat{S}, \hat{T}, W, Y$ and $Z$. The definitions of the oblique parameters $\hat{S}, \hat{T}, W$ and $Y$ match the definitions of the oblique parameters in Equation 2.5 of \cite{EWprecision}. 
+
+
+In new physics theories that aren't universal, the oblique parameters cannot be used to do precision analyses, because we are not able to move all the Beyond the Standard Model physics effects into the sector containing only bosons, which is required by the first of the 3 conditions involved in defining the oblique parameters (mentioned earlier). 
+
+\subsubsection{Defining the triple-gauge couplings} 
+
+The term $\mathcal{L}_{V^3}$ in Equation \ref{eq:Luniversal} can be reduced down to the form in Equation 3.21 in \cite{universal}. 
+
+
+The term $\mathcal{L}_{V^3}$ relates to the dynamics of triple gauge interactions (i.e interactions involving three or more gauge bosons). At the level of dimension-6 operators these couplings are written as:
+
+\begin{equation}
+\label{eq:couplings}
+\Delta\bar{g}_1^{\gamma} = 0, \Delta\bar{k}_{Z} = \Delta\bar{g_{1}}^{Z} - \frac{s_{\theta}^{2}}{c_{\theta}^{2}}\Delta\bar{k}_\gamma, \bar{\lambda}_{Z} = \bar{\lambda}_{\gamma}
+\end{equation}
+
+where the parameters in Equation \ref{eq:couplings} can be seen in Equation 3.22 in \cite{universal}. The TCG (triple gauge coupling) parameters however are given in Equation 3.24 of \cite{universal}. These are $\Delta\bar{g}_1^{Z}, \Delta\bar{k}_{\gamma}, \bar{\lambda}_{\gamma}$ and $\bar{\lambda}_{g}$. 
+
+
+When the oblique parameter $\hat{S}$  does not have a value of 0, there is kinetic mixing
+between the $\bar{W^{3}}$ and $\bar{B}$ fields and therefore also between the $\bar{Z}$ and $\bar{A_{\mu}}$ fields, therefore these fields canot be matched with the particles. 
+	
+ $\Delta\bar{g}_1^{Z}, \Delta\bar{k}_{\gamma}, \bar{\lambda}_{\gamma}$ and $\bar{\lambda}_{g}$ can be used alongside the oblique parameters $\hat{S}, \hat{T}, W$ and $Y$ and are therefore more appropriate for universal theories.
+
+These 4 triple gauge coupling parameters can be added to the 5 oblique parameters defined in the earlier section; now 9 out of the 16 new physics parameters have been found.
+\subsubsection{Defining the Higgs boson couplings}
+
+The Higgs field $h$ can be redefined in terms of $\bar{h}$  (shown in Equation \ref{eq:Lhiggs}). The parameter $\lambda$ which is for the Higgs self-interactions is also redefined (shown in Equation \ref{eq:higgsscale}.)
+
+\begin{equation}
+\label{eq:higgsscale}
+\lambda = [(1+\frac{3}{2}E_{6}+E_{H})\bar{\lambda}]
+\end{equation}
+
+
+\begin{equation}
+\label{eq:Lhiggs}
+\mathcal{L} = \frac{1}{2}\partial_{d_\mu}\bar{h}\partial_{d^{\mu}}\bar{h} - \frac{1}{2}(2\bar{\lambda}\bar{v}^2)\bar{h}^2 - (1-E_{6}-\frac{3}{2}E_{H})\bar{\lambda}\bar{v}\bar{h}^3+\mathcal{O}(\bar{h}^4)
+\end{equation}
+
+
+and so the Standard Model equation relating the Higgs mass to the vacuum expectation value $v$ = $\bar{v}$ and the scaled self interaction term $\lambda$ via the relation $m_{h^2} = 2\bar{\lambda}\bar{v}^{2}$  is retained. This gives us the term $L_{h}$ in Equation \ref{eq:Luniversal}, where the new physics is encapsulated in the Higgs self-interaction terms. The new physics corrections in the term $(1-E_{6}-\frac{3}{2}E_{H})\bar{\lambda}\bar{v}\bar{h}^3$ (the correction involving a coupling of three Higgs bosons) can result in seeing a difference in the production of di-Higgs bosons. A Standard Model Lagrangian describing a massive Higgs field $h$ and a hypothetical massive gauge boson $B$ is given by Figure \ref{fig:higgssml}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5in]{higgssml.png}
+	\caption{Standard Model Higgs Lagrangian}
+	\label{fig:higgssml}
+\end{figure}
+
+
+As can be seen in Figure \ref{fig:higgssml}, the triple-Higgs interaction term is given by $-\lambda v h^{3}$. However Equation \ref{eq:Lhiggs} shows that the triple-Higgs interaction term is given by $(1-E_{6}-\frac{3}{2}E_{H})\bar{\lambda}\bar{v}\bar{h}^3$ meaning that the deviation from the Standard Model can be given by letting $1+\Delta\mathcal{K}_{3}$ be the coefficient of $\bar{\lambda}\bar{v}\bar{h}^3$ where 
+
+\begin{equation}
+\label{eq:higgsdeviation}
+\Delta\mathcal{K}_{3} = -E_{6} - \frac{3}{2}E_{H}
+\end{equation}
+
+making $\Delta\mathcal{K}_{3}$ the 10th new physics parameter. 
+
+The 11th new physics universal parameter comes from looking at the term in Equation \ref{eq:Luniversal} which deals with the interaction of the Higgs Boson with fermions: $\mathcal{L}_{hf}$, defined in Equation 3.8 in \cite{universal}. The Yukawa coupling (shown in this expression for $\mathcal{L}_{hf}$) gives the coupling of the fermion to the Higgs Field and is defined in Equation \ref{eq:yukawa}. 
+
+\begin{equation}
+\label{eq:yukawa}
+y_{f'} = \frac{m_{f'}\sqrt{2}}{v}
+\end{equation}
+
+
+After redefining the Yukawa couplings ($y_{f'}$) and rewriting $\mathcal{L}_{hf}$ as in Equation 3.30 of \cite{universal}, we get (1 + $\Delta\mathcal{K}_{F}$) to be the coefficient of the Yukawa interaction term $-\frac{\bar{y_{f'}}}{\sqrt{2}}\bar{h}\bar{f'}f'$ where $\Delta\mathcal{K}_{F}$ is defined by:
+	
+\begin{equation}
+\label{eq:param11}
+\Delta\mathcal{K}_{F} = -E_{y} - \frac{1}{2}E_{H}
+\end{equation}
+
+After rescaling the interaction vertices involving the Higgs and vector bosons, 1 + $\Delta\mathcal{K}_{V}$ can be used when scaling the interaction of the vertices where the Higgs boson interacts with two W bosons, giving the 12th universal parameter:
+
+\begin{equation}
+\label{eq:param12}
+\Delta\bar{\mathcal{K}}_{V} = - \frac{1}{2}E_{H}
+\end{equation}
+
+
+The 13th, 14th and 15th new physics parameters in universal theory correspond to more rescaling of Higgs and vector boson interactions. These interactions are: the production of the Higgs via the interaction of two gluons ($g g \rightarrow h$), the decay of the Higgs into a Z boson and a photon ($h \rightarrow Z \gamma$) and the decay of a Higgs into two photons ($h \rightarrow \gamma \gamma$). These parameters are defined by Equation \ref{eq:higgsvb}.
+
+\begin{equation}
+\label{eq:higgsvb}
+f_{gg} = 4E_{GG}, f_{Z\gamma} = 2[2c_{\theta^2}E_{WW} - 2s_{\theta^2}E_{BB} - (c_{\theta^2} - s_{\theta^2}E_{WB})], f_{\gamma \gamma} = 4(E_{WW} + E_{BB} - E_{WB})
+\end{equation}
+
+The 16th and final universal parameter that BSM physics can be encapsulated by in universal theories is related to the four-fermion interactions, which in Equation \ref{eq:Luniversal} is given by the $\mathcal{L}_{4f}$ term defined by:
+
+\begin{equation}
+\label{eq:param16}
+\mathcal{L}_{4f} = E_{2y}\mathcal{O}_{2y}
+\end{equation}
+
+where $c_{2y} = E_{2y}$ is the final new physics parameter.
+
+To summarise, we have the 5 oblique parameters $\hat{S}$, $\hat{T}$, $W$, $Y$, $Z$, the triple gauge coupling parameters $\Delta\bar{g}_{1}^Z$, $\Delta\bar{K}_{\gamma}$, $\bar{\lambda}_{\gamma}$, $\bar{\lambda}_g$, 3 parameters involved in the rescaling of the Higgs couplings in the Standard Model, $\Delta\mathcal{K}_{3}$, $\Delta\mathcal{K}_{F}$, and $\Delta \bar{\mathcal{K}}_{V}$, 3 parameters for Higgs-vector boson couplings with Lorentz structures %explain%
+which don't conform to the Standard Model :$f_{gg}$, $f_{Z\gamma}$, $f_{\gamma\gamma}$, and a 16th parameter $c_{2y}$ which relates to the four fermion coupling. 
+
+In comparison, the parameters used in the effective field theory in \cite{EWprecision} are different than the ones used in the universal theory in \cite{universal}, as here the new physics corrections to the observables related to the leptons are encapsulated by seven oblique parameters $\hat{S}, \hat{T}, W, Y, \hat{U}, V$ and $X$, two parameters relating to corrections involving quarks $\delta\epsilon_{q}$ and $C_{q}$ and a 10th parameter $\delta\epsilon_{b}$ to describe third generation quarks like the bottom quark.
+
+\subsection{Higgs basis and Higgs couplings}
+
+The aim of the Higgs basis is to parametrise the space of the dimension-6 operators which relates to the observable quantities used in Higgs physics in a more direct way. \cite{higgsbasis} A common Standard Model Effective Field Theory basis contains an arrangement of ``effective couplings" which encapsulate the new physics corrections to the interactions of the vertices in the Standard Model Lagrangian. The ``defining conditions" for the Higgs basis are as follows: firstly, that the mass eigenstates in the Higgs basis must have no kinetic mixing terms and must be normalized with no higher derivative self-interaction terms; secondly, that the mass of the Z-boson, the mass of the Higgs, the Fermi coupling constant, the fine structure constant and the strength of the strong interaction and the mass of the fermions involved should not be modified in leading order interactions. In addition to this, the interactions $Vff$, $hVff$ and $h^2Vff$ should be $\propto (1+\frac{h}{v})^2$. \cite{universal}. A subdivision of the``effective couplings" can be chosen to be independent \cite{higgsbasis}, and the set of these couplings are defined as the Higgs basis. Because of the Higgs basis, all the Beyond the Standard Model effects are encapsulated by corrections to the vertices involving the physical particles themselves, and therefore the new physics effects directly contribute to the precision observables. Several features of the Higgs basis are as follows: all the couplings in the subdivision of the "effective couplings" have to be independent. In addition to this, the number of these independent couplings have to be the same as the number of couplings in the Warsaw or SILH basis, therefore this subdivision is maximal.
+
+
+From an experimental viewpoint the Higgs basis is the most efficient basis to use compared to e.g the Warsaw basis or the SILH basis, because the relationship between the Wilson coefficients in the Warsaw ir SILH bases (Wilson coefficients in SMEFT are given by $\mathcal{C}_{k}$ in Equation \ref{eq:SMLagrangian}) and the appropriate Higgs couplings are more complex. 
+
+
+The Higgs basis in universal theories is defined by the 16 universal theory parameters defined in Section 3.1. In order to write universal theories in the Higgs basis we need to use the universal theory Lagrangian (given in Equation \ref{eq:Luniversal}) and redefine some fields and parameters so that the ``defining conditions" for the Higgs basis are satisfied. Equation \ref{eq:Luniversal} is written in full in Equation 3.36 of \cite{universal} and is shown in Figure \ref{fig:Luniversalfull}.
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{Luniversalfull.png}
+	\caption{Universal Theory Lagrangian}
+	\label{fig:Luniversalfull}
+\end{figure}
+
+In order to satisfy the first ``defining condition" for the Higgs basis, the terms that are $\propto$ the oblique parameters $W,Y$ and $Z$ must be discarded($W,Y,Z \rightarrow 0$) due to the fact that they are representative of higher-derivative gauge boson self-interactions which can be seen in the definitions of the oblique parameters for $W$, $Y$ and $Z$:
+
+\begin{equation}
+W = \frac{-m^2_{w}}{2}\bar{\Pi}_{33}''(0),
+Y = \frac{-m^2_{w}}{2}\bar{\Pi}_{BB}''(0),
+Z = \frac{-m^2_{w}}{2}\bar{\Pi}_{GG}''(0)
+\end{equation}
+
+In addition to this, some more of the 16 universal parameters can be redefined in order to satisfy the ``defining conditions", these redefinitions can be seen in Equation 4.3 of \cite{universal}. These redefinitions contain the parameters $\Delta\epsilon_{1}, \Delta\epsilon_{2}$ and $\Delta\epsilon_{3}$ which are defined in terms of the oblique parameters:
+
+\begin{equation}
+\label{eq:obliquehiggs}
+\Delta\epsilon_{1} = \hat{T} -W - \frac{s^2_{\theta}}{c^2_{\theta}}Y
+\Delta\epsilon_{2} = -W
+\Delta\epsilon_{3} = \hat{S} - W - Y
+\end{equation}
+
+The fields $\bar{Z}_{\mu}$ and $\bar{A}_{\mu}$ can also be redefined (Equation 4.7 in \cite{universal}) so that the neutral vector boson kinetic terms can be rewritten in terms of the Higgs basis. The $W^{\pm}$ terms do not undergo a redefinition). In order to keep the LO equations that relate variables such as the mass of the Z boson $m_{Z}$, the Fermi coupling constant $G_{F}$ and the fine structure constant $\alpha$, with the parameters in the Standard Model Lagrangian, the parameters $\bar{v}$ and $\bar{e}$ need to be redefined. This reason the relations between $m_{Z}$, $G_{F}$, $\alpha$ and Standard Model Lagrangian parameters need to be preserved is so that the second of the ``Higgs basis defining conditions" mentioned earlier is not violated. Using these parameter redefinitions, the Lagrangians that underpin the dynamics of the interactions of fermions in the Standard Model can be written in terms of the Higgs basis. These are the charged-current interaction (interaction involving $W^{\pm}$ bosons) Lagrangian $\mathcal{L}_{CC}$, the neutral-current interaction (interaction involving $Z^{0}$ bosons) $\mathcal{L}_{NC}$, and the triple-gauge coupling interaction Lagrangian $\mathcal{L}_{TGC}$. (Equation 4.14a, 4.14b, 4.14c of\cite{universal}).
+
+Figure \ref{fig:higgsbasis} shows Table 8 from \cite{universal}. It shows the Higgs basis couplings represented in terms of the redefined universal parameters, and it is clear that $\Delta\epsilon_{1}$, $\Delta\epsilon_{2}$ and $\Delta\epsilon_{3}$ are contained in some of these redefinitions, and as discussed in Equation \ref{eq:obliquehiggs}, they relate to the four electroweak sector parameters $\hat{S}$, $\hat{T}$, $W$ and $Y$. From \cite{dimmensions} we know that the fourth oblique parameter can only be accessed through 4-fermion interactions. The parameters that contribute to the four-fermion interactions in the Higgs basis are combinations of $W$, $Y$ and $Z$ (if beyond EW sector) and $c_{2y}$: in Figure \ref{fig:higgsbasis}, this is given by $c_{4f}$. 
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{higgsbasis.png}
+	\caption{Table showing the universal parameters which constitute each coupling in the Higgs basis \cite{universal}}
+	\label{fig:higgsbasis}
+\end{figure}
+
+
+
+
+
+Moving on from the interactions that take place in the electroweak sector, we now turn our attention to the Higgs sector. The first Higgs basis defining condition states that the mass eigenstates in the Higgs basis must have no kinetic mixing terms and must be normalized with no higher derivative self-interaction terms: this is satisfied by the kinetic term for the Higgs Boson in Figure $\mathcal{L}_{universal}$ (\ref{fig:Luniversalfull}), therefore $\bar{h} = \hat{h}$, and in order to keep the LO relations defining the masses of the Higgs boson and the fermions in the Standard Model:
+
+\begin{equation}
+\label{eq:mass}
+m_{H}^{LO} = \sqrt{2\bar{\lambda}\bar{v}} = \sqrt{2\bar{\lambda}\bar{v}} ,    m_{f'}^{LO} = \frac{\bar{y}_{f'}\bar{v}}{\sqrt{2}} = \frac{\hat{y}_{f'}\hat{v}}{\sqrt{2}}
+\end{equation}
+
+where $m_{H}^{LO}$ and $m_{f'}^{LO}$ denote the leading order mass of the Higgs and the fermions respectively. 
+
+The second Higgs basis defining condition tells us that the mass of the Z-boson, the mass of the Higgs, the Fermi coupling constant, the fine structure constant and the strength of the strong interaction and the mass of the fermions involved should not be modified in leading order interactions, and Equation \ref{eq:mass} satisfies this. In order to continue preserving these variables, the Higgs boson self coupling parameter $\lambda$ and the Yukawa coupling parameter $\bar{y_{f'}}$ needs to be redefined  using $\Delta\epsilon_{2}$, shown in Equation \ref{eq:lambday}.
+
+\begin{equation}
+\label{eq:lambday}
+\bar{\lambda} = (1 + \Delta\epsilon_{2})\hat{\lambda}, \bar{y}_{f'} = (1 + \frac{\Delta\epsilon_{2}}{2})\hat{y}_{f'}
+\end{equation}
+
+Using Equation \ref{eq:lambday} and Equation \ref{eq:mass} the terms defining the interactions of three Higgs bosons and the interactions of the Higgs boson with fermions ($\mathcal{L}_{h^3}$ and $\mathcal{L}_{hff}$) can also be redefined (Equation 4.18a and 4.18b of \cite{universal}.) To derive the Lagrangians that define the way the Higgs interact with vector bosons, more redefinitions of fields are needed. The Lagrangians for charged current $\mathcal{L}_{CC}$ and neutral current $\mathcal{L}_{NC}$ interactions of Standard Model fermions are used as well as the Lagrangian defining triple gauge boson couplings $\mathcal{L}_{TGC}$ and in order to satisfy the third Higgs basis defining condition, the interaction terms involving vector bosons and fermions are reorganised and as equations of motion are applied, producing Lagrangians which give the dynamics of the Higgs boson interacting with W and Z bosons: $\Delta\mathcal{L}_{hW}$ and $\Delta\mathcal{L}_{hZ}$. $\Delta\mathcal{L}_{hW}$ and $\Delta\mathcal{L}_{hZ}$ can then be applied to interactions of the Higgs with vector bosons in $\mathcal{L}_{universal}$ and then parameter redefinitions for the Z-boson and photon fields (Equation 4.7a and 4.7b of \cite{universal} are then applied as well as the parameter redefinitions in Equations 4.8 and 4.9 of \cite{universal}. From this we can learn that the coupling of the Higgs boson to two Z bosons ($hZZ$) is such that the coupling of this interaction in terms of the Higgs basis is given by $\delta c_{z}$ (which is given in terms of universal parameters in the table in Figure \ref{fig:higgsbasis} and we can see that in terms of the universal parameters this is $\Delta \bar{\mathcal{K}}_{V}$ From $\delta c_{z}$ we can work out the coupling involved when a Higgs boson interacts with two W bosons via the coupling relation given in Equation \ref{eq:couplingequation}.
+
+\begin{equation}
+\label{eq:couplingequation}
+\delta c_{w} = \delta c_{z} + 4 \delta_{m}
+\end{equation}
+
+where $\delta_{m}$ is the mass coupling in the Higgs basis and can also be seen in terms of universal parameters in \ref{fig:higgsbasis}. Coupling parameters in the Higgs basis where you have 2 Higgs bosons coupling to vector bosons or fermions can also be  derived in this manner. When compared to \cite{higgsbasis}, the independent coupling parameters chosen in the Higgs basis is slightly different to \cite{universal} as in Equation 4.1 in \cite{higgsbasis}, the coupling parameters for the Higgs interacting with two vector bosons $c_{zz}$ and $c_{z_\Box}$ are replaced in \cite{universal} with the triple-gauge coupling parameters $\delta g_{1z}$ and $\delta \kappa_{\gamma}$ (shown in the left hand column of the table in Figure \ref{fig:higgsbasis}.)
+
+Section 4.2  of \cite{higgsbasis} gives relations between ``dependent couplings" and the independent coupling parameters mentioned earlier. ``Dependent couplings" arise from there being a larger number of terms that encapsulate the deviations from the Standard Model Lagrangian than the number of Wilson coefficients multiplied to the dimension-6 operators (Wilson coefficients are given by $\mathcal{C}_{k}$ in Equation \ref{eq:SMLagrangian}.) in the Effective Field Theory Lagrangian. As a result of this, there must be a relations between among the couplings in the SMEFT Lagrangian. These couplings can be given in terms of the Higgs basis and are called ``dependent couplings" \cite{higgsbasis}. They are given by Equation 4.5 in \cite{higgsbasis} and differ slightly from Equations 4.24a,4.24b,4.24c,4.24d and 4.24e in \cite{universal} where $c_{zz}$ and $c_{z \Box}$ are replaced by $\delta g_{1z}$ and $\delta \kappa_{\gamma}$. 
+
+From Equations 4.24a,b,c,d,e in \cite{universal} it is evident that the triple-gauge couplings are responsible for providing new physics in the interactions of vector bosons with the Higgs bosons, which can be used to formulate the parameters for the triple gauge couplings using data involving the Higgs boson. 
+
+\section{Triple gauge couplings and new Higgs physics}
+This is shown in \cite{higgsdata} which states that new physics which modifies how the couplings of the Higgs field relate to the electroweak gauge bosons are linked to triple gauge couplings and uses data involving the production of Higgs bosons to provide some bounds on the TGCs. \cite{higgsdata} states that there are 29 dimension-six operators that are linked to interactions of the Higgs Boson, eight of which change how the Higgs couples to EW gauge bosons, one which changes how the Higgs couples to gluons, and one which changes how the Higgs interacts with itself. Three of these change how the Higgs Boson couples to fermions, while the remaining effect how fermions couple to the Higgs Boson and how fermions couple to gauge bosons. TGCs which affect W-bosons are changed by four of these operators and also an operator that includes only the self interactions of EW bosons. 
+
+Equation \ref{eq:Leff} gives the effective field theory Lagrangian which contains the dimension-six operators $\mathcal{O}_{n}$ which relate to Higgs physics (mentioned above).
+
+
+
+\begin{multline}
+\mathcal{L}_{eff} = -\frac{\alpha_{s}}{8\pi}\frac{f_{g}}{\Lambda^{2}}\mathcal{O}_{GG}+ \label{eq:Leff}
+\frac{f_{WW}}{\Lambda^{2}}\mathcal{O}_{WW} + \frac{f_{BB}}{\Lambda^{2}}\mathcal{O}_{BB} +\\
+\frac{f_{\phi,2}}{\Lambda^{2}}\mathcal{O}_{\phi,2} + \frac{f_{bot}}{\Lambda^{2}}\mathcal{O}_{d,\phi,33} +
+\frac{f_{\tau}}{\Lambda^{2}}\mathcal{O}_{e\phi,33} + \frac{f_{W}}{\Lambda^{2}}\mathcal{O}_{W} +\\
+\frac{f_{B}}{\Lambda^{2}}\mathcal{O}_{B} + \frac{f_{WWW}}{\Lambda^{2}}\mathcal{O}_{WWW}
+\end{multline}
+
+with the individual operators $\mathcal{O}_{n}$ defined in Equation 2 of \cite{higgsdata}. $\phi$ represents the Higgs doublet, and the operators aside from $\mathcal{O}_{WWW}$ relate to the interactions the Higgs Boson has with gauge bosons in the Standard Model, bottom quarks and pairs of tau muons. The operators $\mathcal{O}_{W}$, $\mathcal{O}_{B}$ and $\mathcal{O}_{WWW}$ relate to the triple gauge-couplings of gamma photons and W-bosons and Z-bosons and W-bosons ($\gamma W^{+} W^{-}$ and $Z W^{+} W^{-}$). These particular triple gauge coupling interactions can be defined with their own Lagrangian, shown in Equation \ref{eq:WWV}. 
+
+
+\begin{multline}
+\mathcal{L}_{WWV} = -ig_{WWV}{g_{1}^{V}}(W^{+}_{\mu\nu}W^{-\mu}V^{\nu} - W^{+}_{\mu}V_{\nu}W^{-\mu\nu})+\\ \label{eq:WWV}
+\kappa_{V}W^{+}_{\mu}W^{-}_{\nu}V^{\mu\nu} + \frac{\lambda_{V}}{m^{2}{W}}W^{+}_{\mu\nu}W^{-\nu\rho}V_{\rho}^{\mu}
+\end{multline}
+
+In order for there to be gauge invariance for electromagnetism, the gauge coupling $g^{\gamma}_{1}$ = 1. The other gauge couplings are linked to the operators $\mathcal{O}_{B}$, $\mathcal{O}_{W}$ and $\mathcal{O}_{WWW}$ using $\kappa^{V} = 1 + \Delta\kappa^{V}$ and $g^{Z}_{1} = 1 + \Delta g_{1}^{Z}$ which are shown in Figure 11 in the column for the universal parameters. Therefore it can be said that the dimension-six operators $\mathcal{O}_{W}$ and $\mathcal{O}_{B}$ cause new Higgs physics and triple gauge couplings, meaning that changes that are due to the couplings of the Higgs field are related to triple gauge couplings. Triple gauge couplings are usually searched for by analysing the production of EW bosons, and these searches were done using Large Electron Positron colliders, Tevatron and more recently experiments at the Large Hadron Collider. Figure \ref{fig:tgc} shows the bounds on triple gauge couplings, using data from vertices of W bosons coupling to the Z boson and W bosons coupling to the gamma photon (WWZ and WW$\gamma$ vertices). Here the couplings $\lambda_{Z}$ and $\lambda_{\gamma}$ are set to equal zero, as per the predictions from the Standard Model. 
+
+The D{\O} experiment combined their results from Tevatron and the Large Electron Positron collider (LEP) and the bounds on triple gauge couplings can be seen in Figure \ref{fig:tgc}. The results from the Large Hadron Collider are also presented in Figure \ref{fig:tgc}: the ATLAS experiment are studying triple gauge couplings by looking at WW and WZ interactions; here $\lambda_{\gamma}$ and $\lambda_{Z}$ are also set to zero. 
+
+\begin{figure}
+\includegraphics[width=\textwidth]{tgc.png}
+\caption{Plot showing the 95\% confidence level for the parameters $\delta\kappa_{\gamma}$ and $\delta g_{1}^{Z}$ from analysing data involving the Higgs Boson collected from the Large Hadron Collider and the Tevatron (the red region) , as well as results from other experiments.}
+\label{fig:tgc}
+\end{figure}
+
+By combining the bounds shown in Figure 1, black region in the centre of the plot can be obtained. The results from searches involving a gamma photon and a W-boson were only sensitive to the coupling involving two W bosons and photon, and therefore to $\Delta\kappa_{\gamma}$ and $\Delta\lambda_{\gamma}$, and because of this Figure \ref{fig:tgc} shows dashed horizontal bands. \cite{higgsfermion} tells us that when we include the fermion operators ${f}_{bot}$ and ${f}_{\tau}$ from the list of six-dimension operators given in the equation for the effective Lagrangian relevant to Higgs couplings ($\mathcal{L}_{eff}$), the effect on the dimension-six operators ${f}_{W}$ and ${f}_{B}$ is practically non-existent, therefore we can assume that the fermionic interactions behave as they would in Standard Model physics and their value can be set to their SM values, and the following six-dimensional operators shown in $\mathcal{L}_{eff}$ can be included only: ${f}_{g}$, ${f}_{WW}$, ${f}_{BB}$, ${f}_{\phi,2}$, ${f}_{W}$ and ${f}_{B}$. Using Equation 5 from \cite{higgsdata} the bounds on the dimension-six operators ${f}_{W}$ and ${f}_{B}$ can be expressed in terms of the bounds on $\Delta\kappa_{\gamma}$, $\Delta\kappa_{Z}$ and $\Delta g_{Z}^{1}$. Figure \ref{fig:tgc} shows the data from the analysis of the Higgs boson plotted with the possible values of $\Delta\kappa_{\gamma}$ and $\delta g_{Z}^{1}$ on the axes, meaning that the other operators aside from ${f}_{W}$ and ${f}_{B}$ have been marginalised. As can be seen from Figure \ref{fig:tgc} there is a clear correlation between the Higgs physics constraints on $\Delta\kappa_{\gamma}$ and $\Delta g_{Z}^{1}$, which would come from the correlation between the operators ${f}_{W}$ and ${f}_{B}$ (from Equation 5 in \cite{higgsdata}).
+
+It can also be seen from Figure \ref{fig:tgc} that the shaded red region which envelopes the bounds on the parameters from Higgs data and shows a correlation between $\Delta\kappa_{\gamma}$ and $\Delta g_{Z}^{1}$ is different to the bounds on the correlation between the two parameters from results from the other colliders. What Figure \ref{fig:tgc} also shows is that when it comes to looking at new physics effects, the results from the analysis of the Higgs boson data and the  triple gauge coupling data from the LHC, Tevatron and LEP, show complementarity. 
+
+
+\cite{higgsdata} shows that in the electroweak symmetry breaking sector the new physics effects can be given in terms of an effective field theory Lagrangian $\mathcal{L}_{eff}$ which is made up of dimension-six operators, and Figure \ref{fig:tgc} shows that changes to how the Higgs field couple to EW gauge bosons are related to TGC vertices which deviate from the norm.
+
+
+
+Another paper which looks at triple gauge couplings and its impact on new Higgs physics is \cite{WWtgc}. As we have seen in \cite{higgsdata}, the production of electro-weak gauge bosons is very important when it comes to searching for new physics effects. These new physics occurrences are due to divergences from the Standard Model in the TGC ZWW or $\gamma$WW (as seen from \cite{higgsdata}.) Looking at the WW cross section allows for high precision measurements to be made of the self-couplings of these gauge bosons. A Feynman diagram of this triple gauge vertex coupling is shown in Figure \ref{fig:tgcvertex}.
+
+\begin{figure}
+\centering
+\includegraphics[width=3in]{tgcvertex.png}
+\caption{Feynman diagram in the s-channel showing the triple-gauge coupling vertices for the WWZ and WW$\gamma$ interactions}
+\label{fig:tgcvertex}
+\end{figure}
+
+\subsubsection{Extracting confidence intervals for the anomalous triple gauge coupling parameters from $W^{+}W^{-}$ production cross sections}
+
+\cite{WWtgc} looks at the cross section of the production of WW bosons using proton-proton collisions at ATLAS at the LHC at a centre of mass energy of 8 TeV and the data used when calculating this cross section was equal to an integrated luminosity $L = 20.3 fb^{-1}$ during 2012. The measurements that were looked at were carried out in the $e\mu$, $ee$ and $\mu\mu$ channels, meaning that the final states of the WW bosons after they have decayed are either an electron and muon, two electrons, or two muons. The WW cross section was measured to be  71.1$\pm$ 1.1 pb from combining the results from the three decay channels $e\mu$, $ee$ and $\mu\mu$. In order to try and find evidence of new physics in this process, these results from the data must be compared with the theoretical predictions. The result for the cross section from these three processes was found to be greater than the next-to-next-to leading order NNLO prediction of the cross-section which was 63.2$\pm$1.2 pb (about 1.4$\sigma$ less than the results from the data.) The fiducial cross section (meaning the cross section for a subdivision of the process where you have certain final states visible in the parts of the detector volume which are sensitive to them) for the final states  $e\mu$, $ee$ and $\mu\mu$ are two $\sigma$ greater than the theoretical predictions from next-to-leading order calculations. When higher order new physics effects are included in the theoretical predictions however, the difference between the predictions and the data are reduced by about 5\% to 10\%, and are compatible with each other. 
+
+With regards to this paper however, what we are most interested in is the limits on the anomalous couplings of the triple gauge boson, and its effect on possible new physics. \cite{WWtgc} states that (just as in \cite{higgsdata}) the self-interactions of of photons, W-bosons and Z-bosons can be investigated using the vertex depicted in Figure \ref{fig:tgcvertex}, which is a WWV vertex with the ``V" being a Z-boson or a $\gamma$ photon. Equation \ref{eq:WWV} is also given in \cite{WWtgc}, which shows the Lagrangian used to encapsulate the interactions, where V can be replaced with Z or $\gamma$ to to indicate WWZ and WW$\gamma$ couplings.
+
+Also seen in the discussion for \cite{higgsdata}, \cite{WWtgc} includes the following parameters in its parametrisation of the triple gauge boson couplings: $\Delta g^{Z}_{1} = 1 - g^{Z}_{1}$, $\Delta\kappa^{Z} = 1 - \kappa^{Z}$, $\Delta\kappa^{\gamma} = 1- \kappa^{\gamma}$. In the Standard Model, the values of these parameters would be 1, and the above deviations from them characterise deviations from the Standard Model. The parameters $\lambda^{\gamma}$ and $\lambda^{Z}$ have a value of zero in the Standard Model: if a notable non-zero value for any of these parameters were to be found it would definitely indicate the presence of new physics interactions. If these new interactions occur, at large energies, these terms in Equation \ref{eq:WWV} would violate unitarity. Violation of unitarity means that the $\mathcal{S}$-matrix (used to describe how a physical system of particles evolves when the particles are scattered) does not obey the unitarity condition $\mathcal{S}^{\dagger}\mathcal{S} = \mathcal{I}$. Form factors are therefore used to solve this issue, and reduce the increase of the WW boson cross section, so it can retain its physical values. The modified versions of the parameters $\Delta g^{V}_{1}$, $\Delta\kappa^{V}$ and $\lambda^{V}$ are shown in Equation 10.3 of \cite{WWtgc}. These form factors include $\hat{S}$, which is the square of the mass of the WW bosons produced, and $\Lambda$ which is the energy scale of the new physics interactions. 
+
+
+Making the assumption that the parameters involved with the WW$\gamma$ and WWZ interactions are the same as each other (done using the Equal Coupling constraint), so that $g^{Z}_{1} = g^{\gamma}_{1} = 1$, the remaining parameters which are independent (and again made equal to each other assuming the Equal coupling constraint) are $\Delta\kappa^{\gamma}$ = $\Delta\kappa^{Z}$ and $\lambda^{\gamma}$ = $\lambda^{Z}$, leading to the constraint shown in Equation 10.4 of \cite{WWtgc} which is the same as the relations in Equation 6 of \cite{higgsdata}, and as mentioned in \cite{higgsdata}, this is known as the ``LEP constraint'' or ``LEP scenario''.\cite{WWtgc} also mentions using another set of constraints (called the HISZ constraints) shown in Equation 10.5, which can be used when assuming no tree-level contributions cancel one-loop contributions.
+
+\cite{WWtgc}, just like \cite{higgsdata} also mentions using an effective field theory to characterise the new physics contributions, and the Lagrangian given is the same as in Equation \ref{eq:Leff}, where again it is of the form given in Equation \ref{eq:SMLagrangian} where $\mathcal{C}_{k}$ are coefficients which encapsulate the coupling strength of the Standard Model physics in relation to the new physics. Similarly to \cite{higgsdata}, \cite{WWtgc} focuses mainly on the dimension-six operators which conserve charge and parity, which are $\mathcal{O}_W$, $\mathcal{O}_B$ and $\mathcal{O}_{WWW}$ which are defined in the same way as in Equation 3 of \cite{higgsdata}. The covariant derivative $D_{\mu}$, $B_{\mu\nu}$ and $W_{\mu\nu}$ are also defined in the same way as in \cite{higgsdata}.
+
+
+As aTGCSs are able to change the cross section involving the creation of WW bosons at large values of the mass of the WW bosons ($\hat{s}$) , variables which are sensitive to them need to be probed. One such variable is the transverse momentum of the leading lepton $p^{lead}_{T}$: this is the lepton that has the higher transverse momentum out of the pairs produced in the decay channels of the WW bosons $ee$, $e\mu$ and $\mu\mu$. This variable is very sensitive to the existence of anomalous triple gauge couplings and can therefore be used to obtain limits on their associated parameters. \cite{WWtgc} mostly only uses the data where the final states of the WW boson production are the electron and the muon ($e\mu$ channel) to gain the limits on aTGCs as this channel has a greater signal-to-background ratio than the other decay channels ($ee$ and $\mu\mu$). To see whether the theoretical predictions match up with the observed data, a likelihood-ratio test is used. A likehood-ratio test is used when comparing how well two models fit observations, a null model against an alternative model where the likelihood ratio gives how much more likely the data fits one model more than the other. The 95\% confidence interval for the aTGC parameters is then given by using the frequentist method (frequentism here meaning that the probability of an event occurring is taken as being the limit of its relative frequency after a lot of trials). Events where the transverse momentum of the leading lepton is less than 150 GeV are not used in the analysis because the signals from triple-gauge-couplings will not make a significant contribution.
+
+PDFs (probability distribution functions) are created from the data and the predictions for the detected signal processes and the background processes. NLO oblique corrections to the production of a pair of W bosons in the Standard Model is used to when extracting the limits of anomalous triple gauge coupling limits, and this correction to the WW boson production process becomes more important at higher values of the transverse momentum of the leading lepton $p^{lead}_{T}$. 
+
+The comparison between the distribution of the transverse momentum of the leading lepton $p^{lead}_{T}$ and the theoretical predictions of the Standard Model are shown in Figure \ref{fig:atgcvssm}.
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{tgcvssm.png}
+	\caption{Comparison of the leading lepton transverse momentum $p^{lead}_{T}$ for di-lepton channel $e\mu$ final states (left) and the distributions at detector level using values of the parameters of anomalous triple gauge couplings which correlate to the upper bound of the 95\% CL level (right)}
+	\label{fig:atgcvssm}
+\end{figure}
+
+The plot on the left in Figure \ref{fig:atgcvssm} shows the effects of theoretical predictions where the values of the anomalous triple gauge couplings are arbitrarily large on the distribution. The plot on the right shows the predictions where the anomalous triple gauge couplings have their parameter values set to the ones which correspond to the 95\% CL level. In order to get the confidence interval for certain aTGC parameters, the other aTGC parameters must be set to the values they take in the Standard Model predictions. The values for the aTGC couplings are shown in Table 11 of \cite{WWtgc}; with the 95\% CL given for the expected and observed measurements for the following different scenarios mentioned earlier (``no constraints", LEP, HISZ, and ``Equal Coupling"). The scale of the new physics $\Lambda$ are taken with both $\infty$ and 7 TeV.  
+
+Table \ref{table:atgccl} shows the confidence levels for the EFT, while Figure \ref{fig:atgceft} gives the expected and observed at 95\% CL and also constraints required in order to preserve unitarity as a function of the new physics scale $\Lambda$. 
+
+\begin{table}[h!]
+	\begin{center}
+		\begin{tabular}{|| c | c | c ||} 
+			\hline
+			Parameter  &  Expected [$TeV^{-2}$] & Observed [$TeV^{-2}$] \\ [0.5ex] 
+			\hline\hline
+			$C_{WWW}/\Lambda^{2}$ & [-7.62, 7.38]  & [-4.61, 4.60]\\
+		    $C_{B}/\Lambda^{2}$ & [-35.8, 38.4]  & [-20.9. 26.3] \\ 
+		    $C_{W}/\Lambda^{2}$ & [-12.58, 14.32] & [-5.87, 10.54]\\ 	[1 ex] 
+			\hline
+		\end{tabular}
+		\caption{Observed  and expected 95\% confidence intervals for different scenarios in the effective field theory approach}
+		\label{table:atgccl}
+	\end{center}
+\end{table}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{tgccl.png}
+	\caption{The expected 95\% confidence level (in red) and the observed 95\% confidence level (in black) and the theoretical unitarity constraint (blue) for the ''no constraints" scenario.}
+	\label{fig:atgceft}
+\end{figure}
+
+Figure \ref{fig:noconstraints} and Figure \ref{fig:LEP}  show the 95\% CL levels for two anomalous triple gauge coupling parameters which are both non-zero for the ``no constraints" and LEP scenarios, where aside from the two aTGC coupling parameters depicted the rest are given a value of zero. Figure \ref{fig:hiszandec} depicts the 95\% CL (expected and observed) for the HISZ and "Equal Couplings'' scenario. 
+
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{noconstraints.png}
+	\caption{The expected and observed 95\% confidence level for two non-zero aTGC parameters in the ``no constraints" scenario.}
+	\label{fig:noconstraints}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{LEP.png}
+	\caption{The expected and observed 95\% confidence level for two non-zero aTGC parameters in the ``LEP" scenario.}
+	\label{fig:LEP}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{hiszandec.png}
+	\caption{The expected and observed 95\% confidence level for two non-zero aTGC parameters in the ``Equal Couplings" scenario (left) and HISZ scenario (right)}
+	\label{fig:hiszandec}
+\end{figure}
+
+Combining the results for the effective field theory scenarios described, the 95\% CL level plots for two simultaneously non-zero parameters (from Table \ref{table:atgccl}) obtained are shown in Figure \ref{fig:total}.   
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{total.png}
+	\caption{The expected and observed 95\% confidence level for two non-zero EFT couplings}
+	\label{fig:total}
+\end{figure}
+
+Figures \ref{fig:total}, \ref{fig:hiszandec}, \ref{fig:LEP} and \ref{fig:noconstraints} show that because the 95\% CL contour plot for the observed data is inside the 95\% CL contour plot for what is expected for the aTGC parameters and the EFT couplings, there is no evidence of the existence of these aTGC couplings and the results are found to be consistent with the Standard Model, and no evidence of new physics effects.
+
+\subsubsection{Extracting confidence intervals for the anomalous triple gauge coupling parameters from WV production cross sections}
+
+In addition to looking at $W^{+}W^{-}$ cross section measurements in the di-lepton channels ($ee$, $e\mu$, $\mu\mu$) as we have seen in \cite{WWtgc}, it is also important to look at other means of di-boson production when testing the Standard Model of particle physics and looking for new physics effects. As we have seen in the earlier section, measurements of di-boson production allow us to investigate the structure of triple gauge couplings (TGCs). In \cite{WV} fiducial cross-section measurements are made of the $WV \rightarrow l\nu qq'$ process where V = the W or Z boson. Similarly to \cite{WWtgc}, anomalous triple gauge couplings (aTGCs) are searched for in \cite{WV} using the following channels: $WV \rightarrow l\nu jj$ and $WV \rightarrow J$ where ``jj" and ``J" denote how the $V \rightarrow qq'$ process has been reconstructed. $WV \rightarrow l\nu jj$ means that the  $V \rightarrow qq'$ process can be reconstructed using two jets with a small radius and $WV \rightarrow J$ means that the  $V \rightarrow qq'$ process can be reconstructed using a single large radius jet. The fiducial cross section measured for the first phase space $WV \rightarrow l\nu jj$ takes the decay products to be contained inside two jets with a radius of R=0.4, and the fiducial cross section is measured to be 209$\pm$28(stat)$\pm$(syst) fb (where (stat) and (syst) denote the statistical and systematic errors on the measurement) and this $WV \rightarrow l\nu qq'$ decay measurement was made with a significance of 4.5$\sigma$, in agreement with the next-to-leading order prediction of 225$\pm$13 fb. The fiducial cross section measured for the second phase space $WV \rightarrow l\nu J$ takes the decay products to be contained inside one jet of radius R = 1.0, and the fiducial cross section was measured to be 30$\pm$11(stat)$\pm$22(syst) fb which is also in agreement with the next-to-leading order prediction of 58$\pm$15 fb. \cite{WV}
+
+
+What we are most interested in, just as in \cite{WWtgc} is the limits on anomalous triple gauge boson coupling parameters (aTGCs) and evidence of new physics. Just as in \cite{WWtgc} and \cite{higgsdata}, \cite{WV} states that the new physics can be parametrised using the effective field theory Lagrangian given in Equation \ref{eq:WWV}. \cite{WV} defines the anomalous triple gauge coupling parameters as being $\lambda^{X}$, $\Delta\kappa^{X}$ and $\Delta g^{X}_{1}$ where X can be either Z or $\gamma$ or leading to six anomalous triple gauge couplings, with $\Delta g_{1}^{\gamma}$ being set to 0 in order to preserve gauge invariance for the EM field, also mentioned in \cite{WWtgc}. This leaves five anomalous triple gauge coupling parameters, which, as stated in the section reviewing \cite{WWtgc}, correspond to divergences from the Standard Model predictions. In the Standard Model,  $\lambda^{X}$, $\Delta\kappa^{X}$ and $\Delta g^{X}_{1}$ are all equal to zero. The LEP constraint, shown in Equation 13 of \cite{WWtgc} is applied to these parameters, and just as in \cite{WWtgc}, form factors are introduced in order to make sure that at large values, unitarity is not violated. The same dimension-six operators are looked at in \cite{WV} as in \cite{WWtgc}, $O_{W}$, $O_{B}$, and $O_{WWW}$ and these are defined in the same way as in \cite{WWtgc} with $\phi$ once again representing the Higgs doublet, $D_{\mu}$ representing the covariant derivative and $W^{\mu\nu}$ and $B^{\mu\nu}$ representing the field strength of the W and B boson fields respectively. 
+
+The EFT parameters (which are mentioned in \cite{WWtgc}), and which are the coefficients of the dimension-six operators and take a value of zero in the Standard Model can be related to the anomalous triple gauge coupling parameters using Equation \ref{eq:coeffatgc}.
+
+
+\begin{equation}
+\label{eq:coeffatgc}
+\begin{aligned}
+\frac{\mathcal{C}_{W}}{\Lambda^{2}} = \frac{2}{m^{2}_{Z}}\Delta g_{1}^{Z}\\
+\frac{\mathcal{C}_{B}}{\Lambda^{2}} = \frac{2}{m^{2}_{Z}}\Delta\kappa^{\gamma} - \frac{2}{m^{2}_{Z}}\Delta g_{1}^{Z}\\
+\frac{\mathcal{C}_{WWW}}{\Lambda^{2}} = \frac{2}{3g^{2}m^{2}_{W}}\lambda\\
+\end{aligned}
+\end{equation}
+
+At high values of transverse momentum, and high values of invariant mass, the anomalous triple gauge coupling parameters and the effective field theory parameters increase the WZ cross-section and the decay of WZ to $l \nu jj$ (two small jet quark reconstruction) and to $l\nu J$ (single large jet quark reconstruction) can be used to find non-zero values of these beyond the standard model physics parameters.
+
+Figure \ref{fig:lvatgc1} shows the distribution of events in both of these decay channels. The increase of the WZ cross-section as the transverse momentum increases can be seen, however there is no notable difference from the Standard Model predictions shown, and as a result, 95\% CL levels can be calculated for the anomalous triple gauge coupling and effective field theory parameters.
+
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{wv2j.png}
+\caption{The distribution of transverse momentum for the $WV \rightarrow l\nu jj$ (left) and the distribution of transverse momentum for the $WV \rightarrow l\nu J$ (right). The signal and background prediction is also shown,  as well as the expected amplification of beyond the standard model physics because of the effective field theory parameters $\frac{\mathcal{C}_{WWW}}{\Lambda^{2}}$ with values of $4 TeV^{-2}$ and $8 TeV^{-2}$ }
+\label{fig:lvatgc1}
+\end{figure}
+
+The 95\% CL intervals for the anomalous triple gauge coupling parameters without the LEP constraint are calculated for both the $WV \rightarrow l\nu jj$ and $WV \rightarrow l\nu J$ decay channels, and shown in Table 5 of \cite{WV} with the scale of new physics $\Lambda$ taken to be $\infty$ and 5 TeV as opposed to $\infty$ and 7 TeV in \cite{WWtgc}.
+
+It can be seen that the $WV \rightarrow l\nu J$ event selection is far more sensitive to the anomalous triple gauge coupling parameters, and the reason \cite{WV} doesn't combine the confidence intervals for the two decay channels $WV \rightarrow l\nu jj$ and $WV \rightarrow l\nu J$ is because the $WV \rightarrow l\nu J$ channel gives the largest contribution. The region of transverse momentum $p_{T}$ which is most sensitive to anomalous triple gauge coupling parameters is $p_{T}$ $>$ 600 GeV for the $WV \rightarrow l\nu J$ decay channel, however, for the $WV \rightarrow l\nu jj$ channel, the region of the transverse momentum which is most sensitive to anomalous triple gauge couplings is 300-600 GeV. 
+ 
+
+Table 6 in \cite{WV} shows the 95\% confidence intervals (observed and expected) for the anomalous triple gauge coupling parameters $\Delta g_{1}^{Z}$, $\Delta\kappa_{\gamma}$ and $\lambda_{Z} (=\lambda_{\gamma})$ for the LEP constraint scenario. The 95\% CL levels are worked out for both the $WV \rightarrow l\nu jj$ and $WV \rightarrow l\nu J$ decay channels separately.
+
+
+
+Table \ref{table:atgccl2} gives the 95\% CL levels (observed and expected) for the effective field theory parameters mentioned earlier: $\frac{\mathcal{C}_{WWW}}{\Lambda^{2}}$, $\frac{\mathcal{C}_{B}}{\Lambda^{2}}$ and $\frac{\mathcal{C}_{W}}{\Lambda^{2}}$. 
+
+
+
+
+
+\begin{table}[h!]
+	{\centering
+		\begin{tabular}{|| c | c | c | c | c ||} 
+			\hline
+			Parameter  & Observed [$TeV^{-2}$] & Expected [$TeV^{-2}$] & Observed [$TeV^{-2}$] & Expected [$TeV^{-2}$]  \\
+			& \multicolumn{2}{c|}{$WV \rightarrow l\nu jj$} & \multicolumn{2}{c|}{$WV \rightarrow l\nu J$}\\
+			\hline\hline
+			$C_{WWW}/\Lambda^{2}$ & [-5.3, 5.3]  & [-6.4, 6.3] & [-3.1,3.1] & [-3.6,3.6]\\
+			$C_{B}/\Lambda^{2}$ & [-36, 43]  & [-45, 51] & [-19,20] & [-22,23]  \\ 
+			$C_{W}/\Lambda^{2}$ & [-6.4, 11] & [-8.7, 13] & [-5.1,5.8] & [-6.0,6.7]\\ 	[1 ex] 
+			\hline
+		\end{tabular}}
+		\caption{Observed  and expected 95\% confidence intervals for the three effective field theory parameters.}
+		\label{table:atgccl2}
+\end{table}
+ 
+ 
+ Figure \ref{fig:atgccl3} shows the contour plots for the expected and observed 95\% CL for the effective field theory parameters. While calculating the CL for each parameter, the values for the other two parameters were set to zero.
+
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{atgccl3.png}
+	\caption{The 95\% CL contours plotted simultaneously for two combinations of the effective field theory parameters. The expected and observed contours for the $WV \rightarrow l\nu jj$ decays process are shown in red, and for the $WV \rightarrow l\nu J$ process, the expected and observed contours are shown in blue.}
+	\label{fig:atgccl3}
+\end{figure}
+
+
+As in Figure \ref{fig:total} from \cite{WWtgc}, Figure \ref{fig:atgccl3} from \cite{WV} shows no evidence of physics beyond the Standard Model because the values of the observed data for the effective field theory couplings $\frac{\mathcal{C}_{WWW}}{\Lambda^{2}}$, $\frac{\mathcal{C}_{B}}{\Lambda^{2}}$ and $\frac{\mathcal{C}_{W}}{\Lambda^{2}}$ lies within the expected limits.
+
+\section{Conclusion}
+Overall, this paper gives various ways in which Effective Field Theories (EFTs) can used to parametrise new physics effects and looks at relevant phenomenological and experimental particle physics papers which discuss this. Effective Field Theories can use an Effective Lagrangian which can be thought of as an extension to the Standard Model Lagrangian: i.e, the Standard Model Lagrangian added to a combination of dimensionless coefficients (which parametrise the coupling strength of the SM physics and the new physics (NP) effects) and dimension-six operators and the new physics scale $\Lambda$. Some particle phenomenology papers make use of oblique parameters to parametrise the new physics, such as in \cite{EWprecision} where 7 oblique parameters are used: $\hat{S}, \hat{T}, W, Y, \hat{U}, V$ and $X$ and that these parameters coupled with two parameters related to quarks $\delta\epsilon_{q}$ and $C_{q}$ give the best approximation of the actual new physics bound. Beyond the Standard Model parameters in universal theories were also investigated in \cite{universal}, which differ from effective field theories in that while effective field theories look at how new physics theories relate to a single gauge boson, universal field theories are more all-encompassing and look at new physics in all the couplings, hence there being more new physics parameters, with 16 parameters being derived in \cite{universal}: 5 oblique parameters (which relate to the ones in \cite{EWprecision}), as well as triple gauge coupling parameters (TGCs) and coupling parameters which relate specifically to the Higgs Boson. Ways to parametrise new Higgs physics specifically was looked at in \cite{higgsbasis} and the relations between the Higgs basis coupling and the universal parameters used in universal theories was given. As \cite{higgsbasis} stated that new physics was linked to anomalous triple gauge couplings (aTGCs) these were investigated in the paper \cite{higgsdata}, and the experimental particle physics papers \cite{WWtgc} and \cite{WV} where it was shown in \cite{WWtgc} that when looking at the triple gauge coupling vertex in the $q\bar{q} \rightarrow W^{+}W^{-}$ in the $ee$, $e\mu$, $\mu\mu$ channels, aTGC parameters which need a significant non-zero value for there to be evidence of BSM physics are $\Delta g^{Z}_{1}$, $\Delta\kappa^{Z}$ and $\Delta\kappa^{\gamma}$, and the 95\% CL levels were calculated for the expected and observed values of these parameters, and the coefficients of the dimension six-operators $O_{W}$, $O_{B}$ and $O_{WWW}$ also had their observed and expected 95\% CL levels calculated and then displayed in contour plots for two coefficients simultaneously while the third was set to zero. This was also done for the $WV \rightarrow l\nu qq'$ process where two channels were looked at  $WV \rightarrow l\nu jj$ (process reconstructed into two jets with a small radius) and $WV \rightarrow l\nu J$ (process reconstructed into one jet with a large radius). In both papers, no evidence of BSM physics was found as there were no evidence of the existence of anomalous triple gauge couplings and the results were completely consistent with the Standard Model predictions. 
+
+
+\section{Acknowledgements}
+I'd like to thank my supervisor Dr Eram Rizvi for his very helpful supervision and also Dr Chris White for meeting with me occasionally for further helpful discussions.
+
+
+\begin{thebibliography}{9} 
+\bibitem{EWprecision}
+G. Cacciapaglia, C.Csáki, G. Marandella and A. Strumia, Phys. Rev. D \textbf{74} (2006) 033011
+\textit{The Minimal Set of Electroweak Precision Parameters}. 
+[arXiV:hep-ph/0604111v1]
+
+\bibitem{SMlagrangian}
+B. Grzadkowski, M. Iskrzyński, M. Misiak and J. Rosiek, JHEP \textbf{1010} (2010) 085 
+\textit{Dimension-Six Terms in the Standard Model Lagrangian} 
+[arXiv:hep-ph/1008.4884v3]	
+
+\bibitem{dimmensions}
+R.Barbieri, A.Pomarol, R. Rattazzi and A.Strumia, Nucl.Phys.B \textbf{703} (2004) 127-146
+\textit{Electroweak Symmetry Breaking after LEP1 and LEP2}
+[arXiv:hep-ph/0405040]
+
+\bibitem{highptdilepton}
+A. Greljo, D. Marzocca, Eur. Phys. J. C \textbf{77} (2017) 548
+\textit{High-$p_{t}$ dilepton tails and flavour physics}
+[arXiv:hep-ph/1704.09015v1]
+
+\bibitem{b2s}
+G.Hiller, F.Kr\"uger, Phys. Rev. D \textbf{69} (2004) 074020
+\textit{More Model-Independent Analysis of $b \rightarrow s$ Processes}
+[arXiv:hep-ph/0310219v2]
+
+\bibitem{universal}
+J. D. Wells, Z. Zhang, High Energ. Phys. \textbf{2016} (2016) 123
+\textit{Effective theories of universal theories}
+[arXiv:hep-ph/1510.08462v2] 
+
+\bibitem{higgsbasis}
+A. Falkowski
+\textit{Higgs Basis: Proposal for an EFT basis choice for LHC HXSWG}
+LHCHXSWG-INT-2015-001
+http://cds.cern.ch/record/2001958
+
+\bibitem{higgsdata}
+Corbett, Tyler and \'Eboli, O. J. P. and Gonzalez-Fraile, J. and Gonzalez-Garcia, M. C.
+\textit{Determining Triple Gauge Boson Couplings from Higgs Data}
+Phys. Rev. Lett. \textbf{111}, 1, (2013) [arXiv:1304.1151 [hep-ph]]
+
+\bibitem{higgsfermion}
+Corbett, Tyler and \'Eboli, O. J. P. and Gonzalez-Fraile, J. and Gonzalez-Garcia, M. C, Phys. Rev. D \textbf{87} (2013) 015022 
+\textit{Robust Determination of the Higgs Couplings: Power to the Data}
+[arXiv:1211.4580v4 [hep-ph]]
+
+
+\bibitem{WWtgc}
+The ATLAS Collaboration
+\textit{Measurement of total and differential W+W− production cross sections in proton-proton collisions at $\sqrt{s} = 8$ TeV with the ATLAS detector and limits on anomalous triple-gauge-boson couplings}
+arXiv:1603.01702v3 [hep-ex]
+
+\bibitem{WV}
+The ATLAS Collaboration
+\textit{Measurement of WW/WZ $\rightarrow l\nu qq'$ production with the hadronically decaying boson reconstructed as one or two jets in pp collisions at $\sqrt{s} = 8$ TeV with ATLAS, and constraints on anomalous gauge couplings}
+arXiv:1706.01702v4 [hep-ex]
+
+
+\end{thebibliography}
+
+\end{document}
