@@ -1,0 +1,539 @@
+\documentclass[11pt,oneside,a4paper]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{float}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{placeins}
+
+
+
+
+\begin{document}
+
+
+\begin{titlepage}
+	\centering
+	\includegraphics[width=\textwidth]{livlogo.png}\par\vspace{1cm}
+	\vspace{1cm}
+	{\scshape\Large First Year PhD Report\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Determining how z-dependence in the Super-Kamiokande tank affects the value of the absorption parameter of the water\par}
+	\vspace{2cm}
+	{\Large\itshape Pruthvi Hiren Mehta\par}
+	\vfill
+	supervised by\par
+	Professor Neil McCauley\par 
+	Dr Adrian Pritchard\par  
+	\vfill
+	
+	% Bottom of the page
+	{\large \today\par}
+\end{titlepage}
+
+
+
+
+\tableofcontents
+\newpage
+
+
+
+
+
+
+
+\begin{abstract}
+The absorption parameter of the water in the Super-Kamiokande tank is calculated for each light injector position by using corrected TOF plots and doing a $\chi^{2}$ comparison between MC and `fake data'. The absorption parameter values are calculated for two normalisation cases: normalising using the number of injected photons and the total charge in the Super-Kamiokande tank. The calculated values for both cases are consistent with the expected values, aside for the B5 injector position for the photon normalisation case. As predicted, the photon normalisation case gives more accurate results for the values with the uncertainty in the value reduced by a factor of 2 compared to the total charge normalisation case. A description of the UK light injection system is given as well as its improvements over the Korean system, including information on the use of the three optics and the benefit of using a collimated beam.
+\end{abstract}
+\newpage
+\section{Introduction}
+In order to determine the properties of the Super-Kamiokande and Hyper-Kamiokande water Cherenkov detectors, calibration procedures need to be carried out. This report concerns itself with the calibration of the properties of the water in the Super-Kamiokande tank. In order to accurately determine the absorption and scattering parameters of the water, a light injection (laser) system is used for calibration, and by looking at the PMT response and timing distributions, the parameter values can be calculated. This report describes how the absorption parameter of the water changes with depth in the Super-K tank by looking at Monte Carlo simulations and also describes the UK Light Injection system which will be used in Super-Kamiokande and Hyper-Kamiokande, and the benefit over the current system, especially regarding the use of a collimated beam. The experimental motivation for such a calibration system is also described, stemming from the need to ensure accurate identification of electron-like and muon-like events, with a detailed description of the T2K, Super-K and Hyper-K experiments also given. The physics motivation for the experiments is described as well, starting from the discovery and identification of the neutrino flavours and the physics behind their oscillation.
+
+
+\section{Physics background}
+
+\subsection{Neutrino theory}
+
+\subsubsection{Neutrinos in the SM}
+In the Standard Model neutrinos are defined as having no mass, spin = $\frac{1}{2}$, and coming in three ``flavours'' ${\nu}_{e}$, ${\nu}_{\mu}$ and ${\nu}_{\tau}$ associated with their respective charged leptons. There are also the neutrinos' corresponding antiparticles which also have no mass and half-integer spin, but are distinguishable from their particle counterparts due to having the opposite lepton number, helicity and chirality, with neutrinos having left-handed helicity states (i.e the spin is in the opposite direction to the direction of its momenta) and anti-neutrinos having right-handed helicity states (i.e the spin is parallel to the direction of its momenta), shown in Figure \ref{fig:helicity}. Due to neutrinos not having have charge associated with the strong or EM forces, they only interact via the weak force. 
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.0in]{helicity.png}
+	\caption{Depiction of helicity}
+	\label{fig:helicity}
+\end{figure}
+
+The neutrino was first proposed by Wolfgang Pauli \cite{neutrino1} in 1930 when it was discovered that energy, momentum and angular momentum appeared to not be conserved in $\beta$-decays - as beta decay leaves the mass number of a nucleus unchanged, the change in nuclear spin after the decay must be an integer; however, if beta decay solely consisted of electron emission, angular momentum would not be conserved due to the spin of the electron being 1/2. Pauli resolved this by introducing the concept of the neutrino, an extremely light neutral particle with 1/2 spin which would account for the missing energy, momentum and angular momentum. The Cowan-Reines neutrino experiment \cite{cowanreines} carried out in 1956 confirmed the existence of neutrinos which made use of the fact that nuclear reactors were expected to produce neutrino fluxes of around $10^{13}$ neutrinos $s^{-1}$ $cm^{-2}$. The electron anti-neutrinos generated from the nuclear reactor would react with the protons in the water molecules inside a tank producing neutrons and positrons. The positrons produced would quickly pair-annihilate with electrons producing two 0.5 MeV gamma photons going in opposite direction. These would be detected by scintillator material which would produce flashes of visible light in response to the gamma photons and this light would be detected by photomultiplier tubes that surround the water in the tank. The detection of the neutron produced was used to confirm the reaction, and this was detected by placing $CdCl_{2}$ into the tank: the Cadmium would absorb the neutron and produce a an additional gamma ray, the signal from which would be detected 5 $\mu$s after the gamma photons produced from the $e^{+}$$e^{-}$ annihilation - the results from the experiment are shown in Figure \ref{fig:cowan_reines}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.0in]{cowan_reines.png}
+	\caption{The output of the Cowan-Reines experiment showing the signals of the positrons and neutron produced}
+	\label{fig:cowan_reines}
+\end{figure}
+
+The muon neutrino was discovered in 1962 by Lederman, Schwartz and Steinberger at the Alternating Gradient Synchrotron in Brookhaven. A beam of energetic protons at 15GeV from the AGS were used to produce a shower of $\pi$ mesons by slamming them into a beryllium target; these pions then travelled 70 feet towards a 5,000 tonne steel wall. On their way, the pions decayed to muons and muon neutrinos, and only the neutrinos would have been able to pass through the steel - the other particles would have been absorbed. The neutrinos were detected as they moved through a ten-tonne spark chamber behind the detector, as one would occasionally hit a proton in the aluminium plates in the detector and produce a neutron and a muon. The muons produced distinct tracks in the spark chamber (shown in Figure \ref{fig:muonneutrino}). Had electron neutrinos been produced in the pion decay instead, electrons would have been detected in the spark chamber, meaning that instead of tracks, a shower would have been seen \cite{muonneutrino}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.0in]{muonneutrino.png}
+	\caption{Lederman standing in front of the spark chamber}
+	\label{fig:muonneutrino}
+\end{figure}
+
+Nearly 40 years later, the tau neutrino was discovered by the Direct Observation of the Nu Tau (DONUT) experiment. The reason it took so long to discover this flavour of neutrino was because of the need to identify the tau lepton associated with it, which has an incredibly short lifetime ($2.9 \times 10^{-13}$)s and subsequent short decay length (1mm). The DONUT experiment used a very high energy beam of neutrinos (expected to contain tau neutrinos) and fired it at a target consisting of iron plates with layers of emulsion in between. The tau lepton was identified by looking for a kink in the track; the tauon would decay to a muon and neutrinos so the track would change direction when the tauon decays. The DONUT team saw just four tracks which contained the characteristic kink out of six million \cite{tauneutrino}.
+
+\subsubsection{Neutrino oscillation}
+Neutrinos that exist in either the electron neutrino, muon neutrino and tau neutrino flavours mentioned above can later be measured to have a different flavour. Neutrino oscillation was first predicted in 1957 by Bruno Pontecorvo and since then has been observed in many different experiments and in a range of different contexts since then.\cite{pontecorvo}
+\newline
+The first experiment to have identified the effects of neutrino oscillation was Ray Davis' and John N. Bahcall's Homestake experiment. The purpose of the experiment was to count the number of neutrinos produced by the sun. After running continuously from 1965 it produced a result for the average capture rate of solar neutrinos of 2.56 $\pm$ 0.25 SNU (Solar Neutrino Unit- a unit of solar neutrino flux, equal to producing 10$^{-36}$ captures per target atom per second.) The experiment was comprised of a 380 cubic meter tank of tetrachloroethene ($CCl_{2}$), and placed deep underground to avoid cosmic ray interference. When an electron neutrino from the sun interacts with the $^{37} \mathrm{Cl}$ atoms in the tetrachloroethene in the tank, the $^{37} \mathrm{Cl}$ atoms turn into an isotope of $^{37} \mathrm{Ar}$ according to Equation \ref{eq:chlorinetoargon}. A small gas counter was used to collect the atoms of $^{37} \mathrm{Ar}$ which was then used by Davis to determine how many neutrinos had been captured \cite{homestake}.  
+
+\begin{equation}
+\label{eq:chlorinetoargon}
+\nu_{\mathrm{e}}+^{37} \mathrm{Cl} \longrightarrow^{37} \mathrm{Ar}+\mathrm{e}^{-}
+\end{equation}
+
+Bahcall predicted that according to the Standard Solar Models of the time the predicted capture rate of the solar neutrinos should have been 8.1 $\pm$ 1.2 SNU, meaning that the observed flux from the experiment was only a third of the predicted solar neutrino flux - this was known as the Solar Neutrino Problem. At the time, many people made the assumption that something was wrong with the experiment, one reason for this being that Homestake didn't have any directional information or information about the energy of the solar neutrinos, or any concrete evidence that the neutrinos observed were definitely coming from the sun. However when Super-Kamiokande released their results measuring the solar neutrino flux, the problem became harder to ignore: Super-K found that using their main mode of solar neutrino detection (given in Equation \ref{eq:superksolarnu}) the observed capture rate of the solar neutrinos was 0.45 $\pm$ 0.02 SNU with the model prediction being almost two times larger, 1.0 $\pm$ 0.2 SNU. Super-Kamiokande's ability to reconstruct the direction of the incoming neutrino meant that they could confirm that the neutrinos were from the sun. These results, along with the results from other neutrino experiments such as SAGE and GALLEX confirmed that there was a definite discrepancy between the experimental results and theoretical predictions.
+
+To show that oscillations between different flavour states were the reason behind the Solar Neutrino Problem, there needed to be a way to measure total neutrino flux, regardless of the flavour of the neutrino. The SNO experiment allowed just this because of its use of heavy water as the target in the tank. Heavy water contains deuteron (deuteron being comprised of a proton and a neutron). Due to deuteron nuclei being very fragile, it only takes 2 MeV to split apart the proton and neutron which makes it up, and as solar neutrinos have energies up to 18.77 MeV any of the neutrino flavours can break apart a deuteron in a neutral current (NC) reaction and detect the neutron in the final state, so that all the neutrinos that weren't being able to be detected by Homestake, Super-K, SAGE and GALLEX \cite{gallex} could be detected by SNO by three different interaction channels: Elastic Scattering ($\nu + e^{-} \rightarrow \nu + e^{-}$), Charged Current ($\nu_{e} + d \rightarrow p + p + e^{-}$), and Neutral Current ($\nu + d \rightarrow n + p +\nu$) \cite{sno}.
+
+The elastic scattering channel is the interaction which is looked at by Super-K, and the combination in which the flux of the electron, muon and tau neutrinos are produced is as follows:
+
+\begin{equation}
+\label{eq:superksolarnu}
+\phi_{ES} = \phi(\nu_{e})+0.15(\phi(\nu_{\mu})+\phi(\nu_{\tau}))
+\end{equation}	
+
+The neutral current channel is the most important channel as it allows for the measurement of the total neutrino flux: $\phi(\nu_{e})+\phi(\nu_{\mu})+\phi(\nu_{\tau})$. Below are the measurements of the neutrino fluxes in each of the reaction channels, and Figure \ref{fig:sno} shows the full solar flux measurement \cite{sno1}.
+
+
+
+\paragraph{}
+
+
+\begin{gather*}
+\label{eq:flux}
+\phi_{C C}=\phi\left(\nu_{e}\right) =1.76 \pm 0.01 \mathrm{cm}^{-2} \mathrm{s}^{-1}\\ \phi_{E S} =\phi\left(\nu_{e}\right)+0.15\left(\phi\left(\nu_{\mu}\right)+\phi\left(\nu_{\tau}\right)\right)=2.39 \pm 0.26 \mathrm{cm}^{-2} \mathrm{s}^{-1} \\ \phi_{N C} =\phi\left(\nu_{e}\right)+\phi\left(\nu_{\mu}\right)+\phi\left(\nu_{\tau}\right) \quad=5.09 \pm 0.63 \mathrm{cm}^{-2} \mathrm{s}^{-1}
+\end{gather*}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{sno.png}
+	\caption{The three reaction rates, CC-charged current, NC-neutral current, EC-electron capture, provide evidence for
+		neutrino flavor transformation and confirm the Standard Solar Model.}
+	\label{fig:sno}
+\end{figure}
+
+
+Subtracting the flux from charged current interactions from the flux from neutral current interactions we get $(3.33 \pm 0.63) \times 10^{-8} \mathrm{cm}^{-2} \mathrm{s}^{-1}$ for the total flux of muon and tau neutrinos from the Sun which is about three times larger than the flux for electron neutrinos from the charged current channel. From these results, the conclusion was drawn that the neutrinos were changing flavour on their way from the Sun to the detector; this was definitive proof of neutrino flavour oscillation.
+
+\subsubsection{Neutrino oscillation theory}
+
+Neutrino oscillation occurs due to the mixing between the flavour and mass eigenstates of neutrinos. For example, for the case of muon neutrinos and electron neutrinos the mixing between the mass eigenstates ($\nu_{1}$,$\nu_{2}$) and the flavour eigenstates ($\nu_{e}$,$\nu_{\mu}$) can be represented by a 2 by 2 rotation matrix with $\theta$ being the mixing angle.
+
+
+\begin{equation}
+\label{eq:nuemuematrix}
+\left( \begin{array}{l}{v_{e}} \\ {v_{\mu}}\end{array}\right)=\left( \begin{array}{cc}{\cos \theta} & {\sin \theta} \\ {-\sin \theta} & {\cos \theta}\end{array}\right) \left( \begin{array}{c}{v_{1}} \\ {v_{2}}\end{array}\right)
+\end{equation}
+
+Using Equation \ref{eq:twoflavprob} the probability of generating one neutrino with a certain flavour ($\nu_{\alpha}$) with energy E but detecting a neutrino with another flavour at a distance L can be worked out:
+
+
+\begin{equation}
+\label{eq:twoflavprob}
+P\left(\nu_{\alpha} \rightarrow \nu_{\beta}\right)=\sin ^{2}(2 \theta) \sin ^{2}\left(1.27 \Delta m^{2} \frac{L}{E_{\nu}}\right)
+\end{equation}
+
+The rotation matrix given in Equation \ref{eq:nuemuematrix} can be extended to include electron, muon and tau neutrinos.
+
+\begin{equation}
+\left( \begin{array}{c}{\nu_{e}} \\ {\nu_{\mu}} \\ {\nu_{\tau}}\end{array}\right)=\left( \begin{array}{lll}{U_{e 1}} & {U_{e 2}} & {U_{e 3}} \\ {U_{\mu 1}} & {U_{\mu 2}} & {U_{\mu 3}} \\ {U_{\tau 1}} & {U_{\tau 2}} & {U_{\tau 3}}\end{array}\right) \left( \begin{array}{c}{\nu_{1}} \\ {\nu_{2}} \\ {\nu_{3}}\end{array}\right)
+\end{equation}
+
+The 3x3 matrix here is known as the PMNS (Pontecorvo-Maki-Nakagawa-Sakata) matrix and is the neutrino analog to the CKM (Cabbibo-Kobayashi-Masakawa) matrix in the quark sector. The PMNS matrix is unitary so that
+
+\begin{equation}
+\label{eq:PMNS}
+U^{\dagger} U=I \quad \rightarrow \quad U^{\dagger}=U^{-1}=\left(U^{*}\right)^{T}
+\end{equation}
+
+Using this information, in a similar way to before, the three neutrino oscillation probability can be written as:
+\begin{equation}
+\begin{aligned} P\left(\nu_{\alpha} \rightarrow \nu_{\beta}\right)=& \delta_{\alpha \beta}-4 \sum_{i>j} \operatorname{Re}\left(U_{\alpha i}^{*} U_{\beta i} U_{\alpha j} U_{\beta j}^{*}\right) \sin ^{2}\left(\Delta m_{i j}^{2} \frac{L}{4 E}\right) \\ &+2 \sum_{i>j} \operatorname{Im}\left(U_{\alpha i}^{*} U_{\beta i} U_{\alpha j} U_{\beta j}^{*}\right) \sin \left(\Delta m_{i j}^{2} \frac{L}{2 E}\right) \end{aligned}
+\end{equation}
+
+The PMNS matrix in Equation \ref{eq:PMNS} can be parametrised by
+
+\begin{equation}
+\label{eq:PMNSparametrised}
+\left[ \begin{array}{ccc}{c_{12} c_{13}} & {s_{12} c_{13}} & {s_{13} e^{-i \delta_{C P}}} \\ {-s_{12} c_{23}-c_{12} s_{23} s_{13} e^{i \delta_{C P}}} & {c_{12} c_{23}-s_{12} s_{23} s_{13} e^{i \delta_{C P}}} & {s_{23} c_{13}} \\ {s_{12} s_{23}-c_{12} c_{23} s_{13} e^{i \delta_{C P}}} & {-c_{12} s_{23}-s_{12} c_{23} s_{13} e^{i \delta_{C P}}} & {c_{23} c_{13}}\end{array}\right]
+\end{equation}
+
+where the transformation can be thought of in terms of three rotations: the mixing angles $\theta_{12}$, $\theta_{23}$ and $\theta_{13}$ and a charge-parity violating phase $\delta_{CP}$. When the postulated existence of Majorana neutrinos(if neutrinos are identical to their antineutrino counterparts) are taken into consideration, there are extra phase factors $\alpha_{1}$ and $\alpha_{2}$ which are also included in the PMNS matrix as follows:
+
+\begin{equation}
+\label{eq:PMNSmajorana}
+\left[ \begin{array}{ccc}{c_{12} c_{13}} & {s_{12} c_{13}} & {s_{13} e^{-i \delta}} \\ {-s_{12} c_{23}-c_{12} s_{23} s_{13} e^{i \delta}} & {c_{12} c_{23}-s_{12} s_{23} s_{13} e^{i \delta}} & {s_{23} c_{13}} \\ {s_{12} s_{23}-c_{12} c_{23} s_{13} e^{i \delta}} & {-c_{12} s_{23}-s_{12} c_{23} s_{13} e^{i \delta}} & {c_{23} c_{13}}\end{array}\right] \left[ \begin{array}{ccc}{e^{i \alpha_{1} / 2}} & {0} & {0} \\ {0} & {e^{i \alpha_{2} / 2}} & {0} \\ {0} & {0} & {1}\end{array}\right]
+\end{equation}
+
+For three flavour neutrino oscillation probabilities, the current measurements for the oscillation parameters are: $sin^2(2\theta)_{13} = 0.10$, $sin^2(2\theta)_{23} = 0.97$ and $sin^2(2\theta)_{13} = 0.861$. Along with the three mixing angles, there are squared mass differences which can also be measured to give an indication as to the mass hierarchy of neutrinos, as we don't know whether the mass eigenstate $m_{3}$ is heavier than the mass eigenstate $m_{2}$. If it is, the hierarchy is said to be ``normal", but if it isn't, the hierarchy is ``inverted".  The current measured values of $\Delta m^{2}$ are $\Delta{m^2}_{12} = 7.53 \times 10^{−5} eV^2$ and $\Delta{m^2}_{32} \approx \Delta{m^2}_{13} = 2.44 \times 10^{−3} eV^2$.
+
+
+\subsubsection{CP violation}
+
+In the PMNS matrix, the CP-violating phase $\delta_{CP}$ always appears alongside the mixing angle $\theta_{13}$ and therefore if we are sensitive to $\theta_{13}$, it can be measured. CP-violation is important to look at because according to the Sakharov conditions, to create the matter - antimatter imbalance that is present in the universe, CP-violation must exist. The Standard Model contains at least three sources of CP-violation: the first source comes from the CKM matrix in the quark sector - this source of CP-violation has been confirmed experimentally but only accounts for a small amount of the total CP violation. The strong interaction should also be a source of CP-violation but measurements of the neutron electric dipole moment (nEDM) indicate that CP-violation in the strong sector is likely to be too small to account for the necessary CP violation. The third source of CP-violation comes from the PMNS matrix in the lepton sector - in order for CP-violation to exist the delta-CP phase has to be non-zero, something which has been confirmed by the T2K experiment at over 2$\sigma$ \cite{t2k2sigma}. 
+
+
+\section{T2K}
+
+The T2K experiment (Tokai-2-Kamioka) is a long-baseline neutrino experiment in Japan that has been built to measure the $\theta_{13}$ mixing angle but also makes measurements of the $\theta_{23}$ angle, and the parameter $\delta CP$. T2K directs a beam of muon neutrinos (or muon antineutrinos) from the J-PARC accelerator facility in Tokai (in east Japan) towards the Super-Kamiokande water Cherenkov detector (in the mountains in west Japan) about 295 km away. The Super-Kamiokande experiment looks for the neutrino flavour at the far detector (either muon neutrinos or electron neutrinos).\cite{t2kexperiment}The experiment has an off-axis operation angle of 2.5$\degree$ which was chosen deliberately as it produces a much more mono-energetic beam (peaked at 0.6 GeV) (see Figure \ref{fig:flux}) and maximises the neutrino oscillation probability at 295km while minimising the background to electro-neutrino appearance detection \cite{t2kflux}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{flux.png}
+	\caption{Neutrino fluxes at different off-axis angles}
+	\label{fig:flux}
+\end{figure}
+
+The neutrino beam is produced in collisions between a proton beam and a graphite target. These collisions produce pions, which are collected and focussed by three magnetic horns, and then decay to muons and muon neutrinos. The muons and any remaining protons and pions are stopped by a second layer of graphite (beam dump), but the neutrinos pass through this layer. The energy spectrum, flavour content and interaction rates of the unoscillated neutrinos produced are then measured by two detectors (ND280 and INGRID) located 280m from the production target, and this information is used to predict the neutrino interactions at Super-Kamiokande. INGRID (Interactive Neutrino GRID) is an on-axis near detector which checks the intensity and direction of the neutrino beam by looking at the interactions of the neutrinos with iron. ND280 is the primary near-detector at the 280m site and is used to measure the number of muon neutrinos before any oscillations occur in order to determine the muon neutrino flux at Super-Kamiokande. Also, the electron neutrino content of the beam as a function of the energy of the neutrino is measured by ND280 - the electron neutrino background comprises about $1\%$ of the muon neutrino flux. At the T2K beam energy the dominant neutrino interactions are CC (Charged Current) interactions ($\overline{v}_{\mathrm{e}}+\mathrm{p} \rightarrow \mathrm{n}+\mathrm{e}^{+}$), and the neutral current $\pi^{0}$ rate are measured by ND280 using the P\O D (Pi-Zero detector), as events containing  $\pi^{0}$'s are the dominant physics background to the appearance of the electron neutrino signal at Super-Kamiokande \cite{pizero}.
+
+
+
+\section{Super-Kamiokande and Hyper-Kamiokande}
+\subsection{Super-Kamiokande}
+Super-Kamiokande is a large Water Cherenkov detector located in Kamioka, Gifu Prefecture in Japan, and was originally built to help detect proton decay. Since then it has broadened the field of physics it's investigating, now being used for not only proton decay searches, but also the detection of supernovae in the Milky Way, to study solar and atmospheric neutrinos, and also detect high energy neutrinos from artificial neutrino beams. The detector is located 1000m underground and is housed inside the Mozumi Mine in Kamioka, and is made of a cylindrical stainless steel tank 42m in height and 39m in diameter, with a volume of 22.5kT and a fiducial volume of 50kT. A cylindrical structure which supports photomultiplier tubes (PMTs) divides the tank into two separate volumes, the inner detector (ID) and outer detector. (OD): Figure \ref{fig:superk-structure} shows a cross-section of the detector \cite{skdetector}.
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{superk-structure.png}
+	\caption{Labelled diagram of the Super-Kamiokande detector, showing the ID and OD and its location with respect to the control room and its position within the mine}
+	\label{fig:superk-structure}
+\end{figure}
+
+The ID  contains 32,000 tonnes of water and is surrounded by 11,146 inward facing PMTs (Hamamatsu R3600), which are 50cm in diameter, which leaves 2.5m of water remaining on all side around the support structure, this being the OD.  It contains 1885 PMTs which face outward on the support structure, and these PMTs are 20cm in diameter (Hamamatsu R1408),  which were previously used in the Irvine-Michigan-Brookhaven (IMB) Water Cherenkov detector. The purpose of the OD is to act as a counter which actively vetos incoming charged particles and is used to shield against interference from neutrons and $\gamma$-rays coming from the rocks in the surrounding mine. The OD is lined with a material called Tyvek, and each PMT in the OD is attached to a wavelength shifting plate, improving the Cherenkov light collection efficiency of the OD. 
+
+\subsubsection{Particle interactions and detection}
+Neutrino interactions are detected using the Cherenkov light emitted from charged particles produced by these interactions, with events which produce Cherenkov light in the ID corresponding to depositing a minimum of 4.5 MeV being defined as neutrino interaction candidates, where there is no evidence of entering charged particles in the OD (which can identified using the OD PMTs). The size, shape and orientation of the patterns of the Cherenkov light created on the walls of the ID can be used to identify whether the events are electron-like or muon-like, and thus identify whether an electron or muon neutrino was involved in the CC interaction (Feynman diagram shown in Figure \ref{fig:CCinteraction}); if an electron neutrino is involved in the interaction, an electron will be produced which will scatter in the water more than the muon, producing a ring of Cherenkov light which will therefore be fuzzy. If the ring were sharper, it would be classified as a muon-like event, shown in Figure \ref{fig:rings}. If the neutrino events occur only in the ID and there is no activity detected in the OD then the neutrino events are labelled as ``fully contained'' (FC), and for events with patterns of light in the OD corresponding to exiting charged particles, these are a labelled as ``partially contained" (PC) events, and the energy which is deposited in the OD from these type of events can only be used as a lower limit on the energy of the neutrino which corresponds to the charged particle.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.0in]{ibd}
+	\caption{Feynman diagram of typical charged current event (Inverse beta decay). Charged current neutrino-nucleon reactions are important to look for as they produce a charged lepton with the same flavour as the incoming neutrino}
+	\label{fig:CCinteraction}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{rings}
+	\caption{Two simulated events for the Super-Kamiokande detector. Left: muon event, right: electron event}
+	\label{fig:rings}
+\end{figure}
+
+Atmospheric $\nu_{\mu}$ and $\bar{\nu}_{\mu}$ (which have a mean energy of 100 GeV) produce muons via interacting weakly with the rocks which surround the detector, and these are also recorded: if the data from the OD shows that the upward going muon leaves the detector, it is recorded as a ``through-going upward muon", if not, it is a ``stopping upward muon", with the energy of the neutrinos being determined from the charge readout from the photo-multiplier tubes.
+
+\subsubsection{Data acquisition}
+The data acquisition system at Super-Kamiokande involves sending signals from the photomultiplier tubes in the ID to ATM's (Analog Timing Modules); these give information about the area of the pulse and the arrival time of the signal.
+
+\subsubsection{Water and air purification}
+The ultrapure water in the tank is continually recirculated at a rate of about 30 tons per hour, with mesh filters removing dust and particles from the water and a heat exchanger being used to cool down the water so PMT dark noise level is reduced and bacterial growth within the tank is quelled. In addition to this, fresh air is pumped into the tank from outside in order to lessen the high radon background inside the mine. 
+
+\subsection{Hyper-Kamiokande}
+Hyper-Kamiokande will be the successor to Super-K and just like Super-Kamiokande, it will also be a large Water Cherenkov detector located 295 km away from the J-PARC proton accelerator complex in Tokai, Japan, and will be placed in the Tochibora mine. The tank design which is considered to be the most optimal is a one-tank design, with a cylindrical detector which is 60m in height and 74 m in diameter with the fiducial volume of the tank being 10 times greater than that of Super-Kamiokande (illustration shown in Figure \ref{fig:hyperk-structure}. The tank will be constructed near the current Super-K site, 295 km and 2.5$\degree$ off-axis from the J-PARC neutrino source.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{hyperk-structure.png}
+	\caption{Diagram of a Hyper-Kamiokande cylindrical tank}
+	\label{fig:hyperk-structure}
+\end{figure}
+
+The Hyper-Kamiokande tank will have the same ID and OD structure as Super-Kamiokande with the ID being 70.8m in diameter and 54.8m in height, and the ID will be surrounded by 40,000 50cm PMTs (Hamamatsu R12860). Just like Super-Kamiokande, it will have a 40\% photocoverage, but since these new PMTs will have double the efficiency with regards to detecting single photons,  the total photodetection efficiency of Hyper-Kamiokande will be double that of Super-Kamiokande.The outer detector will contain around 6,700 outward facing PMTs which will act as a veto for cosmic ray muons which enter the detector. Just like in Super-Kamiokande, the job of the OD is to determine whether an event which occurs is fully contained within the ID or not. Within the region of the barrel, the thickness of the OD will be 1m and 2m in the area around the top and bottom of the tank. In 2015, SK-Gd was approved, which will upgrade the capabilities of the Super-Kamiokande detector by dissolving 0.2\% gadolinium sulphate into the water inside the tank in order to increase the detection efficiency of antineutrinos from supernova relics, using neutron tagging (due to the neutron produced via the inverse beta decay reaction being captured on the gadolinium releasing gamma rays). 
+
+
+
+\section{Calibration at Super-Kamiokande and Hyper-Kamiokande - Light Absorption and Scattering}
+In order to determine the neutrino energy, it is vitally important to know the amount of Cherenkov radiation collected by the photomultplier tubes. One facet of the experiment which this depends on is the ultra-pure water, in particular the absorption and scattering coefficients of the water, as this will affect the amount of Cherenkov light hitting the PMTs. In order to help identify whether the charged lepton produced in the CC interactions are electrons or muons (and therefore whether the neutrino involved in the interaction are electron neutrinos or muon neutrinos) and to produce accurate Monte Carlo simulations of these events, we need a good description of the amount of scattering and absorption in the water in the Super-Kamiokande tank. This is done by injecting laser beams into the Super-Kamiokande tank and comparing the timing and spatial distributions of the light with Monte Carlo. Currently in Super-Kamiokande, the water scattering and absorption coefficients are measured using the Korean laser injection calibration system. In the Super-K tank there are 7 (formerly 8) injector positions for the Korean injectors, with these positions indicated in Figure \ref{fig:injectorpos}. There are the five barrel positions B1-B5, the injector position at the top of the tank (NT-New Top), the position at the bottom of the tank (BT). Previously, there was also the OT (Old Top) injector position which is now used for a new light source. Currently, the calibration group at Super-K only uses the NT injector position for analysis where the beam target is at the bottom of the detector (shown in Figure \ref{fig:NTcalib}.) \cite{skcalibration}. 
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.0in]{injectorpos.png}
+	\caption{Diagram of light injector positions within the SK tank}
+	\label{fig:injectorpos}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.0in]{vertical_laser.png}
+	\caption{Downward vertical laser system currently at use for calibration in Super-Kamiokande, with the beam target shown in blue}
+	\label{fig:NTcalib}
+\end{figure}
+The UK group's light injection system is an upgrade to Korean light injection system, and was installed during the refurbishment of Super-K in the summer of 2018. It was initially developed for use in Hyper-Kamiokande, and is being currently developed for such use, but also is currently being prepared for calibration inside of Super-K. 
+
+\subsection{The UK Light Injection System}
+
+The improvements of the UK's light injection system over the current Korean system are numerous: not only can it be used to calculate the scattering and absorption coefficients of the water, but it can also be used to calibrate properties of the photomultiplier tube response, such as timing calibration of the PMTs and looking at how the PMT gain evolves with time. Unlike the Korean system, the UK system also uses an external monitor PMT to normalise the measurements according to the number of photons injected into the tank, while the current system simply uses the measurement of the total charge in the SK detector as a way to normalise measurements. As will be seen in the Results section, when determining the values of absorption and scattering, normalising by total charge in the tank leads to less accurate values. The current light injection system in Super-K uses an optical fibre to inject light into the tank with a $\approx$10$\degree$ half opening angle, with this being the single optic in use, whereas the UK light injection system is made up of three optics, a bare fibre (like the one the current system uses), a collimator (the analysis of which will be the focus of this report) and a diffuser. 
+
+\subsubsection{The Diffuser}
+The diffuser optic allows for the measurement of the absorption and scattering coefficients of the water and also allows for the determination of PMT gain evolution and PMT timing calibration. Due to the diffuse nature of the beam, hundreds of PMTs on the opposite side of the detector wall can receive the laser light. Due to the wide opening angle (45$\degree$), and the fact that the photons being injected into the tank will be uniformly distributed over this this angle, the light emitted will travel a variety of lengths between being injected and being detected by a hit PMT. This means that differences in the time taken for laser light to be injected and received will indicate changes in the parameter values in accordance with the path taken.
+The diffuser contains a hemispherical ball of acrylic resin in which particles of polymethyl methacrylate (PMMA) are suspended - the light being injected into the diffuser will scatter off the PMMA particles inside the diffuser ball and therefore be distributed evenly over the 45$\degree$ angle when they leave and enter the tank. \cite{diffuser} Figure \ref{fig:diffuser} shows the diffuser ball and its enclosure.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{diffuser.png}
+	\caption{The PMMA diffuser outside its enclosure (left). The diffuser enclosure
+		(centre). The diffuser inside its enclosure (right).}
+	\label{fig:diffuser}
+\end{figure}
+
+
+
+\subsubsection{The Collimator}
+As mentioned previously, the focus of this report will be analysis of fake data and MC for a description of the collimator beam light and the calculation of the absorption and scattering coefficients from it: this section will be a description of the collimator optic. The collimator optic produces a collimated beam, which means that the opening angle of the beam of injected light is reduced, with a half opening angle of $\approx$~4$\degree$. This is done by using a GRIN lens (a lens where there is a gradient in the refractive index in the material used to make it) attached to a bare fibre, which is housed inside a watertight, cylindrical tube made of stainless steel. The GRIN lens is securely positioned through the use of a ferrule (narrow circular ring), the end of which has been spring loaded (see Figure \ref{fig:collimatorschematic}) in the fibre optic connector. The lens mount also contains an aperture 2.35mm in diameter so that any background light which is off-axis is reduced. The end-cap for the collimator optic which contains a window of sapphire glass is then screwed into place on the mounting sleeve, with all holes drilled into the collimator sealed with epoxy in order to make sure the collimator is water-tight. 
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{collimatorschematic.png}
+	\caption{Schematic of collimator optic showing the mounting sleeve, lens mount and end-cap}
+	\label{fig:collimatorschematic}
+\end{figure}
+
+\subsubsection{Benefits of a collimated beam} 
+The benefits of using a collimated beam of laser light instead of a bare fibre for use in the light injection system at Super-Kamiokande and Hyper-Kamiokande are numerous; due to the beam being much narrower, the beam spot on the detector wall is much smaller. When there are multiple light injectors, as in Figure \ref{fig:injectorpos}, this means that the beam spots will not overlap, as they do when using the bare fibre. This means that the measurements of the scattering and absorption coefficients of the water can be constrained to certain positions in the tank, meaning that how the values for the coefficients vary according to depth dependence in the tank can be determined (See Section 7.) As the collimator gives a smaller beam spot than the bare fibre, less hit PMTs are excluded outside of the beam spot, meaning that greater statistics can be included. 
+
+\section{Method of determining the scattering and absorption parameters}
+\subsection{Selection criteria}
+In order to probe the correct region in which to count the hits, the following selection criteria need to be defined. A distinct set of PMTs need to be used for each injector position: as the smallest difference in z between each of injector positions is 560 cm, it is reasonable to make sure that the PMTs being used must be within z =$\pm$280cm of the injector position. Additionally, PMTs $\leq$ 320cm around the beam target are excluded from the analysis to ensure that hits due to direct light from the injector are fully excluded, so that only the hits due to the light being scattered is recorded. PMTs which are $\leq$ to 200cm from the light injector are also excluded due to avoid recording multiple hits. Figure \ref{fig:region} shows a schematic of the detector regions included and excluded in the analysis.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{region.png}
+	\caption{Schematic showing the regions in which hits are included and excluded}
+	\label{fig:region}
+\end{figure}
+
+
+ 
+
+
+
+\subsection{TOF corrected plots}
+Injecting collimated laser beams into the Super-Kamiokande tank and comparing the timing distributions of the laser light with the Monte Carlo allows us to extract the absorption and scattering coefficients \cite{skcalibration}. The scattering of the laser light that takes place inside the detector can be split up into two types: Rayleigh scattering and Mie scattering. Rayleigh scattering is symmetric, and takes place when light with a wavelength of $\lambda$ scatters off particles and molecules which are a lot smaller ($<\frac{1}{10}\lambda$). Mie scattering however is more intense in the forward direction and takes place when the size of the particles the light scatters off is greater than $\lambda$. In order to look at how these parameters depend on depth in the tank, and which type of scattering is dominant, it is important to look at the timing distributions of the hit photomultiplier tubes after time of flight corrections (TOF) take place. Figure \ref{fig:TOFschematic} shows a diagram of injected light entering the detector, being scattered and hitting a PMT.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{TOFschematic.png}
+	\caption{Injected light from a laser being scattered in the tank and hitting a PMT}
+	\label{fig:TOFschematic}
+\end{figure}
+
+The number of hits are plotted against the time for the scattered light to hit the PMT minus the time of flight from the target centre to the hit PMT ($t=(t1+t2) - TOF_{tar}$): this allows for the separation of hits which are scattered and the hits which are reflected. This is because hits which are reflected from the target region travel a longer distance than hits which are scattered and then reach the PMT, so on the TOF plot the reflected peak will be separated from the scattered hits, as they will take place later on (see Figure \ref{fig:exampleTOF} for an example of a TOF plot.)
+	
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{111.png}
+	\caption{An example of a TOF plot}
+	\label{fig:exampleTOF}
+\end{figure}	
+	
+The sharp peak on the right in Figure \ref{fig:exampleTOF} shows the region which contains the reflected hits: this region is not included in the analysis due to imperfections with modelling reflections in the Monte Carlo simulations. The region to the left of the sharp peak contains the scattered hits, and the total number of events in this region are controlled by the amount of scattering. 
+
+When the hits are normalised, either by normalising using the total charge in Super-Kamiokande or using the number of photons injected, the it becomes easier to properly see the regions which contain hits due to light scattering different distances (see Figure \ref{fig:TOFnormalised}.)
+	
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{examplenew.jpg}
+	\caption{An example of a TOF plot with the number of hits normalised by total charge in SK}
+	\label{fig:TOFnormalised}
+\end{figure}
+
+The small peak at 400 ns shows the light which is scattered after travelling a short distance. The medium scattered light is region between this and the reflected peak: the reason for the dip is due to lower angular acceptance for light scattered in the centre of the beam, as the distance it has to travel to reach the photomultiplier tubes is larger. 
+	
+The area just before the sharp peak of the reflected hits region contains the hits which include the scattered light which has travelled the greatest distance in the detector. The shape of this region and the number of events in this region are the most sensitive to changes in absorption due to light which has travelled a greater distance in the detector also having a bigger chance of being absorbed. This region is especially sensitive to changes in absorption value when using the number of photons injected into the detector to normalise the hits instead of looking at total charge in the SK tank as the total charge in SK is itself a factor which depends on the absorption value of the water, hence using the total number of injected photons is more reliable. The reason normalisation of hits is carried out is to account for the random fluctuations in the light intensity from the injector and the rate at which the hits occur.
+
+	
+\subsection{The effect of changing the absorption and scattering parameters on the TOF MC}
+In order to determine which of the parameters (absorption, Rayleigh or Mie scattering) is the most dominant regarding the TOF plots, MC with different values of these parameters were generated. Figure \ref{fig:overlay2} show the effects of increasing each of these values by exaggerated and unrealistic amounts just to look at the effect on the scattering and reflected hits regions in the TOF plots. The following plots were produced using the B1 injector settings in the MC production script, with 5000 photons in the injected laser beam, and the laser light having a wavelength of $\lambda$ = 337nm.
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{overlay2.png}
+	\caption{Corrected TOF distributions showing the absorption, Rayleigh and Mie scattering parameters set to 1.0, 2.0, 4.0 and 10.0}
+	\label{fig:overlay2}
+\end{figure}
+	
+	
+From Figure \ref{fig:overlay2} it is evident that if the values for the scattering parameters are increased the number of hits in the scattered region also increase, with the number of photons being absorbed or reflected decreasing, which is to be expected. The next step involved looking at which of the parameters the corrected TOF plots were most sensitive to when changed, which is why MC with each parameter increased in turn were generated, in order to see changing which parameter had the greatest effect on the corrected TOF distribution overall.
+	
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{overlay.png}
+	\caption{Corrected TOF distributions showing the effect on the timing distribution when the absorption and scattering parameter values are changed individually}
+	\label{fig:overlay}
+\end{figure}	
+	
+	
+From Figure \ref{fig:overlay} we can ascertain that Rayleigh scattering (symmetric scattering) is the most dominant type of scattering, with increasing the parameter for it increasing the number of hits in the scattered region far more than when the Mie scattering parameter is increased to 4.0. In addition to this, increasing the absorption parameter value from 1.0 to 4.0 will decrease the number of hits in the region before the reflected peak, which is most sensitive to absorption, due to more photons being absorbed the further they travel in the detector.
+\newpage
+\section{Results}
+\subsection{Determining the best fit measured absorption parameter for the B1 - B5 injector positions} 	
+In order to see how the value of the absorption changes as a function of depth in the Super-K tank when using the collimated beam, it is useful to first produce Monte Carlo files with the absorption parameter values in the range of 0.05 to 2.0 in steps of 0.05. The values for the Rayleigh and Mie scattering parameters were set to 1.0, and 50,000 events were used when generating the MC sets for each barrel position, with 4000 photons injected into the tank.
+
+Additionally, 'fake data' MC sets that simulate a gradient in the absorption parameter across the tank can be generated using the default SK MC simulation. This asymmetry in the values of the absorption parameter is based on temperature measurements inside the tank: Figure \ref{fig:temperature} shows how the temperature of the water varies with depth in the SK tank. The asymmetry varies the absorption parameter across the tank according to Equation \ref{eq:absorptionasymmetry1} and \ref{eq:absorptionasymmetry2} for whether the depth in the SK tank at which point the absorption is being calculated is greater or less than 11m respectively. 
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{temperature.png}
+	\caption{z-dependence on temperature ($\degree C$) in SK tank}
+	\label{fig:temperature}
+\end{figure}
+
+
+\begin{equation}
+\label{eq:absorptionasymmetry1}
+z>-1100cm: Abs(z) = Abs(0) + (TBA(cm^{-1}) \times z(cm))
+\end{equation}	
+\begin{equation}
+\label{eq:absorptionasymmetry2}
+z< -1100cm: Abs(z) = Abs(0) + (TBA(cm^{-1}) \times -1100cm)
+\end{equation}
+
+The `fake data' MC sets were generated using a TBA (Top-Bottom Asymmetry) parameter of TBA = +10, meaning that for a default absorption value at the middle of the tank (Abs(0)) of 1.0, the absorption value at 10m above this height will be 1.1. After generating the MC data and the `fake data' plots of the background subtracted corrected TOF timing distributions were produced in order to look at the scattered hits region, for both the MC and 'fake data' files. A $\chi^{2}$ comparison was then carried out between the full set of MC (with absorption values between 0.05 and 2.0) and a single `fake data' file with TBA = +10. This $\chi^{2}$ comparison was done for the case in which normalisation of the hits is done using the total charge in Super-Kamiokande and also in the case of the normalisation done using the number of injected photons. The $\chi^{2}$ values were then plotted against the values for the absorption parameter, with the curve in the plots fitted with a quadratic. The results of the fit were then used to determined the best fit measured absorption parameter and calculate the uncertainty on this value. This chain of analysis was carried out for each of the B1-B5 injector positions. Figures \ref{fig:B1} - \ref{fig:B5} shows the $\chi^{2}$ comparison plots for each injector position containing the fit for both the photon normalisation and total charge in SK normalisation cases. These plots also contain a dashed line showing the expected value of the absorption parameter calculated using Equations \ref{eq:absorptionasymmetry1} and \ref{eq:absorptionasymmetry2}.  
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{B1.jpg}
+	\caption{$\chi^{2}$ comparison for B1 injector}
+	\label{fig:B1}
+\end{figure}
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{B2.jpg}
+	\caption{$\chi^{2}$ comparison for B2 injector}
+	\label{fig:B2}
+\end{figure}
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{B3.jpg}
+	\caption{$\chi^{2}$ comparison for B3 injector}
+	\label{fig:B3}
+\end{figure}	
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{B4.jpg}
+	\caption{$\chi^{2}$ comparison for B4 injector}
+	\label{fig:B4}
+\end{figure}	
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{B5.jpg}
+	\caption{$\chi^{2}$ comparison for B5 injector}
+	\label{fig:B5}
+\end{figure}	
+	
+
+
+
+\newpage
+Table \ref{table:valuesQ} shows the values of the absorption parameter for each injector along with the ratio of the fitted absorption value with the expected absorption value for the total charge in SK normalisation case and Table \ref{table:valuesPhoton} shows the same but for the photon normalisation case. 
+
+\begin{table}[h]
+	\begin{tabular}{lllll}
+	Injector	&Fitted value of absorption & Precision of fitted value & Expected value & Ratio   \\
+	\hline
+		B1	  	&1.219 $\pm$ 0.103         & 8.454\%                  & 1.123          & 1.085 $\pm$ 0.092 \\                   
+		B2		&1.103 $\pm$ 0.108         & 9.778\%                  & 1.060          & 1.041 $\pm$ 0.102  \\               
+		B3		&0.990 $\pm$ 0.099         & 10.011\%                 & 0.996          & 0.994 $\pm$ 0.099  \\               
+		B4		&0.974 $\pm$ 0.102         & 10.478\%                 & 0.939          & 1.037 $\pm$ 0.109  \\               
+		B5		&0.915 $\pm$ 0.094         & 10.225\%                 & 0.890          & 1.028 $\pm$ 0.105  \\              
+	\end{tabular}
+\caption{Table \label{table:valuesQ} showing the fitted absorption value and ratio over the expected absorption value for the charge in SK normalisation case}
+\end{table}
+	
+\begin{table}[h]
+	\begin{tabular}{lllll}
+		Injector	&Fitted value of absorption & Precision of fitted value & Expected value & Ratio   \\
+	\hline
+		B1	  	&1.107 $\pm$ 0.045        & 4.078\%                 & 1.123           & 0.985 $\pm$ 0.040 \\
+		B2		&1.104 $\pm$ 0.050        & 4.514\%                 & 1.060           & 1.042 $\pm$ 0.047  \\
+		B3		&0.986 $\pm$ 0.046        & 4.698\%                 & 0.996           & 0.990 $\pm$ 0.046  \\
+		B4		&0.934 $\pm$ 0.051        & 5.463\%                 & 0.939           & 0.994 $\pm$ 0.054  \\
+		B5		&0.837 $\pm$ 0.046        & 5.455\%                 & 0.890           & 0.941 $\pm$ 0.051  \\           
+	\end{tabular}
+	\caption{Table \label{table:valuesPhoton} showing the fitted absorption value and ratio over the expected absorption value for the photon normalisation case}
+\end{table}	
+	
+Figure \ref{fig:injposvsabs} shows the absorption values for each injector position plotted against the z-position of those injectors in the Super-Kamiokande tank, for both normalisation cases, with the expected absorption value for each position also shown. 	
+	
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=5.0in]{absvpos2.png}
+	\caption{Fitted absorption value vs injector position with the expected value (prediction) and both normalisation cases}
+	\label{fig:injposvsabs}
+\end{figure}	
+	
+By looking at the fitted and expected values of the absorption parameter in Table \ref{table:valuesPhoton} and Table \ref{table:valuesQ}, it can be seen that for both the total charge in SK normalisation case and the photon normalisation case, the expected value of the absorption parameter is compatible with the fitted value. However, looking at the precision of the fitted values, it can be seen that normalising the hits using the number of photons gives more accurate results with uncertainties which are ~50\% those normalised using the total charge in SK. Figure \ref{fig:injposvsabs} also confirms this, with the fitted values for the injected photon normalisation case being closer to the predicted values for the injector positions B1-B4, however the result for B5 shows otherwise. 
+\newpage
+\section{Conclusion}
+Super-Kamiokande (and the soon to be built Hyper-Kamiokande) are multi-purpose water Cherenkov detectors with a variety of uses including being the far detectors for long-baseline neutrino experiments, looking for nucleon decay, making measurements of atmospheric and solar neutrinos, and looking for neutrinos that have astrophysical sources. In order to obtain the results it has, such as confirmation of neutrino oscillation and antineutrinos from supernova emissions, it is vital to ensure the detector is well calibrated, especially when trying to understand what affects the properties of the water in the tank, as this is something which affects the amount of Cherenkov radiation detected by the PMTs. Using Monte Carlo simulations, the impact of changing the absorption and scattering parameter values on the corrected TOF distributions were shown. These timing distributions were then used to specifically look at how the value of the absorption parameter was affected by z-dependence in the tank, the value of the absorption parameter was seen to decrease with increased depth in the tank. The results from the MC were compatible with the predicted values for the absorption parameter, with the slight exception of the result for the photon normalisation case for the B5 injector position. Overall however, the photon normalisation case was more accurate than using the total charge in SK to normalise the hits, as the uncertainties were reduced by a factor of ~2. The next steps of this analysis will be to look at the two scattering parameters (Rayleigh and Mie scattering), and see how they change with z-dependence in the tank. Looking at Rayleigh, or symmetric scattering, will be the first priority; as Figure \ref{fig:overlay} shows that it is the most dominant type of scattering, and will therefore be more sensitive to changes in depth. 
+\newpage
+\section{Acknowledgements}
+
+I'd like to thank my supervisors Dr. Adrian Pritchard and Prof. Neil McCauley for their very helpful supervision regarding understanding the analysis process and also Lauren Anthony for her invaluable information on the UK light injection system.
+
+
+
+
+
+ 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+\newpage	
+\bibliography{first_year_report} 
+\bibliographystyle{abbrv}	
+	
+\end{document}
